@@ -7,7 +7,8 @@ Repositório genérico para **usar IA com as mesmas convenções do Cursor e do 
 | Pasta / arquivo | O que é | Como reutilizar |
 |-----------------|---------|-----------------|
 | `.agents/skills/` | Mini-manuais invocáveis (`SKILL.md` + refs) | Copie a pasta da skill para `.agents/skills/` (Cursor) ou `.claude/skills/` (Claude Code) |
-| `.cursor/rules/` | Convenções persistentes (`.mdc`) | Copie só as regras que fazem sentido no projeto destino |
+| `.cursor/rules/` | Rule geral (`projetos.mdc`) — qualquer stack | Copie para o destino; não amarra Next nem Nest |
+| `docs/exemplos/rules/` | Rules de **exemplo** (hoje: Next.js) | Copie só se o destino for aquela stack; ligue `alwaysApply` ou `globs` lá |
 | `.prompts/` | Prompts para colar na conversa | Copie o arquivo ou o texto; prompts **não** são carregados sozinhos |
 | `docs/` | Exemplos de overview, arquitetura, design e PRD | Use como modelo; adapte, não copie o conteúdo de domínio |
 | `AGENTS.md` | Instruções para agentes Cursor/Codex | Adapte ao projeto destino (stack, comandos, o que não fazer) |
@@ -34,8 +35,11 @@ destino/.claude/skills/<nome-da-skill>/
 # Prompt
 destino/.prompts/<nome>.md
 
-# Regras Cursor (só as relevantes)
-destino/.cursor/rules/<regra>.mdc
+# Rule geral (qualquer stack)
+destino/.cursor/rules/projetos.mdc
+
+# Rule de stack (só se o destino for Next, Nest, etc.)
+destino/.cursor/rules/<regra-de-exemplo>.mdc
 ```
 
 Cada skill deve continuar **autossuficiente**: o agente lê o `SKILL.md` e, se precisar, os arquivos em `refs/`. Não dependa de pastas deste kit existirem no projeto destino.

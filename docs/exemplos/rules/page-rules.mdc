@@ -1,6 +1,9 @@
 ---
-alwaysApply: true
+description: Exemplo Next.js App Router — estrutura de páginas (page, _components, _actions, _data-access). Copie para .cursor/rules/ de um app Next.
+alwaysApply: false
 ---
+
+> Exemplo deste kit. **Não é carregado automaticamente.** Para usar num app Next.js, copie para `.cursor/rules/` e ligue `alwaysApply: true` ou `globs: src/app/**/*.tsx`.
 
 # Estrutura de Páginas - Padrão do Projeto
 

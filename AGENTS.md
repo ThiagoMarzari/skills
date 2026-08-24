@@ -7,7 +7,8 @@ Este repositório é um **kit reutilizável de práticas de IA**, não um aplica
 - Visão humana: `README.md`
 - Skills: `.agents/skills/<nome>/SKILL.md` (Cursor também lê `.cursor/skills/` e `.claude/skills/`)
 - Prompts: `.prompts/` — só valem quando o usuário cola ou pede para usar
-- Rules: `.cursor/rules/` — exemplos; **não** trate este repo como um app Next.js
+- Rule geral (sempre): `.cursor/rules/projetos.mdc` — vale para qualquer stack
+- Rules de exemplo (Next.js, **não** aplicar neste kit): `docs/exemplos/rules/`
 - Exemplos de documentação de produto: `docs/` (domínio de amostra, não o produto deste kit)
 
 ## Regras de trabalho neste repo

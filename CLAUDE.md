@@ -9,7 +9,8 @@ See @README.md
 - Skills deste kit: `.agents/skills/<nome>/SKILL.md`
 - No **projeto destino**, coloque skills em `.claude/skills/` (descoberta nativa). Cursor também lê `.agents/skills/`.
 - Prompts: `.prompts/` — não são auto-carregados; o usuário cola ou pede para usar.
-- Rules de exemplo (Cursor): `.cursor/rules/` — **não** interprete este repo como app Next.js.
+- Rule geral: `.cursor/rules/projetos.mdc` (qualquer stack).
+- Rules de exemplo Next.js: `docs/exemplos/rules/` — **não** aplicar neste kit.
 - Exemplos de doc de produto: `docs/` (amostra, não o produto deste kit).
 
 ## Como trabalhar aqui

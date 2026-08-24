@@ -1,8 +1,9 @@
 ---
-description: Sempre que for criar componente, paginas, routes no Next JS
-globs:
-alwaysApply: true
+description: Exemplo Next.js — convenções de UI, formulários e colocação de componentes. Copie para .cursor/rules/ de um app Next.
+alwaysApply: false
 ---
+
+> Exemplo deste kit. **Não é carregado automaticamente.** Para usar num app Next.js, copie para `.cursor/rules/` e ligue `alwaysApply: true` ou `globs`. Conteúdo largo de propósito — no destino, enxugue ou fatie.
 
 # Use a Modular File Structure:
 
