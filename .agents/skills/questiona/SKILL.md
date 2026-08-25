@@ -1,7 +1,6 @@
 ---
 name: questiona
-description: Interroga o usuário uma pergunta por vez até fechar escopo, trade-offs e regras no projeto atual. Use apenas com questiona ou /questiona — nunca inferir de um pedido de implementação.
-disable-model-invocation: true
+description: "Interrogue incansavelmente o usuário sobre cada aspecto de uma ideia ou plano até entendimento compartilhado — árvore de decisão, ângulos e trade-offs no projeto atual. Invocável APENAS com 'questiona' ou /questiona."
 ---
 
 # Questiona
@@ -26,15 +25,15 @@ Fechar cada ângulo aberto (escopo, comportamento, trade-offs, impacto no códig
 
 ### 1. Ancorar no projeto
 
-Antes da 1ª pergunta, leia codebase e docs (`docs/`, PRDs): stack, convenções, módulos relacionados. Resuma em 3–5 bullets o que impacta a ideia.
+Antes da 1ª pergunta, explore codebase e docs (`docs/`, PRDs): stack, convenções, módulos relacionados, padrões a seguir ou quebrar. Resuma em 3–5 bullets o que impacta a ideia.
 
 ### 2. Árvore de decisões
 
 Mapeie: escopo, usuário/fluxo, dados/permissões, UX/erros, integrações, impacto no código, edge cases. Priorize ramos **bloqueantes**.
 
-### 3. Questionar
+### 3. Questionar (regra central)
 
-Não pare no “parece ok”. Cubra os ramos críticos ou até o usuário encerrar.
+**Uma pergunta por mensagem.** Não pare no "parece ok" — cubra todos os ramos críticos ou até o usuário encerrar.
 
 Formato de cada pergunta:
 
@@ -51,15 +50,17 @@ Ao responder:
 
 ### 4. Fechamento
 
-Resumo: **Decisões fechadas**, **Trade-offs aceitos**, **Fora de escopo**, **Próximo passo**. Sugira `/prd-generator` se o escopo for grande; implementação se for pequeno. Pergunte: _"Fechamos ou ainda tem ramo aberto?"_
+Entregue resumo com: **Decisões fechadas**, **Trade-offs aceitos**, **Fora de escopo**, **Próximo passo** pergunte se deseja usar (`/prd-generator` se escopo grande, implementação se pequeno). Pergunte: _"Fechamos ou ainda tem ramo aberto?"_
 
 ## Princípios
 
-- Ambiguidade restante = falha
-- Fechar decisões, não “mais ou menos”
-- Recomendações ancoradas no repo, não greenfield
-- YAGNI — desafie nice-to-have
-- Nunca só concorde: analise alternativas
+- **Incansável** — ambiguidade restante = falha
+- **Acordo explícito** — fechar decisões, não "mais ou menos"
+- **Projeto primeiro** — recomendações ancoradas no repo, não greenfield
+- **Codebase > suposição** — nunca pergunte o que já está no código
+- **YAGNI** — desafie nice-to-have que infla escopo
+- **Sem implementação** — termina em clareza
+- **Nunca apenas concorde e sim analise o questionamento, alternativas
 
 ## Evitar
 
