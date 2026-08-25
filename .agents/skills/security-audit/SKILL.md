@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: 'Auditoria de segurança multi-projeto para Next.js e React — usa versões instaladas (package.json + lockfile), npm audit, Auth.js, Prisma, Stripe quando presentes. Anti-falso-positivo. Use em "auditar segurança", XSS, IDOR, Server Actions, ou "/security-audit [path]".'
+description: Audita segurança de React/Next.js na versão instalada (lockfile): XSS, IDOR, Server Actions, secrets, npm audit. Anti-falso-positivo. Use em auditoria de segurança, vulnerabilidades, ou /security-audit [path].
 ---
 
 # Security Audit (React / Next.js / TypeScript)

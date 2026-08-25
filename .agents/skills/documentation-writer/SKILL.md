@@ -1,40 +1,38 @@
 ---
 name: documentation-writer
-description: "Cria e mantém documentação clara, objetiva e atualizada para qualquer projeto. Analisa o código atual, compara com os documentos existentes e atualiza apenas o que mudou. Invocável APENAS via comando /documentation-writer."
+description: Sincroniza docs/project-overview.md, docs/architecture.md e README.md com o código atual. Atualização cirúrgica; pede confirmação antes de escrever. Use apenas com /documentation-writer.
 disable-model-invocation: true
 ---
 
 # Documentation Writer
 
-The Documentation Writer agent is responsible for creating and maintaining clear, comprehensive, and up-to-date documentation for the project. It keeps the primary documentation in sync with the actual codebase — reading the source of truth (code) and updating only what has changed.
+Mantém a documentação primária alinhada ao código — a fonte da verdade é o que está implementado, não o que alguém lembra. Lê o projeto, compara com os docs existentes e atualiza **somente** o que mudou.
 
 <HARD-GATE>
-Esta skill NUNCA executa automaticamente. Só deve ser ativada quando o usuário digitar explicitamente o comando:
+Esta skill NUNCA executa automaticamente. Só deve ser ativada quando o usuário digitar explicitamente:
 
 **/documentation-writer**
 
-Se a skill for chamada de qualquer outra forma, recuse e instrua o usuário a usar `/documentation-writer`.
+Se for chamada de qualquer outra forma, recuse e instrua a usar `/documentation-writer`.
 
-Regras invioláveis dentro desta skill:
+Regras invioláveis (mesmo que o usuário peça o contrário dentro desta skill):
 
 - PROIBIDO criar, editar ou apagar qualquer arquivo fora de `docs/` e `README.md`.
 - PROIBIDO usar `Write` para caminhos fora desses dois locais.
 - Acesso ao código é APENAS leitura/análise (`Read`, `Glob`, `Grep`, `Shell` read-only).
 - PROIBIDO rodar comandos que alterem código, instalar dependências, executar migrations ou qualquer ação fora do escopo de documentação.
 - Não reescreva seções que não mudaram — atualize cirurgicamente o que está desatualizado.
-  </HARD-GATE>
-
----
+</HARD-GATE>
 
 ## Responsibilities
 
-- Maintain `docs/project-overview.md` updated with what the product actually does.
-- Maintain `docs/architecture.md` aligned with the real stack, layers, and external dependencies.
-- Maintain `README.md` as a functional onboarding entry point.
-- Identify and report outdated or missing sections before editing.
-- Respect the line limits of each document.
+- Manter `docs/project-overview.md` alinhado ao que o produto **de fato** faz.
+- Manter `docs/architecture.md` alinhado à stack real, camadas e dependências externas.
+- Manter `README.md` como ponto de entrada funcional (como clonar, rodar, o que é o projeto).
+- Identificar e reportar seções desatualizadas ou faltando **antes** de editar.
+- Respeitar o limite de linhas de cada documento.
 
----
+Se o projeto ainda não tiver esses arquivos, crie só os que fizerem sentido (ainda dentro de `docs/` + `README.md`). Não invente produto; descreva o que o código faz.
 
 ## Documents Under Management
 
@@ -44,42 +42,40 @@ Regras invioláveis dentro desta skill:
 | Architecture & tech decisions | `docs/architecture.md`     | 200 lines      |
 | Onboarding entry point        | `README.md`                | no fixed limit |
 
----
-
 ## Execution Protocol — /documentation-writer
 
 ### Step 1 — Explore the project
 
-Do not assume a fixed structure. Discover what exists by:
+Não assuma estrutura fixa. Descubra o que existe:
 
-1. Reading `README.md`, `AGENTS.md`, `CLAUDE.md` — existing entry points and instructions.
-2. Listing root-level files and folders to map the project layout.
-3. Finding the dependency manifest (`package.json`, `pyproject.toml`, `go.mod`, `Cargo.toml`, etc.) — stack and versions.
-4. Locating the source folder (typically `src/`, `app/`, `lib/`, or similar) — routes, actions, components, services.
-5. Finding the database or schema layer (migrations folder, ORM schema, SQL files, etc.) — entities, tables, RLS.
-6. Reading type or model definitions that describe core entities.
-7. Finding routing or middleware entry points — auth flows, redirects, access control.
-8. Running `git log --oneline -10` to catch recent changes that may need documentation.
-9. Reading any existing docs in `docs/` to understand current coverage.
+1. Leia `README.md`, `AGENTS.md`, `CLAUDE.md` — entrada e instruções já escritas.
+2. Liste arquivos e pastas na raiz — mapa do projeto.
+3. Ache o manifesto de dependências (`package.json`, `pyproject.toml`, `go.mod`, `Cargo.toml`, etc.) — stack e versões.
+4. Localize o código (`src/`, `app/`, `lib/`, `packages/`, ou equivalente) — rotas, actions, components, services, modules.
+5. Ache a camada de dados (migrations, schema de ORM, SQL, Prisma, Supabase, etc.) — entidades, tabelas, RLS.
+6. Leia tipos ou models das entidades centrais.
+7. Ache roteamento, proxy/middleware e auth — fluxos, redirects, controle de acesso.
+8. Rode `git log --oneline -10` para pegar mudanças recentes que os docs podem não ter.
+9. Leia o que já existe em `docs/` para entender a cobertura atual.
 
-> Adapt these steps to whatever the project uses. If `supabase/` doesn't exist, look for `prisma/`, `db/`, `migrations/`, etc. If `src/` doesn't exist, look for `app/`, `packages/`, etc.
+> Adapte ao que o projeto usa. Se não houver `supabase/`, procure `prisma/`, `db/`, `migrations/`. Se não houver `src/`, procure `app/`, `packages/`, etc.
 
 ### Step 2 — Compare with current documents
 
-Read each document under management and identify:
+Leia cada documento sob gestão e identifique:
 
-- Implemented features not mentioned in the doc
-- Documented items removed from the codebase
-- Outdated stack versions or removed dependencies
-- Entities, routes, or layers renamed or changed in behavior
-- Documents exceeding their line limits
+- Features implementadas que não estão no doc
+- Itens documentados que saíram do código
+- Versões de stack ou dependências removidas/desatualizadas
+- Entidades, rotas ou camadas renomeadas ou com comportamento diferente
+- Documentos acima do limite de linhas
 
 ### Step 3 — Report before editing
 
-Before writing any file, present a summary to the user:
+Antes de escrever qualquer arquivo, mostre o resumo ao usuário:
 
 ```
-## What is outdated
+## O que está desatualizado
 
 ### docs/project-overview.md
 - [ ] ...
@@ -90,16 +86,14 @@ Before writing any file, present a summary to the user:
 ### README.md
 - [ ] ...
 
-Can I apply the updates?
+Posso aplicar as atualizações?
 ```
 
-Only proceed after explicit user confirmation.
+Só prossiga depois de confirmação explícita.
 
 ### Step 4 — Update the documents
 
-Apply only the identified changes. Never rewrite entire documents without necessity. Update the "Last updated" date in each edited file. Respect line limits.
-
----
+Aplique somente as mudanças identificadas. Nunca reescreva o documento inteiro se só uma seção mudou. Atualize a data “Última atualização” em cada arquivo editado. Respeite os limites de linhas.
 
 ## Best Practices
 
@@ -111,8 +105,6 @@ Apply only the identified changes. Never rewrite entire documents without necess
 - **No duplication** — if information exists in another doc, reference it instead of repeating.
 - **Scope control** — do not add new sections without clear need; do not expand what is already concise.
 - **Glossary discipline** — if the project has a glossary, add new domain terms there instead of redefining them in every doc.
-
----
 
 ## What NOT to Do
 
