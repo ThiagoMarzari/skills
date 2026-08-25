@@ -18,7 +18,7 @@ Repositório genérico para **usar IA com as mesmas convenções do Cursor e do 
 
 1. Leia a skill ou o prompt **antes** de pedir a tarefa.
 2. Invoque a skill pelo nome (`/questiona`, `/prd-generator`, `/documentation-writer`, `/security-audit`).
-3. Cole o prompt de `.prompts/` quando a tarefa for pontual (ex.: decidir o que testar).
+3. Cole o prompt de `.prompts/` quando a tarefa for pontual (ex.: [decidir o que testar](.prompts/testes-automatizados.md) ou [briefing do PRD](.prompts/prd-generator.md)).
 4. Trate `docs/` como **exemplo**, não como o produto deste repo.
 
 ## Como levar para outro projeto
