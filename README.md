@@ -18,7 +18,7 @@ Repositório genérico para **usar IA com as mesmas convenções do Cursor e do 
 
 1. Leia a skill ou o prompt **antes** de pedir a tarefa.
 2. Invoque a skill pelo nome (`/questiona`, `/prd-generator`, `/documentation-writer`, `/security-audit`).
-3. Cole o prompt de `.prompts/` quando a tarefa for pontual (ex.: [decidir o que testar](.prompts/testes-automatizados.md) ou [briefing do PRD](.prompts/prd-generator.md)).
+3. Cole o prompt de `.prompts/` quando a tarefa for pontual (ex.: [decidir o que testar](.prompts/testes-automatizados.md), [TDD com agentes](.prompts/tdd-com-agentes.md) ou [briefing do PRD](.prompts/prd-generator.md)).
 4. Trate `docs/` como **exemplo**, não como o produto deste repo.
 
 ## Como levar para outro projeto
@@ -62,6 +62,7 @@ Cada skill deve continuar **autossuficiente**: o agente lê o `SKILL.md` e, se p
 
 ## Referências
 
+- [Cursor — Creating features (TDD com agentes)](https://cursor.com/learn/creating-features)
 - [Cursor — Rules e AGENTS.md](https://cursor.com/docs/rules)
 - [Cursor — Skills](https://cursor.com/docs/skills)
 - [Claude Code — CLAUDE.md / memory](https://code.claude.com/docs/en/memory)

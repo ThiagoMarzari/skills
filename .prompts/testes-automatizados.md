@@ -1,3 +1,8 @@
+# Prompt — o que testar
+
+Cole no chat **antes** de escrever testes. Depois de fechar o que testar, use o fluxo em [tdd-com-agentes.md](tdd-com-agentes.md).
+
+```text
 Analise a funcionalidade que [ x | acabamos de implementar].
 
 
@@ -20,3 +25,4 @@ Ignore detalhes visuais e implementações triviais.
 
 Classifique cada teste sugerido como:
 CRÍTICO, IMPORTANTE ou DISPENSÁVEL.
+```
