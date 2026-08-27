@@ -2,13 +2,15 @@
 
 Cole o bloco no chat, **incluindo** a primeira linha. A skill só roda com `/prd-generator`.
 
-Quanto mais você preencher (problema, público, ações, regras, fora de escopo), menos ela pergunta. O que não souber, omita.
+Quanto mais você preencher (problema, público, ações, regras, fora de escopo), menos ela pergunta. O que não souber, omita ou deixe em **Regras ainda em aberto** — a skill pergunta em vez de inventar.
 
-Há dois exemplos: **produto novo** (INICIAL) e **funcionalidade em projeto existente** (FEATURE).
+Há dois modelos: **produto novo** (INICIAL) e **funcionalidade em projeto existente** (FEATURE). Troque tudo entre `[colchetes]` pelo seu caso; apague seções que não se aplicarem.
 
 ---
 
-## Exemplo — produto novo (ocorrências de condomínio)
+## Modelo — produto novo (INICIAL)
+
+Use quando ainda **não existe** produto implementado (ou você quer replanejar do zero).
 
 ```text
 /prd-generator
@@ -16,82 +18,73 @@ Há dois exemplos: **produto novo** (INICIAL) e **funcionalidade em projeto exis
 Modo: INICIAL (produto do zero).
 
 ## Ideia
-Sistema web para **um condomínio** registrar, acompanhar e comentar ocorrências do dia a dia (manutenção, limpeza, segurança, barulho, etc.).
+[Uma frase: o que é o sistema e para qual contexto — ex.: "app web para [organização] registrar e acompanhar [tipo de registro]"]
 
 ## Problema
-Hoje os relatos ficam espalhados (conversa, papel, mensagem). Não há histórico único, status nem fotos organizadas. Morador não sabe se algo já foi aberto ou se andou. Funcionário não tem fila clara do que está aberto, em andamento ou resolvido.
+[Como é feito hoje sem o sistema. O que falta: histórico, status, visibilidade, fila, etc. Quem sofre e como.]
 
 ## Público
-- Moradores cadastrados (não é o público geral).
-- Funcionários do condomínio (administração, zeladoria e equivalentes).
-Não é multi-condomínio nem para síndicos de outros prédios.
+- [Perfil principal 1 — quem usa no dia a dia]
+- [Perfil principal 2 — quem administra ou opera]
+[Recorte explícito do que NÃO é público — ex.: "não é multi-tenant", "não é auto-cadastro"]
 
 ## Ações
 
-Morador (entra só com e-mail já cadastrado e ativo — sem senha):
-- Listar ocorrências do condomínio, com filtro por status e categoria
-- Abrir ocorrência: título, descrição, categoria, local, foto opcional
-- Ver detalhe
-- Comentar na ocorrência
+[Perfil A] ([como entra — ex.: e-mail cadastrado, login senha, convite]):
+- [ação 1 — ex.: listar X com filtro por Y]
+- [ação 2 — ex.: criar X com campos A, B, C]
+- [ação 3 — ex.: ver detalhe]
+- [ação 4 — ex.: comentar / anexar / etc.]
 
-Funcionário (área dashboard; só eles usam):
-- Cadastrar moradores: nome completo, e-mail, torre/apartamento, telefone (sem senha)
-- Acessar o mesmo ciclo de ocorrências (lista, filtro, detalhe, comentário)
-- Login do funcionário: ainda não fechei — sugestão: e-mail e senha
+[Perfil B] ([área ou papel — ex.: dashboard, backoffice]):
+- [ação administrativa 1]
+- [mesmas ações do fluxo principal, se compartilhadas]
+- [login/auth — feche ou marque "ainda não fechei — sugestão: ..."]
 
-Há um link/entrada para a área do morador (e-mail) e outra para o dashboard.
+[Como as áreas se separam — ex.: link público vs área restrita]
 
 ## Essencial agora
-- Cadastro de moradores pelo funcionário
-- Abrir / listar / filtrar / detalhar ocorrência
-- Foto opcional na abertura
-- Comentários no detalhe
-- Duas áreas: dashboard (funcionário) e morador (e-mail)
+- [entrega 1]
+- [entrega 2]
+- [entrega 3]
 
 ## Pode ficar para depois (confirmar)
-- Morador editar ou excluir a própria ocorrência
-- App mobile
-- Notificações (e-mail/push)
-- Vários condomínios na mesma instância
+- [nice-to-have 1]
+- [nice-to-have 2]
 
 ## Fora do escopo agora
-- Auto-cadastro do morador
-- Senha para morador
-- Pagamento, boleto, reservas de espaço, assembleia
+- [feature que parece relacionada mas não entra neste recorte]
+- [integração, pagamento, mobile, etc. — se não for agora]
 
 ## Regras (as que já fechei)
-- Um condomínio por instância
-- Morador só entra se o e-mail estiver cadastrado e ativo
-- Ocorrência tem categoria e local
-- Foto é opcional na abertura
+- [regra objetiva 1]
+- [regra objetiva 2]
+- [regra de permissão ou limite]
 
 ## Regras ainda em aberto (a skill deve perguntar, não inventar)
-- Quais status existem (ex.: aberta / em andamento / resolvida)?
-- Morador vê todas as ocorrências do prédio ou só as que ele abriu?
-- Quem pode comentar quando a ocorrência está resolvida?
-- Funcionário altera status? exclui ocorrência? cadastra categorias e outros funcionários?
-- Limite de fotos e tamanho?
+- [status possíveis?]
+- [quem vê o quê?]
+- [o que acontece em estado final / fechado?]
+- [quem pode alterar ou excluir?]
+- [limites de anexo, tamanho, quantidade?]
 
 ## Fluxos principais
-1. Funcionário cadastra o morador → morador acessa com o e-mail → vê a lista e abre uma ocorrência (com foto se quiser).
-2. Morador ou funcionário abre o detalhe → lê o histórico → adiciona comentário.
-3. Funcionário usa o dashboard para acompanhar a fila (lista + filtros).
+1. [ator] faz [passo] → [passo] → [resultado]
+2. [ator A ou B] no detalhe → [ação] → [resultado]
+3. [fluxo operacional — ex.: fila, triagem, acompanhamento]
 
 ## Como saber que está bom
-- Morador cadastrado entra com o e-mail e abre uma ocorrência com categoria, local e foto opcional
-- Dá para listar e filtrar por status e categoria
-- No detalhe dá para comentar
-- Quem não é funcionário não entra no dashboard
-- E-mail não cadastrado (ou inativo) não entra na área do morador
+- [critério verificável 1]
+- [critério verificável 2]
+- [critério de permissão ou bloqueio]
+- [critério de caso que NÃO deve funcionar]
 ```
-
-Troque o domínio pelo seu; mantenha as seções.
 
 ---
 
-## Exemplo — funcionalidade (editar e excluir ocorrência)
+## Modelo — funcionalidade (FEATURE)
 
-Use quando o produto **já existe**. Cite o que já tem; descreva só o recorte da feature. A skill detecta a stack do projeto — não peça Next/Nest de novo.
+Use quando o produto **já existe**. Descreva só o recorte da feature; cite o que já está pronto. A skill detecta a stack — não peça Next/Nest de novo.
 
 ```text
 /prd-generator
@@ -99,73 +92,70 @@ Use quando o produto **já existe**. Cite o que já tem; descreva só o recorte 
 Modo: FEATURE.
 
 ## Feature
-Permitir que o **morador** edite ou exclua uma ocorrência **criada por ele**, e que o **funcionário** exclua qualquer ocorrência pelo dashboard.
+[Uma frase: o que passa a ser possível — ex.: "permitir que [ator] edite/exclua [entidade] própria e que [ator admin] faça [ação broader]"]
 
 ## Contexto (já existe)
-Sistema de ocorrências de um condomínio:
-- Morador entra com e-mail cadastrado; lista, abre, vê detalhe e comenta
-- Funcionário usa o dashboard; cadastra moradores; lista, filtra, detalha e comenta
-- Ocorrência tem categoria, local, foto opcional na abertura, status (aberta / em andamento / resolvida)
-- Comentários no detalhe
+[2–5 bullets do que o sistema já faz — login, CRUD principal, listagem, filtros, campos da entidade, status atuais]
 
-Não reinventar login, cadastro de morador nem a abertura de ocorrência.
+Não reinventar: [liste fluxos/autenticação/cadastros que ficam como estão]
 
 ## Problema
-Depois de abrir, o morador não consegue corrigir um erro (categoria errada, foto que não era para ir) nem tirar um relato que abriu por engano. Funcionário também não consegue remover ocorrência duplicada ou ofensiva. Hoje isso vira comentário solto ou conversa fora do sistema.
+[O que não dá para fazer hoje por causa desta lacuna. Consequência prática — workaround manual, erro, duplicata, etc.]
 
 ## Público desta feature
-- Moradores que já abrem ocorrência
-- Funcionários no dashboard
+- [quem ganha a nova capacidade]
+- [quem ganha capacidade extra de admin/operação]
 
 ## Ações
-Morador:
-- Editar título, descrição, categoria, local e foto da ocorrência que **ele** criou
-- Excluir a ocorrência que **ele** criou
+[Perfil A]:
+- [ação nova 1]
+- [ação nova 2]
 
-Funcionário:
-- Excluir qualquer ocorrência (não só as próprias)
+[Perfil B]:
+- [ação nova com escopo maior ou diferente]
 
 ## Essencial agora
-- Editar ocorrência própria (morador)
-- Excluir ocorrência própria (morador)
-- Excluir qualquer ocorrência (funcionário)
-- Impedir a ação quando a regra bloquear, com mensagem clara
+- [comportamento mínimo 1]
+- [comportamento mínimo 2]
+- [bloqueio com mensagem clara quando regra impedir]
 
 ## Pode ficar para depois
-- Funcionário editar ocorrência de outro autor
-- Histórico de edições
-- Restaurar ocorrência excluída
+- [extensão futura da mesma feature]
+- [auditoria, histórico, soft delete, etc.]
 
 ## Fora do escopo desta feature
-- Mudança de status (já existe ou fica para outro PRD)
-- Comentários: editar/excluir comentário
-- Notificações
-- Novo tipo de ocorrência ou nova área do app
+- [mudança em outra parte do produto]
+- [outro PRD — ex.: notificações, novo tipo, nova área]
 
 ## Regras (as que já fechei)
-- Morador só edita/exclui ocorrência **criada por ele**
-- Em status **resolvida**, o morador não edita e não exclui
-- Funcionário pode excluir em qualquer status
-- Excluir some da lista (não precisa de “lixeira” agora)
+- [quem pode fazer o quê — ex.: só autor, só antes de status X]
+- [o que admin pode vs usuário comum]
+- [efeito da exclusão — some da lista, soft delete, etc.]
 
 ## Regras ainda em aberto (a skill deve perguntar, não inventar)
-- Excluir é definitivo ou só esconde?
-- E os comentários e fotos da ocorrência excluída?
-- Morador pode trocar a foto na edição? remover a foto?
-- Precisa confirmar antes de excluir?
+- [exclusão é definitiva?]
+- [o que acontece com dados relacionados — comentários, anexos?]
+- [campos editáveis na alteração?]
+- [confirmação antes de ação destrutiva?]
 
 ## Fluxos principais
-1. Morador abre o detalhe de uma ocorrência **dele**, ainda não resolvida → edita os campos → salva → vê o detalhe atualizado.
-2. Morador no detalhe de uma ocorrência **dele**, ainda não resolvida → confirma exclusão → volta para a lista; a ocorrência não aparece mais.
-3. Funcionário no detalhe de qualquer ocorrência → confirma exclusão → some da lista dos dois lados (dashboard e morador).
-4. Morador tenta editar/excluir ocorrência resolvida ou de outra pessoa → o sistema impede.
+1. [ator] em [estado permitido] → [ação] → [resultado visível]
+2. [ator] tenta [ação] em [estado bloqueado] → sistema impede → [feedback]
+3. [admin] → [ação] → [efeito para todos os perfis]
 
 ## Como saber que está bom
-- Morador corrige uma ocorrência aberta criada por ele e o detalhe mostra o novo texto
-- Morador exclui a própria ocorrência não resolvida e ela some da lista
-- Morador não consegue editar/excluir ocorrência resolvida nem a de outro morador
-- Funcionário exclui qualquer ocorrência e ela some para morador e para o dashboard
-- Login, listagem, filtros, abertura e comentários continuam iguais
+- [happy path verificável]
+- [bloqueio verificável]
+- [regressão — o que já existia continua igual]
 ```
 
-No FEATURE: não descreva o produto inteiro de novo. Âncora no que já existe; a skill completa o resto.
+---
+
+## Dicas rápidas
+
+| Modo | Foque em | Evite |
+|------|----------|--------|
+| **INICIAL** | problema, público recortado, MVP, regras, fluxos | pedir stack; inflar escopo |
+| **FEATURE** | lacuna atual, delta sobre o existente, impacto | reescrever o produto inteiro |
+
+**Regras em aberto** são intencionais: deixe o que ainda não decidiu — a skill pergunta. **Regras fechadas** são contrato: só coloque o que já decidiu.
