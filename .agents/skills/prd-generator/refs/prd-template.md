@@ -74,10 +74,11 @@ Specs:
 
 ## 13. Specs funcionais detalhadas
 
-> Cada spec deve ser autossuficiente: um agente de codificação vai ler SÓ esta spec (mais as dependências) para montar o plano técnico e implementar. Preencha todos os campos; se um não se aplica, escreva "Não se aplica" e o porquê.
+> Cada spec deve ser autossuficiente: um agente de plano/código lê SÓ a spec alvo (mais as dependências citadas). O alvo é a próxima com **Status:** Aguardando implementação, na ordem da seção 14 — não o PRD inteiro. Preencha todos os campos; se um não se aplica, escreva "Não se aplica" e o porquê.
 
 ### Spec 01 — [nome curto e claro]
 
+- **Status:** Aguardando implementação
 - **Fase:** [a qual fase pertence]
 - **Objetivo (o quê):** [o resultado que esta spec entrega, em 1–2 frases]
 - **Intenção (por quê):** [o valor/problema que justifica esta spec — o agente usa isso para decidir bem na hora de implementar]
@@ -106,4 +107,4 @@ Specs:
 1. Spec 01 — ...
 2. Spec 02 — ...
 
-[Explique que seguir a ordem evita implementar partes fora de contexto e respeita as dependências.]
+[Explique que seguir a ordem evita implementar partes fora de contexto e respeita as dependências. Quem for implementar: percorra esta lista, pule as que já estão **Implementada**, pegue a próxima **Aguardando implementação**. Só avance várias specs no mesmo chat se o usuário pedir o recorte inteiro / task curta.]

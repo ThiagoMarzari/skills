@@ -98,7 +98,9 @@ Organize a entrega em **fases na ordem lógica** (base → acesso → funcionali
 
 ### Qualidade obrigatória de cada spec
 
-Cada spec é a **unidade de trabalho** que um agente de codificação vai pegar depois para, sozinho, montar o plano técnico e implementar. Por isso ela precisa ser **autossuficiente**: alguém que leia SÓ aquela spec (mais as dependências citadas) deve entender o que construir e por quê, sem perguntar nada de volta.
+Cada spec é a **unidade de trabalho** que um agente de plano/código vai pegar depois. Ela precisa ser **autossuficiente**: quem leia SÓ aquela spec (mais as dependências citadas) deve entender o que construir e por quê, sem perguntar nada de volta.
+
+Toda spec nasce com **Status:** `Aguardando implementação` (os mesmos valores do Status do PRD). Quem implementa atualiza para `Implementada`; esta skill **não** marca spec como feita. O agente seguinte percorre a seção 14, ignora as Implementada e pega a próxima Aguardando — salvo o usuário pedir o recorte inteiro de uma vez (task curta).
 
 Padrão de qualidade de cada spec:
 
@@ -124,8 +126,8 @@ Leia [refs/prd-template.md](refs/prd-template.md) e preencha **todas** as seçõ
    - INICIAL: `docs/prd/<slug-do-projeto>.md`
    - FEATURE: `docs/prd/feature-<slug-da-feature>.md`
    - Colisão: `docs/prd/YYYY-MM-DD-<slug>.md`
-3. Status inicial: **Aguardando implementação**
-4. Informe o caminho ao usuário
+3. Status do PRD e de **cada spec**: **Aguardando implementação**. Nunca grave spec como Implementada na geração.
+4. Informe o caminho ao usuário e o próximo passo: **`/plano-spec`** (outro chat). Não cole PRD nem prompt.
 
 ## O que NÃO fazer
 

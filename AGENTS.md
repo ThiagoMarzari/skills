@@ -25,6 +25,7 @@ Este repositório é um **kit reutilizável de práticas de IA**, não um aplica
 |---------|--------|
 | `/questiona` | Fechar decisões antes de implementar |
 | `/prd-generator` | PRD e specs em `docs/prd/` |
+| `/plano-spec` | Plano da próxima spec pendente (`todas` / `implementa` se pedir) |
 | `/documentation-writer` | Sincronizar docs com o que existe de fato |
 | `/security-audit` | Auditoria de segurança no projeto alvo |
 

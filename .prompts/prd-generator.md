@@ -159,3 +159,5 @@ Não reinventar: [liste fluxos/autenticação/cadastros que ficam como estão]
 | **FEATURE** | lacuna atual, delta sobre o existente, impacto | reescrever o produto inteiro |
 
 **Regras em aberto** são intencionais: deixe o que ainda não decidiu — a skill pergunta. **Regras fechadas** são contrato: só coloque o que já decidiu.
+
+**Depois do PRD:** chat novo e `/plano-spec`. Sem colar o arquivo. `todas` = recorte curto no mesmo chat; `implementa` = sair do plano e codar.

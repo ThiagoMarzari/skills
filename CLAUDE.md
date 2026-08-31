@@ -27,6 +27,7 @@ See @README.md
 |---------|--------|
 | `/questiona` | Fechar decisões antes de implementar |
 | `/prd-generator` | PRD e specs em `docs/prd/` |
+| `/plano-spec` | Plano da próxima spec pendente (`todas` / `implementa` se pedir) |
 | `/documentation-writer` | Sincronizar docs com o que existe de fato |
 | `/security-audit` | Auditoria de segurança no projeto alvo |
 
