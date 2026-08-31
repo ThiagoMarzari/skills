@@ -1,6 +1,6 @@
 ---
 name: plan-spec
-description: Cria o plano técnico da próxima especificação pendente de um PRD em docs/prd/. Use com /plan-spec; acrescente "todas" para planejar todas as especificações pendentes ou "implementa" para executar o recorte sem uma etapa separada de aprovação.
+description: Cria o plano técnico de especificações pendentes de um PRD em docs/prd/. Use com /plan-spec; a skill pergunta se o usuário quer uma especificação ou todas. Acrescente "todas" para informar essa escolha diretamente ou "implementa" para executar o recorte sem uma etapa separada de aprovação.
 disable-model-invocation: true
 ---
 
@@ -18,12 +18,23 @@ Não peça para o usuário colar o PRD ou a especificação. Leia os arquivos do
 
 O comando pode receber dois modificadores:
 
-- `/plan-spec`: planeja somente a próxima especificação pendente.
+- `/plan-spec`: pergunta se deve planejar somente a próxima especificação ou todas as pendentes.
 - `/plan-spec todas`: planeja todas as especificações pendentes, na ordem definida pelo PRD.
 - `/plan-spec implementa`: implementa somente a próxima especificação pendente, sem esperar aprovação de um plano separado.
 - `/plan-spec todas implementa`: implementa todas as especificações pendentes, na ordem do PRD.
 
 Sem `implementa`, esta skill apenas planeja. Com `implementa`, pode alterar o código dentro do recorte selecionado.
+
+Quando o usuário não informar `todas` nem `implementa`, faça uma pergunta de escolha antes de localizar a especificação-alvo:
+
+**Pergunta:** “Você quer trabalhar em apenas uma spec ou em todas as specs pendentes?”
+
+- **Apenas uma spec**: seleciona a próxima especificação pendente, respeitando a ordem do PRD.
+- **Todas as specs pendentes**: seleciona todas as especificações pendentes, respeitando a ordem do PRD.
+
+Use a caixa de seleção do chat (`AskQuestion`) quando estiver disponível. Se não estiver disponível, faça a pergunta no chat com as mesmas duas opções e aguarde a resposta. Não escolha uma opção pelo usuário.
+
+Essa escolha define o alcance tanto do plano quanto da implementação posterior. A implementação só acontece se o comando tiver `implementa` ou se o usuário aprovar o plano.
 
 ## Etapa 1 — Localizar o PRD
 
@@ -41,11 +52,12 @@ Se não houver PRD em `docs/prd/`, informe que `/prd-generator` precisa ser exec
 
 Use a seção **Ordem recomendada de implementação** do PRD:
 
-1. percorra as especificações na ordem apresentada;
-2. pule as que tiverem `Status: Implementada`;
-3. selecione a primeira com `Status: Aguardando implementação`;
-4. verifique as dependências dessa especificação;
-5. se o comando incluir `todas`, inclua todas as especificações ainda pendentes, mantendo a ordem do PRD.
+1. use a escolha do usuário ou o modificador explícito do comando para definir o alcance;
+2. percorra as especificações na ordem apresentada;
+3. pule as que tiverem `Status: Implementada`;
+4. se o alcance for uma spec, selecione a primeira com `Status: Aguardando implementação`;
+5. se o alcance for todas, inclua todas as especificações ainda pendentes, mantendo a ordem do PRD;
+6. verifique as dependências das especificações selecionadas.
 
 Se todas estiverem implementadas, informe que não há trabalho pendente. Não gere um plano vazio. Se uma especificação depender de outra que ainda não foi implementada, preserve a ordem e destaque a dependência no plano.
 
