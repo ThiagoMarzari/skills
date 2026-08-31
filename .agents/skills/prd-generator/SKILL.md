@@ -127,7 +127,7 @@ Leia [refs/prd-template.md](refs/prd-template.md) e preencha **todas** as seçõ
    - FEATURE: `docs/prd/feature-<slug-da-feature>.md`
    - Colisão: `docs/prd/YYYY-MM-DD-<slug>.md`
 3. Status do PRD e de **cada spec**: **Aguardando implementação**. Nunca grave spec como Implementada na geração.
-4. Informe o caminho ao usuário e o próximo passo: **`/plano-spec`** (outro chat). Não cole PRD nem prompt.
+4. Informe o caminho ao usuário e o próximo passo: **`/plan-spec`** (outro chat). Não cole PRD nem prompt.
 
 ## O que NÃO fazer
 

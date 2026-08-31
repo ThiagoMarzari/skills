@@ -1,12 +1,12 @@
 ---
-name: plano-spec
-description: Plano técnico da próxima spec pendente em docs/prd/, pelo Status. Use com /plano-spec. Acrescente "todas" para o recorte inteiro; "implementa" para codar sem passar pelo plano.
+name: plan-spec
+description: Plano técnico da próxima spec pendente em docs/prd/, pelo Status. Use com /plan-spec. Acrescente "todas" para o recorte inteiro; "implementa" para codar sem passar pelo plano.
 disable-model-invocation: true
 ---
 
 # Plano da spec
 
-Só `/plano-spec`. Não peça para colar spec nem PRD.
+Só `/plan-spec`. Não peça para colar spec nem PRD.
 
 ## Como devolver o plano
 

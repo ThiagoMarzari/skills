@@ -17,7 +17,7 @@ Repositório genérico para **usar IA com as mesmas convenções do Cursor e do 
 ## Como usar neste repositório
 
 1. Leia a skill ou o prompt **antes** de pedir a tarefa.
-2. Invoque a skill pelo nome (`/questiona`, `/prd-generator`, `/plano-spec`, `/documentation-writer`, `/security-audit`).
+2. Não sabe por onde começar? `/pergunte-marzari`. Senão, invoque a skill pelo nome (`/questiona`, `/prd-generator`, `/plan-spec`, `/documentation-writer`).
 3. Cole o prompt de `.prompts/` quando a tarefa for pontual (ex.: [briefing do PRD](.prompts/prd-generator.md), [decidir o que testar](.prompts/testes-automatizados.md) ou [TDD com agentes](.prompts/tdd-com-agentes.md)).
 4. Trate `docs/` como **exemplo**, não como o produto deste repo.
 
@@ -48,11 +48,11 @@ Cada skill deve continuar **autossuficiente**: o agente lê o `SKILL.md` e, se p
 
 | Skill | Quando usar |
 |-------|-------------|
+| `pergunte-marzari` | Não sabe qual skill usar — router do kit |
 | `questiona` | Fechar escopo e trade-offs **antes** de implementar |
 | `prd-generator` | Gerar PRD/specs em `docs/prd/` |
-| `plano-spec` | Plano (e, se pedir, código) da **próxima** spec pendente |
+| `plan-spec` | Plano (e, se pedir, código) da **próxima** spec pendente |
 | `documentation-writer` | Atualizar overview, arquitetura e README a partir do código |
-| `security-audit` | Auditar segurança (Next.js/React e ecossistema comum) |
 
 ## Convenções do kit
 

@@ -25,11 +25,11 @@ See @README.md
 
 | Comando | Função |
 |---------|--------|
+| `/pergunte-marzari` | Router — qual skill ou fluxo usar |
 | `/questiona` | Fechar decisões antes de implementar |
 | `/prd-generator` | PRD e specs em `docs/prd/` |
-| `/plano-spec` | Plano da próxima spec pendente (`todas` / `implementa` se pedir) |
+| `/plan-spec` | Plano da próxima spec pendente (`todas` / `implementa` se pedir) |
 | `/documentation-writer` | Sincronizar docs com o que existe de fato |
-| `/security-audit` | Auditoria de segurança no projeto alvo |
 
 Não infira skills com `disable-model-invocation`. Sem o comando, não rode o fluxo.
 
