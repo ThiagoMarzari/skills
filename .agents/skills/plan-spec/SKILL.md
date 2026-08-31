@@ -1,6 +1,6 @@
 ---
 name: plan-spec
-description: Plano técnico da próxima spec pendente em docs/prd/, pelo Status. Use com /plan-spec. Acrescente "todas" para o recorte inteiro; "implementa" para codar sem passar pelo plano.
+description: Technical plan for the next pending spec in docs/prd/, based on Status. Use with /plan-spec. Add "todas" for the full scope; "implementa" to code without going through the plan.
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: prd-generator
-description: Gera PRD com specs funcionais autossuficientes em docs/prd/, para produto novo ou feature em projeto existente. Define comportamento, não código. Use apenas com /prd-generator.
+description: Generates a PRD with self-contained functional specs in docs/prd/, for a new product or a feature in an existing project. Defines behavior, not code. Use only with /prd-generator.
 disable-model-invocation: true
 ---
 

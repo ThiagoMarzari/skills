@@ -1,6 +1,6 @@
 ---
 name: questiona
-description: "Interrogue incansavelmente o usuário sobre cada aspecto de uma ideia ou plano até entendimento compartilhado — árvore de decisão, ângulos e trade-offs no projeto atual. Invocável APENAS com 'questiona' ou /questiona."
+description: "Interrogate the user relentlessly about every aspect of an idea or plan until shared understanding — a decision tree, angles, and trade-offs in the current project. Invoked ONLY with 'questiona' or /questiona."
 ---
 
 # Questiona

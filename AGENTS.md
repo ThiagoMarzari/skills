@@ -23,7 +23,7 @@ Este repositório é um **kit reutilizável de práticas de IA**, não um aplica
 
 | Comando | Função |
 |---------|--------|
-| `/pergunte-marzari` | Router — qual skill ou fluxo usar |
+| `/ask-marzari` | Router — qual skill ou fluxo usar |
 | `/questiona` | Fechar decisões antes de implementar |
 | `/prd-generator` | PRD e specs em `docs/prd/` |
 | `/plan-spec` | Plano da próxima spec pendente (`todas` / `implementa` se pedir) |

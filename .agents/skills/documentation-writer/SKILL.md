@@ -1,6 +1,6 @@
 ---
 name: documentation-writer
-description: Sincroniza docs/project-overview.md, docs/architecture.md e README.md com o código atual. Atualização cirúrgica; pede confirmação antes de escrever. Use apenas com /documentation-writer.
+description: Synchronizes docs/project-overview.md, docs/architecture.md and README.md with the current code. Surgical updates; asks for confirmation before writing. Use only with /documentation-writer.
 disable-model-invocation: true
 ---
 

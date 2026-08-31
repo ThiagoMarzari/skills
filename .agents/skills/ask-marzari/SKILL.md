@@ -1,6 +1,6 @@
 ---
-name: pergunte-marzari
-description: Roteia para a skill, prompt ou sequência certa neste kit. Use com /pergunte-marzari quando não souber por onde começar, entre duas skills parecidas, ou no limite de fase de uma sessão longa.
+name: ask-marzari
+description: Routes to the right skill, prompt, or sequence in this kit. Use with /ask-marzari when you don't know where to start, between two similar skills, or at the phase boundary of a long session.
 disable-model-invocation: true
 ---
 
@@ -12,7 +12,7 @@ Router sobre as skills e prompts **deste kit**. Você descreve a situação; o a
 
 ## Ativação
 
-Só `/pergunte-marzari`. Se você já sabe a skill, invoque ela direto — o router não acrescenta nada.
+Só `/ask-marzari`. Se você já sabe a skill, invoque ela direto — o router não acrescenta nada.
 
 ## Como responder
 
