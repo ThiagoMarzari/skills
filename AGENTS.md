@@ -1,39 +1,45 @@
-# Instruções para agentes (Cursor / Codex)
+# Instruções para agentes
 
-Este repositório é um **kit reutilizável de práticas de IA**, não um aplicativo. Skills, prompts, rules e docs de exemplo existem para serem copiados para outros projetos.
+Este repositório é um kit reutilizável de práticas para agentes de IA. Ele reúne skills, prompts, regras e documentos de exemplo para serem copiados e adaptados a outros projetos. Não é um aplicativo e não possui uma stack de produto própria.
 
-## Como navegar
+## Mapa do kit
 
-- Visão humana: `README.md`
-- Skills: `.agents/skills/<nome>/SKILL.md` (Cursor também lê `.cursor/skills/` e `.claude/skills/`)
-- Prompts: `.prompts/` — só valem quando o usuário cola ou pede para usar
-- Rule geral (sempre): `.cursor/rules/projetos.mdc` — vale para qualquer stack
-- Rules de exemplo (Next.js, **não** aplicar neste kit): `docs/exemplos/rules/`
-- Exemplos de documentação de produto: `docs/` (domínio de amostra, não o produto deste kit)
+- `README.md`: visão geral e formas de reutilização.
+- `.agents/skills/<nome>/SKILL.md`: skills do kit.
+- `.prompts/`: prompts que o usuário cola ou solicita explicitamente.
+- `.cursor/rules/projetos.mdc`: regra geral para qualquer stack.
+- `docs/exemplos/rules/`: regras de exemplo, atualmente voltadas a Next.js.
+- `docs/`: exemplos de documentação e PRD; não representam um produto real.
 
-## Regras de trabalho neste repo
+## Regras de trabalho
 
-- Preserve **portabilidade**: cada skill, prompt ou rule deve funcionar copiada sozinha para outro projeto.
-- Não invente stack, rotas, banco, auth ou features de produto aqui.
-- Não misture o conteúdo de exemplo em `docs/` com a identidade deste kit.
-- Não edite uma skill/prompt/rule “para o projeto X”; extraia o que for específico para o destino, não para este repo.
-- Responda em **português**, salvo termos técnicos.
+- Preserve a portabilidade: uma skill, prompt ou regra deve continuar útil quando copiada para outro projeto.
+- Mantenha cada artefato autossuficiente; referências necessárias devem estar no próprio diretório ou ter um caminho claro.
+- Não invente stack, rotas, banco, autenticação ou funcionalidades de produto neste repositório.
+- Não misture o domínio dos exemplos em `docs/` com a identidade do kit.
+- Não adapte uma skill para um produto específico; extraia instruções genéricas e deixe o contexto do destino para o projeto que a receber.
+- Escreva em português, mantendo termos técnicos no idioma original quando isso evitar ambiguidade.
+- Faça somente as alterações pedidas e preserve mudanças existentes do usuário.
 
-## Skills (invocar pelo nome)
+## Skills disponíveis
 
-| Comando | Função |
-|---------|--------|
-| `/ask-marzari` | Router — qual skill ou fluxo usar |
-| `/questiona` | Fechar decisões antes de implementar |
-| `/prd-generator` | PRD e specs em `docs/prd/` |
-| `/plan-spec` | Plano da próxima spec pendente (`todas` / `implementa` se pedir) |
-| `/documentation-writer` | Sincronizar docs com o que existe de fato |
+| Comando | Uso |
+|---|---|
+| `/ask-marzari` | Escolher a skill ou o fluxo adequado |
+| `/questiona` | Fechar escopo, decisões e trade-offs |
+| `/prd-generator` | Criar PRD e especificações funcionais |
+| `/plan-spec` | Planejar ou implementar specs pendentes de um PRD |
+| `/code-review` | Revisar qualidade do código e aderência à especificação |
+| `/documentation-writer` | Sincronizar documentação com o código existente |
+| `/writing-for-agents` | Criar ou melhorar instruções para agentes |
+| `/rework-commits` | Reorganizar uma branch em commits revisáveis |
 
-Skills com `disable-model-invocation` **não** devem ser inferidas. Sem o comando, não execute o fluxo delas.
+Skills com `disable-model-invocation: true` só devem ser executadas quando o usuário as invocar pelo nome. Não deduza uma skill a partir de uma solicitação parecida.
 
-## Ao criar ou alterar artefatos
+## Regras para alterar artefatos
 
-- Skill: pasta própria, `SKILL.md` com `name` + `description` (o quê e quando), corpo < 500 linhas, detalhes em `refs/`.
-- Prompt: um arquivo em `.prompts/`, focado numa tarefa, sem depender deste repo.
-- Rule: uma preocupação, curta, com exemplos concretos.
-- Doc de exemplo: genérica o bastante para servir de modelo; nada de acoplar a um produto específico deste kit.
+- Skill: mantenha `SKILL.md` com `name`, `description` e corpo com menos de 500 linhas; coloque detalhes extensos em referências diretas.
+- Prompt: mantenha um arquivo em `.prompts/`, focado em uma tarefa e sem depender deste repositório.
+- Regra: trate uma preocupação por arquivo e use exemplos concretos.
+- Documento de exemplo: mantenha-o genérico e identifique claramente que é exemplo.
+- Não crie commits ou altere configuração do Git sem pedido explícito.

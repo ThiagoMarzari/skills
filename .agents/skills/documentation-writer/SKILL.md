@@ -1,80 +1,72 @@
 ---
 name: documentation-writer
-description: Synchronizes docs/project-overview.md, docs/architecture.md and README.md with the current code. Surgical updates; asks for confirmation before writing. Use only with /documentation-writer.
+description: Compara a documentação do projeto com o código real e atualiza somente o que estiver desatualizado. Use somente com /documentation-writer.
 disable-model-invocation: true
 ---
 
-# Documentation Writer
+# Atualizador de documentação
 
-Mantém a documentação primária alinhada ao código — a fonte da verdade é o que está implementado, não o que alguém lembra. Lê o projeto, compara com os docs existentes e atualiza **somente** o que mudou.
+## Ativação e limite
 
-<HARD-GATE>
-Esta skill NUNCA executa automaticamente. Só deve ser ativada quando o usuário digitar explicitamente:
+Use esta skill somente quando o usuário digitar `/documentation-writer`.
 
-**/documentation-writer**
+Pode criar ou alterar apenas:
 
-Se for chamada de qualquer outra forma, recuse e instrua a usar `/documentation-writer`.
+- `README.md`;
+- `docs/project-overview.md`;
+- `docs/architecture.md`.
 
-Regras invioláveis (mesmo que o usuário peça o contrário dentro desta skill):
+Leia o código e execute apenas comandos de consulta. Não altere código, instale dependências, execute migrações ou faça mudanças fora dos três documentos.
 
-- PROIBIDO criar, editar ou apagar qualquer arquivo fora de `docs/` e `README.md`.
-- PROIBIDO usar `Write` para caminhos fora desses dois locais.
-- Acesso ao código é APENAS leitura/análise (`Read`, `Glob`, `Grep`, `Shell` read-only).
-- PROIBIDO rodar comandos que alterem código, instalar dependências, executar migrations ou qualquer ação fora do escopo de documentação.
-- Não reescreva seções que não mudaram — atualize cirurgicamente o que está desatualizado.
-</HARD-GATE>
+## Objetivo
 
-## Responsibilities
+Manter a documentação alinhada ao comportamento que existe de fato. O código é a fonte da verdade; documentação antiga, intenção não implementada e suposições não devem ser descritas como realidade.
 
-- Manter `docs/project-overview.md` alinhado ao que o produto **de fato** faz.
-- Manter `docs/architecture.md` alinhado à stack real, camadas e dependências externas.
-- Manter `README.md` como ponto de entrada funcional (como clonar, rodar, o que é o projeto).
-- Identificar e reportar seções desatualizadas ou faltando **antes** de editar.
-- Respeitar o limite de linhas de cada documento.
+## Documentos administrados
 
-Se o projeto ainda não tiver esses arquivos, crie só os que fizerem sentido (ainda dentro de `docs/` + `README.md`). Não invente produto; descreva o que o código faz.
+| Documento | Caminho | Limite |
+|---|---|---|
+| Visão geral do produto | `docs/project-overview.md` | 90 linhas |
+| Arquitetura e decisões técnicas | `docs/architecture.md` | 200 linhas |
+| Entrada para quem está chegando | `README.md` | sem limite fixo |
 
-## Documents Under Management
+Se um documento não existir, crie-o apenas quando houver conteúdo verificável que justifique sua existência.
 
-| Document                      | Path                       | Limit          |
-| ----------------------------- | -------------------------- | -------------- |
-| Product overview              | `docs/project-overview.md` | 90 lines       |
-| Architecture & tech decisions | `docs/architecture.md`     | 200 lines      |
-| Onboarding entry point        | `README.md`                | no fixed limit |
+## Etapa 1 — Levantar o estado real
 
-## Execution Protocol — /documentation-writer
+1. Leia `README.md`, `AGENTS.md`, `CLAUDE.md` e as regras aplicáveis.
+2. Liste a estrutura principal do projeto.
+3. Identifique o manifesto de dependências e os comandos disponíveis.
+4. Localize código, rotas, autenticação, dados e integrações existentes.
+5. Leia os tipos, modelos e módulos centrais relacionados à documentação.
+6. Consulte os commits recentes para identificar mudanças relevantes.
+7. Leia os documentos administrados que existirem.
 
-### Step 1 — Explore the project
+Adapte a busca à tecnologia encontrada. Se não houver `src/`, procure outras pastas de código; se não houver Prisma, procure a camada de dados realmente usada.
 
-Não assuma estrutura fixa. Descubra o que existe:
+**Conclua quando:** o comportamento documentado e o comportamento implementado puderem ser comparados com evidências.
 
-1. Leia `README.md`, `AGENTS.md`, `CLAUDE.md` — entrada e instruções já escritas.
-2. Liste arquivos e pastas na raiz — mapa do projeto.
-3. Ache o manifesto de dependências (`package.json`, `pyproject.toml`, `go.mod`, `Cargo.toml`, etc.) — stack e versões.
-4. Localize o código (`src/`, `app/`, `lib/`, `packages/`, ou equivalente) — rotas, actions, components, services, modules.
-5. Ache a camada de dados (migrations, schema de ORM, SQL, Prisma, Supabase, etc.) — entidades, tabelas, RLS.
-6. Leia tipos ou models das entidades centrais.
-7. Ache roteamento, proxy/middleware e auth — fluxos, redirects, controle de acesso.
-8. Rode `git log --oneline -10` para pegar mudanças recentes que os docs podem não ter.
-9. Leia o que já existe em `docs/` para entender a cobertura atual.
+## Etapa 2 — Identificar divergências
 
-> Adapte ao que o projeto usa. Se não houver `supabase/`, procure `prisma/`, `db/`, `migrations/`. Se não houver `src/`, procure `app/`, `packages/`, etc.
+Para cada documento, procure:
 
-### Step 2 — Compare with current documents
+- funcionalidade existente que não está descrita;
+- funcionalidade descrita que não existe mais;
+- rotas, entidades, camadas ou integrações renomeadas;
+- tecnologia, dependência ou comando desatualizado;
+- instrução de instalação ou uso que não funciona;
+- documento ausente, quando sua criação for necessária;
+- excesso do limite de linhas.
 
-Leia cada documento sob gestão e identifique:
+Registre cada divergência com o caminho do documento e a evidência no código. Ignore conteúdo que ainda estiver correto.
 
-- Features implementadas que não estão no doc
-- Itens documentados que saíram do código
-- Versões de stack ou dependências removidas/desatualizadas
-- Entidades, rotas ou camadas renomeadas ou com comportamento diferente
-- Documentos acima do limite de linhas
+**Conclua quando:** cada alteração proposta tiver uma causa verificável e nenhuma mudança for baseada apenas em suposição.
 
-### Step 3 — Report before editing
+## Etapa 3 — Pedir confirmação
 
-Antes de escrever qualquer arquivo, mostre o resumo ao usuário:
+Antes de escrever, apresente:
 
-```
+```markdown
 ## O que está desatualizado
 
 ### docs/project-overview.md
@@ -86,32 +78,34 @@ Antes de escrever qualquer arquivo, mostre o resumo ao usuário:
 ### README.md
 - [ ] ...
 
-Posso aplicar as atualizações?
+Posso aplicar essas atualizações?
 ```
 
-Só prossiga depois de confirmação explícita.
+Liste apenas os documentos que realmente serão alterados. Aguarde confirmação explícita. Se não houver divergências, informe isso e não peça autorização para uma alteração vazia.
 
-### Step 4 — Update the documents
+## Etapa 4 — Atualizar
 
-Aplique somente as mudanças identificadas. Nunca reescreva o documento inteiro se só uma seção mudou. Atualize a data “Última atualização” em cada arquivo editado. Respeite os limites de linhas.
+Depois da confirmação:
 
-## Best Practices
+1. aplique somente as mudanças identificadas;
+2. preserve seções corretas e o estilo existente;
+3. use links relativos;
+4. atualize a data somente nos documentos editados, se eles tiverem esse campo;
+5. respeite os limites de linhas;
+6. não inclua opinião, recomendação de arquitetura ou funcionalidade futura;
+7. não copie conteúdo de domínio dos exemplos para este kit.
 
-- **Code is the source of truth** — never document behavior you have not verified in the code.
-- **Surgical updates** — edit only what changed; do not reformat intact sections.
-- **Audience first** — write for developers onboarding to the project; assume they know the language/framework, not the internal decisions.
-- **Show, don't tell** — prefer concrete examples, commands, and paths over abstract descriptions.
-- **Relative links** — use relative paths between documents (`../docs/architecture.md`).
-- **No duplication** — if information exists in another doc, reference it instead of repeating.
-- **Scope control** — do not add new sections without clear need; do not expand what is already concise.
-- **Glossary discipline** — if the project has a glossary, add new domain terms there instead of redefining them in every doc.
+**Conclua quando:** cada divergência confirmada estiver corrigida e nenhum conteúdo não verificado tiver sido adicionado.
 
-## What NOT to Do
+## Validação e entrega
 
-- Do not execute without the `/documentation-writer` command.
-- Do not edit files outside `docs/` and `README.md`.
-- Do not rewrite documents from scratch if only one section changed.
-- Do not document assumptions — only what is in the code.
-- Do not exceed document line limits.
-- Do not add opinions, stack recommendations, or architectural decisions not present in the project.
-- Do not describe behavior from a previous version that no longer exists.
+Confira:
+
+- [ ] somente os documentos permitidos foram alterados;
+- [ ] cada afirmação pode ser confirmada no código ou na configuração;
+- [ ] nenhuma seção correta foi reescrita sem necessidade;
+- [ ] os limites de linhas foram respeitados;
+- [ ] links e comandos documentados são válidos;
+- [ ] a documentação não descreve funcionalidades futuras como existentes.
+
+Informe os arquivos atualizados e um resumo curto das mudanças. Não altere o código para fazer a documentação parecer correta.

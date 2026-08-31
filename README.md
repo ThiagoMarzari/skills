@@ -1,70 +1,80 @@
-# Kit de práticas para IA no dia a dia
+# Kit de práticas para IA
 
-Repositório genérico para **usar IA com as mesmas convenções do Cursor e do Claude Code**: regras, skills, prompts e exemplos de documentação. Nada aqui é um produto. Tudo foi pensado para **copiar para outro projeto** e começar a trabalhar.
+Repositório genérico com skills, prompts, regras e exemplos para trabalhar com agentes de IA no Cursor, Claude Code ou ferramentas compatíveis. Este kit não é um aplicativo: os arquivos devem ser copiados seletivamente e adaptados ao projeto de destino.
 
-## O que este kit contém
+## Conteúdo
 
-| Pasta / arquivo | O que é | Como reutilizar |
-|-----------------|---------|-----------------|
-| `.agents/skills/` | Mini-manuais invocáveis (`SKILL.md` + refs) | Copie a pasta da skill para `.agents/skills/` (Cursor) ou `.claude/skills/` (Claude Code) |
-| `.cursor/rules/` | Rule geral (`projetos.mdc`) — qualquer stack | Copie para o destino; não amarra Next nem Nest |
-| `docs/exemplos/rules/` | Rules de **exemplo** (hoje: Next.js) | Copie só se o destino for aquela stack; ligue `alwaysApply` ou `globs` lá |
-| `.prompts/` | Prompts para colar na conversa | Copie o arquivo ou o texto; prompts **não** são carregados sozinhos |
-| `docs/` | Exemplos de overview, arquitetura, design e PRD | Use como modelo; adapte, não copie o conteúdo de domínio |
-| `AGENTS.md` | Instruções para agentes Cursor/Codex | Adapte ao projeto destino (stack, comandos, o que não fazer) |
-| `CLAUDE.md` | Instruções para Claude Code | Idem; no destino, rode `/init` e complete o que faltar |
+| Caminho | Conteúdo | Uso |
+|---|---|---|
+| `.agents/skills/` | Skills com instruções de processo | Copie a pasta para `.agents/skills/` no Cursor ou `.claude/skills/` no Claude Code |
+| `.prompts/` | Prompts para tarefas específicas | Cole o conteúdo na conversa ou solicite o prompt explicitamente |
+| `.cursor/rules/` | Regras permanentes | Copie as regras aplicáveis ao projeto de destino |
+| `docs/exemplos/rules/` | Regras de exemplo por tecnologia | Copie somente quando a tecnologia corresponder |
+| `docs/` | Exemplos de documentação e PRD | Use como modelo; substitua o conteúdo de domínio |
+| `AGENTS.md` | Orientações para agentes | Adapte ao projeto de destino |
+| `CLAUDE.md` | Orientações para Claude Code | Adapte ao projeto de destino |
 
-## Como usar neste repositório
+## Como usar
 
-1. Leia a skill ou o prompt **antes** de pedir a tarefa.
-2. Não sabe por onde começar? `/ask-marzari`. Senão, invoque a skill pelo nome (`/questiona`, `/prd-generator`, `/plan-spec`, `/documentation-writer`).
-3. Cole o prompt de `.prompts/` quando a tarefa for pontual (ex.: [briefing do PRD](.prompts/prd-generator.md), [decidir o que testar](.prompts/testes-automatizados.md) ou [TDD com agentes](.prompts/tdd-com-agentes.md)).
-4. Trate `docs/` como **exemplo**, não como o produto deste repo.
+1. Escolha uma skill ou prompt compatível com a tarefa.
+2. Leia suas instruções antes de invocá-la.
+3. Se o próximo passo não estiver claro, use `/ask-marzari`.
+4. Invoque explicitamente a skill desejada, por exemplo `/questiona`, `/prd-generator`, `/plan-spec` ou `/code-review`.
+5. Copie prompts de `.prompts/` somente quando a tarefa precisar deles.
 
-## Como levar para outro projeto
+## Fluxo recomendado
 
-Copie **só o que aquele projeto precisa**. Skills e prompts são independentes; rules e `AGENTS.md`/`CLAUDE.md` devem refletir a stack real do destino.
+Para uma funcionalidade que ainda precisa de decisões:
+
+`/questiona` → `/prd-generator` → `/plan-spec` → implementação → `/code-review` → `/documentation-writer`
+
+Use apenas as etapas necessárias. Uma tarefa pequena e clara pode ir direto para implementação. O fluxo melhora a consistência, mas não substitui testes, verificações automáticas ou revisão humana.
+
+## Onde copiar
+
+Copie somente o que o projeto destino precisa:
 
 ```text
-# Skill (Cursor)
 destino/.agents/skills/<nome-da-skill>/
-
-# Skill (Claude Code)
 destino/.claude/skills/<nome-da-skill>/
-
-# Prompt
 destino/.prompts/<nome>.md
-
-# Rule geral (qualquer stack)
-destino/.cursor/rules/projetos.mdc
-
-# Rule de stack (só se o destino for Next, Nest, etc.)
-destino/.cursor/rules/<regra-de-exemplo>.mdc
+destino/.cursor/rules/<nome>.mdc
 ```
 
-Cada skill deve continuar **autossuficiente**: o agente lê o `SKILL.md` e, se precisar, os arquivos em `refs/`. Não dependa de pastas deste kit existirem no projeto destino.
+Uma skill pode possuir arquivos de referência em seu próprio diretório. Ao copiá-la, leve também as referências indicadas pelo `SKILL.md`.
 
-## Skills atuais
+## Skills
 
 | Skill | Quando usar |
-|-------|-------------|
-| `pergunte-marzari` | Não sabe qual skill usar — router do kit |
-| `questiona` | Fechar escopo e trade-offs **antes** de implementar |
-| `prd-generator` | Gerar PRD/specs em `docs/prd/` |
-| `plan-spec` | Plano (e, se pedir, código) da **próxima** spec pendente |
-| `documentation-writer` | Atualizar overview, arquitetura e README a partir do código |
+|---|---|
+| `/ask-marzari` | Escolher a skill ou o fluxo adequado |
+| `/questiona` | Fechar escopo e decisões antes de implementar |
+| `/prd-generator` | Criar um PRD e especificações funcionais |
+| `/plan-spec` | Planejar ou implementar especificações pendentes |
+| `/code-review` | Revisar qualidade estrutural e aderência à especificação |
+| `/documentation-writer` | Atualizar documentação com base no código real |
+| `/writing-for-agents` | Escrever ou melhorar documentos para agentes |
+| `/rework-commits` | Organizar commits de uma branch para revisão |
 
-## Convenções do kit
+## Prompts
 
-- **Português** na conversa e nos artefatos gerados, salvo trechos técnicos (OWASP, APIs).
-- Uma preocupação por rule; skill com `SKILL.md` enxuto e detalhes em `refs/`.
-- Skills com `disable-model-invocation` só rodam quando invocadas pelo nome.
-- Este repositório **não** é um app: não invente stack, rotas, banco ou features de produto aqui.
+- `.prompts/prd-generator.md`: briefing para levantar informações antes de um PRD.
+- `.prompts/testes-automatizados.md`: decidir o que merece testes.
+- `.prompts/tdd-com-agentes.md`: conduzir um ciclo de desenvolvimento orientado por testes.
 
-## Referências
+Prompts não são carregados automaticamente. O usuário deve colá-los ou pedir seu uso.
 
-- [Cursor — Creating features (TDD com agentes)](https://cursor.com/learn/creating-features)
-- [Cursor — Rules e AGENTS.md](https://cursor.com/docs/rules)
+## Convenções
+
+- Escreva em português, salvo quando um termo técnico em outro idioma for mais preciso.
+- Mantenha skills, prompts e regras portáteis e sem dependências ocultas.
+- Trate `docs/` como material de exemplo, não como a descrição deste kit.
+- Não invente stack, banco, autenticação, rotas ou funcionalidades de produto neste repositório.
+- Skills com `disable-model-invocation: true` exigem invocação explícita.
+
+## Referências externas
+
+- [Cursor — Rules](https://cursor.com/docs/rules)
 - [Cursor — Skills](https://cursor.com/docs/skills)
-- [Claude Code — CLAUDE.md / memory](https://code.claude.com/docs/en/memory)
-- [Claude Code — Best practices](https://code.claude.com/docs/en/best-practices)
+- [Claude Code — memória e CLAUDE.md](https://code.claude.com/docs/en/memory)
+- [Claude Code — boas práticas](https://code.claude.com/docs/en/best-practices)
