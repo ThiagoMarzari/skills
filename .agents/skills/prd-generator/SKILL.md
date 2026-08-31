@@ -37,6 +37,7 @@ Se o pedido exigir qualquer alteração fora desse arquivo, explique o limite e 
 - Seja direto, crítico e útil.
 - Diferencie sempre **decisão confirmada**, **suposição** e **ponto pendente**.
 - Pergunte quando uma resposta mudar o escopo ou o comportamento; não invente requisitos.
+- Quando oferecer alternativas, recomende uma delas e explique o motivo em uma frase curta, com base no contexto do projeto e no objetivo do recorte.
 - Se o escopo estiver grande ou confuso, proponha um recorte menor antes de escrever.
 - Use linguagem simples, sem perder precisão.
 - Em uma funcionalidade existente, respeite as entidades, fluxos e limitações já encontradas no projeto.
@@ -72,6 +73,20 @@ Se já descreveu, comece pela etapa 1.
 
 Colete as decisões abaixo. Faça uma pergunta por mensagem ou um pequeno bloco de perguntas relacionadas. Depois de cada resposta, registre mentalmente o que está confirmado e o que continua pendente.
 
+Para cada pergunta com alternativas, use este formato:
+
+```markdown
+**Pergunta:** [decisão que precisa ser tomada]
+
+- **A:** [alternativa]
+- **B:** [alternativa]
+- **C:** [alternativa, se necessário]
+
+**Recomendação:** [alternativa escolhida] — [motivo em uma frase curta].
+```
+
+A recomendação orienta, mas não substitui a decisão do usuário. Se houver uma opção claramente melhor pelo contexto, explique o motivo sem apresentar alternativas artificiais. Se a escolha depender de uma informação ainda desconhecida, diga qual informação falta.
+
 1. **Problema**: qual dificuldade existe, para quem e como é resolvida hoje?
 2. **Público**: quem usa ou é afetado? Transforme “qualquer pessoa” em um grupo específico.
 3. **Ações**: o que a pessoa consegue fazer? Converta verbos vagos em ações observáveis, como criar, editar, listar, buscar, consultar, cancelar ou excluir.
@@ -81,7 +96,7 @@ Colete as decisões abaixo. Faça uma pergunta por mensagem ou um pequeno bloco 
 7. **Aceite**: que comportamento pode ser verificado sem interpretação?
 8. **Fora do escopo**: o que ficará explicitamente de fora desta entrega?
 
-Quando o usuário não souber, apresente opções baseadas no contexto já lido e peça uma escolha. Não feche decisões importantes por conta própria.
+Quando o usuário não souber, apresente opções baseadas no contexto já lido, recomende uma delas e peça uma escolha. A justificativa deve ser curta e concreta, por exemplo: “Recomendo A porque atende o fluxo essencial com menor escopo.” Não feche decisões importantes por conta própria.
 
 **Conclua quando:** problema, público, ações, escopo, regras, fluxos, critérios de aceite e itens fora do escopo estiverem definidos ou marcados como pendentes assumidos pelo usuário.
 
@@ -93,7 +108,7 @@ Detecte a tecnologia usada no projeto; não pergunte algo que o repositório já
 
 ### Modo inicial
 
-Se a tecnologia não estiver definida, pergunte se há preferência. Se não houver, sugira uma opção proporcional ao produto:
+Se a tecnologia não estiver definida, pergunte se há preferência. Se não houver, sugira uma opção proporcional ao produto e recomende-a com uma justificativa curta:
 
 - página simples: HTML, CSS e JavaScript, ou React com Vite e TypeScript;
 - aplicação web com login: Next.js, TypeScript e a solução de dados já escolhida;
