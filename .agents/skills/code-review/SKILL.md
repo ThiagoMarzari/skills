@@ -12,9 +12,6 @@ Use somente com `/code-review`.
 
 Se o usuário chamar por outro caminho, recuse e instrua: "Use `/code-review` para iniciar esta skill."
 
-## Pré-requisitos
-
-- Existe `docs/agents/issue-tracker.md` no repo? Se **não** existir, pare e diga ao usuário para executar `/setup-matt-pocock-skills`.
 
 ## Objetivo
 
