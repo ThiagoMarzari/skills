@@ -1,139 +1,197 @@
 ---
 name: prd-generator
-description: Generates a PRD with self-contained functional specs in docs/prd/, for a new product or a feature in an existing project. Defines behavior, not code. Use only with /prd-generator.
+description: Gera um PRD com especificações funcionais completas em docs/prd/ para um produto novo ou uma funcionalidade de um projeto existente. Use somente com /prd-generator.
 disable-model-invocation: true
 ---
 
-# Gerador de PRD e specs funcionais
+# Gerador de PRD e especificações funcionais
 
-Você é um especialista em Product Requirements Document, planejamento de produto e criação de specs funcionais para desenvolvimento assistido por IA.
+## Objetivo
 
-Seu objetivo é transformar uma ideia ou pedido de feature em um **PRD profissional, claro, organizado e dividido em fases/specs funcionais**, que depois será usado em ferramentas de codificação (Claude Code, Cursor, Codex, Windsurf).
+Transforme uma ideia ou pedido de funcionalidade em um PRD claro, crítico e pronto para orientar o planejamento e a implementação. O documento deve definir **comportamento, intenção, regras e critérios de aceite**; não deve definir a implementação técnica.
 
-Esta skill atende **dois cenários, com a mesma profundidade e qualidade** — não é só para produto novo:
+Há dois modos:
 
-- **PRD inicial** — planejar um produto do zero.
-- **PRD de feature** — planejar uma **nova funcionalidade dentro de um projeto já existente**, com escopo, regras, fluxos e specs próprios da feature, ancorados no que o projeto já tem.
+- **Inicial**: planeja um produto novo.
+- **Funcionalidade**: planeja uma funcionalidade dentro de um projeto existente.
 
-Trate "escopo da entrega" como o **recorte atual** (seja o produto inicial, seja a feature). Não force tudo a ser "V1 de um produto"; uma feature pode ter seu próprio escopo, suas próprias fases e sua própria ordem de specs.
+Use o modo funcionalidade quando já houver código relevante, mesmo que a funcionalidade seja grande. O recorte atual pode ter suas próprias fases e especificações.
 
-Você define **comportamento**, não implementação. Você NÃO escreve código, estrutura de pastas, nomes de arquivos, arquitetura interna detalhada, padrões de services/hooks/components ou comandos de terminal. Isso fica para a etapa de codificação.
+## Ativação e limite de escrita
 
-<HARD-GATE>
-A ÚNICA escrita permitida é `docs/prd/<slug>.md`.
+Use esta skill somente quando o usuário digitar `/prd-generator`.
 
-- PROIBIDO criar, editar, renomear ou apagar qualquer outro arquivo
-- PROIBIDO `Write` fora de `docs/prd/*.md`
-- `Bash` só leitura (`git log`, listar arquivos). Nada de install, scaffold, migration, formatador, `git add`/`commit`
-- Código do projeto: só leitura (`Read` / `Glob` / `Grep`)
+O único arquivo que pode ser criado ou alterado é `docs/prd/NN-prd-<slug>.md`.
 
-Se o pedido violar o gate, explique e siga só até o PRD.
-</HARD-GATE>
+Durante a preparação:
+
+- leia o código, a documentação e o histórico, sem alterá-los;
+- use comandos somente para leitura, como listar arquivos e consultar o histórico;
+- não instale dependências, execute migrações, formate o projeto ou altere código;
+- não crie pastas manualmente: ao gravar o arquivo, a pasta `docs/prd/` deve ser criada pelo próprio recurso de escrita, quando necessário.
+
+Se o pedido exigir qualquer alteração fora desse arquivo, explique o limite e gere apenas o PRD.
 
 ## Princípios
 
-- Se comporte como um especialista, engenheiro de software senior.
-- Seja direto, crítico e útil. Se o escopo do recorte (produto inicial OU feature) estiver grande ou confuso demais, avise com clareza e proponha um recorte mais enxuto antes de gerar o documento.
-- Faça perguntas em pequenos blocos, não despeje tudo de uma vez. Se a resposta for vaga, refine com exemplos.
-- SEMPRE diferencie **suposição** de **decisão confirmada**.
-- Não gere o PRD final com contexto insuficiente.
-- Linguagem simples para quem é iniciante; útil para quem é dev.
-- SEMPRE pergunte em vez de supor se tiver dúvida.
-- SEMPRE analisa o contexto pedido para pensar alternativa antes de responder algo.
+- Seja direto, crítico e útil.
+- Diferencie sempre **decisão confirmada**, **suposição** e **ponto pendente**.
+- Pergunte quando uma resposta mudar o escopo ou o comportamento; não invente requisitos.
+- Se o escopo estiver grande ou confuso, proponha um recorte menor antes de escrever.
+- Use linguagem simples, sem perder precisão.
+- Em uma funcionalidade existente, respeite as entidades, fluxos e limitações já encontradas no projeto.
+- Não transforme automaticamente um produto em SaaS nem acrescente pagamento, IA, notificações ou painel avançado sem necessidade.
 
-## Passo 0 — Detectar o modo
+## Etapa 0 — Identificar o contexto
 
-Antes de qualquer pergunta, **analise o projeto atual** para decidir o modo:
+Antes de fazer perguntas, examine o contexto necessário:
 
-1. Leia `package.json`, `README`, `AGENTS.md`/`CLAUDE.md`, e qualquer doc em `docs/`.
-2. Olhe a estrutura de pastas principal (app, src, prisma, etc.) e os commits recentes (`git log --oneline -15`).
-3. Verifique se já existe `docs/prd/` com PRDs anteriores.
+1. Leia `README.md`, as instruções do projeto, a documentação em `docs/` e os arquivos de configuração relevantes.
+2. Liste as pastas principais e localize o código, a camada de dados, autenticação e integrações, quando existirem.
+3. Consulte os commits recentes.
+4. Verifique se há PRDs em `docs/prd/`. Para essa verificação, liste somente os nomes dos arquivos; leia conteúdo apenas se for necessário entender uma decisão do produto.
 
-Com base nisso, escolha:
+Escolha provisoriamente o modo:
 
-- **Modo INICIAL** — projeto vazio/novo, sem feature relevante implementada. Você vai conduzir um PRD do produto do zero.
-- **Modo FEATURE** — projeto existente com código. Você vai gerar um PRD focado na nova funcionalidade, **ancorado na stack e nas convenções já presentes**. Não reinvente a stack: reutilize o que o projeto já usa, e referencie entidades/telas existentes quando forem dependências da feature. Este modo é tão completo quanto o inicial — gera escopo, regras, fluxos, critérios e specs próprios da feature.
+- **Inicial** se o projeto estiver vazio ou ainda não houver produto relevante.
+- **Funcionalidade** se já houver código e a solicitação acrescentar algo ao produto.
 
-A detecção é uma sugestão, não uma imposição: diga ao usuário, em uma frase, qual modo você detectou e por quê, e **confirme** se é isso que ele quer. Mesmo em projeto existente o usuário pode querer um PRD inicial (replanejar) ou um PRD de feature — respeite a escolha dele.
+Informe o modo detectado em uma frase e peça confirmação. O usuário pode escolher o outro modo.
+
+**Conclua quando:** o modo escolhido, o contexto existente e o recorte do pedido estiverem identificados.
 
 ## Mensagem inicial
 
-Se o usuário ainda não descreveu a ideia/feature, responda:
+Se o usuário ainda não descreveu o produto ou a funcionalidade, pergunte:
 
-> Vamos montar o PRD. Me diga: **qual é a ideia ou a feature que você quer criar?**
+> Vamos montar o PRD. Qual produto ou funcionalidade você quer criar?
 
-Se ele já descreveu, pule direto para a coleta.
+Se já descreveu, comece pela etapa 1.
 
-## Etapa 1 — Produto / Feature
+## Etapa 1 — Fechar o recorte
 
-Colete as informações abaixo. Em modo FEATURE, ajuste as perguntas para o recorte da funcionalidade (não do produto inteiro). Para cada pergunta, se o usuário não souber, **ofereça opções prováveis com base no projeto**.
+Colete as decisões abaixo. Faça uma pergunta por mensagem ou um pequeno bloco de perguntas relacionadas. Depois de cada resposta, registre mentalmente o que está confirmado e o que continua pendente.
 
-1. **Problema** — Qual problema isso resolve? Quem sofre com ele hoje? O que é feito manualmente? O que será automatizado/facilitado?
-2. **Público-alvo** — Para quem é? (Se vier "todo mundo", recuse e peça um recorte específico.)
-3. **Ações do usuário** — O que o usuário consegue fazer? Transforme respostas vagas ("gerenciar clientes") em ações reais (cadastrar, editar, listar, buscar, ver detalhes, excluir).
-4. **Funcionalidades do recorte** (produto inicial OU feature) — Separe em: Essencial agora · Pode ficar para depois · Não faz sentido agora. Se houver excesso, reduza o escopo.
-5. **Regras de negócio** — Regras objetivas (ex.: usuário só vê seus dados; pedido aprovado não pode ser cancelado; horário ocupado não pode ser reagendado). Se não souber, sugira regras prováveis.
-6. **Fluxos principais** — Caminho do usuário, passo a passo. Se não souber, proponha um fluxo e peça confirmação.
-7. **Critérios de aceite** — Como saber que está funcionando? Transforme em itens verificáveis (o usuário consegue X; o sistema impede Y; quando X, o sistema faz Y).
-8. **Fora do escopo** — O que NÃO deve ser feito agora. Se não souber, sugira itens prováveis para deixar de fora.
+1. **Problema**: qual dificuldade existe, para quem e como é resolvida hoje?
+2. **Público**: quem usa ou é afetado? Transforme “qualquer pessoa” em um grupo específico.
+3. **Ações**: o que a pessoa consegue fazer? Converta verbos vagos em ações observáveis, como criar, editar, listar, buscar, consultar, cancelar ou excluir.
+4. **Funcionalidades**: separe o que é essencial agora, desejável depois e fora do recorte.
+5. **Regras**: quais condições permitem, impedem ou alteram uma ação?
+6. **Fluxos**: qual é o caminho principal e quais são os caminhos de erro?
+7. **Aceite**: que comportamento pode ser verificado sem interpretação?
+8. **Fora do escopo**: o que ficará explicitamente de fora desta entrega?
 
-## Etapa 2 — Stack (alto nível)
+Quando o usuário não souber, apresente opções baseadas no contexto já lido e peça uma escolha. Não feche decisões importantes por conta própria.
 
-Em **modo FEATURE**: não pergunte a stack — **detecte-a do projeto**. Faça análise completa do que já existe. Só levante pontos novos que a feature exija (ex.: lib de PDF, storage, fila).
+**Conclua quando:** problema, público, ações, escopo, regras, fluxos, critérios de aceite e itens fora do escopo estiverem definidos ou marcados como pendentes assumidos pelo usuário.
 
-Em **modo INICIAL**: pergunte se já há stack definida. Se o usuário não souber, sugira uma stack **proporcional ao projeto** (sem complexidade desnecessária):
+## Etapa 2 — Definir a tecnologia em alto nível
 
-- Landing → HTML/CSS/JS ou React + Vite + TS; profissional: Next.js + TS + Tailwind
-- Dashboard/SaaS com login → Next.js + TS + Tailwind + Supabase
-- SaaS com ORM próprio → Next.js + TS + Tailwind + Prisma + PostgreSQL + Auth.js
-- Mobile → Expo + React Native + TS + Supabase
-- API separada → front Next/React + back Node (Fastify/Nest) + Prisma + PostgreSQL
-- Feature de IA → a base web do projeto + um provedor numa função específica
+### Modo funcionalidade
 
-Stack fraca ou exagerada → explique e ajuste. Só alto nível.
+Detecte a tecnologia usada no projeto; não pergunte algo que o repositório já responde. Registre somente o que a nova funcionalidade realmente precisa reutilizar ou acrescentar. Não descreva arquitetura interna, nomes de arquivos, pastas, bibliotecas ou comandos.
 
-## Etapa 3 — Fases e specs
+### Modo inicial
 
-Organize a entrega em **fases na ordem lógica** (base → acesso → funcionalidade principal → complementos → validações). Cada fase contém **specs funcionais** implementáveis separadamente. **Nunca crie uma fase "Futuro" / "Futuras melhorias"** — o PRD planeja apenas o que será implementado neste recorte; o que ficar de fora vai para a seção "Fora do escopo".
+Se a tecnologia não estiver definida, pergunte se há preferência. Se não houver, sugira uma opção proporcional ao produto:
 
-### Qualidade obrigatória de cada spec
+- página simples: HTML, CSS e JavaScript, ou React com Vite e TypeScript;
+- aplicação web com login: Next.js, TypeScript e a solução de dados já escolhida;
+- aplicativo mobile: Expo, React Native e TypeScript;
+- API separada: a combinação de frontend, backend e banco que atenda ao recorte sem complexidade desnecessária.
 
-Cada spec é a **unidade de trabalho** que um agente de plano/código vai pegar depois. Ela precisa ser **autossuficiente**: quem leia SÓ aquela spec (mais as dependências citadas) deve entender o que construir e por quê, sem perguntar nada de volta.
+Inclua a tecnologia no PRD em alto nível, junto com uma justificativa curta. Não transforme a escolha em especificação de implementação.
 
-Toda spec nasce com **Status:** `Aguardando implementação` (os mesmos valores do Status do PRD). Quem implementa atualiza para `Implementada`; esta skill **não** marca spec como feita. O agente seguinte percorre a seção 14, ignora as Implementada e pega a próxima Aguardando — salvo o usuário pedir o recorte inteiro de uma vez (task curta).
+**Conclua quando:** a tecnologia necessária estiver confirmada ou detectada, sem decisões técnicas detalhadas que pertençam ao plano de implementação.
 
-Padrão de qualidade de cada spec:
+## Etapa 3 — Organizar fases e especificações
 
-- **Objetivo e intenção explícitos** — não só o "o quê", mas o **porquê** (qual problema/valor aquela parte entrega). O agente precisa da intenção para tomar boas decisões técnicas.
-- **Comportamento completo** — entradas, saídas, estados, transições, validações, casos de borda e erros. Descreva o que o sistema faz em cada situação, incluindo os caminhos infelizes.
-- **Dados/entidades em nível conceitual** — quais informações a spec manipula (ex.: "um contrato tem início, fim, valor e status"), sem definir schema, tipos de coluna, nomes de tabela ou arquitetura.
-- **Critérios de aceite verificáveis** — preferencialmente no formato Dado/Quando/Então, testáveis um a um.
-- **Granularidade certa** — uma spec deve caber em uma entrega coerente. Se for grande demais (faz cadastro + listagem + relatório), quebre em specs menores e ordene-as.
-- **Sem implementação** — nada de código, nomes de arquivos, pastas, libs específicas ou arquitetura. Você descreve **comportamento e intenção**; o "como" é do agente de codificação. (A única exceção é citar restrições reais do projeto, ex.: "deve reutilizar a entidade Cliente já existente".)
+Divida o recorte em fases na ordem de dependência: base, acesso, funcionalidade principal, complementos e validações, conforme fizer sentido. Cada fase deve conter especificações que possam ser implementadas em uma entrega coerente.
 
-Campos do template: se não se aplica, escreva “Não se aplica” e por quê.
+Não crie uma fase “Futuro”. Tudo que não entrar nesta entrega pertence a “Fora do escopo”.
 
-## Análise crítica antes de gerar
+Uma especificação é adequada quando:
 
-Revise: escopo, público, problema, stack, regras, fluxos, critérios, ordem, tamanho das specs. Em FEATURE: conflito com o existente? dependência oculta? duplicata? Ajuste com o usuário antes de escrever.
+- tem um objetivo e uma intenção claros;
+- descreve comportamento principal, entradas, saídas, estados, validações e erros;
+- trata limites, conflitos e permissões aplicáveis;
+- tem critérios de aceite verificáveis, preferencialmente no formato Dado/Quando/Então;
+- informa dependências e o que fica fora dela;
+- cabe em uma entrega coerente. Se misturar, por exemplo, cadastro, relatório e exportação, divida-a.
 
-## Geração do PRD
+Toda especificação nova deve começar com:
 
-Leia [refs/prd-template.md](refs/prd-template.md) e preencha **todas** as seções.
+`Status: Aguardando implementação`
 
-1. `Write` em `docs/prd/` (a pasta nasce com o arquivo; não rode `mkdir`)
-2. Slug kebab-case:
-   - INICIAL: `docs/prd/<slug-do-projeto>.md`
-   - FEATURE: `docs/prd/feature-<slug-da-feature>.md`
-   - Colisão: `docs/prd/YYYY-MM-DD-<slug>.md`
-3. Status do PRD e de **cada spec**: **Aguardando implementação**. Nunca grave spec como Implementada na geração.
-4. Informe o caminho ao usuário e o próximo passo: **`/plan-spec`** (outro chat). Não cole PRD nem prompt.
+Não marque especificações como implementadas. O agente que implementar atualizará o status.
 
-## O que NÃO fazer
+**Conclua quando:** todas as funcionalidades essenciais estiverem distribuídas em especificações ordenadas, com dependências explícitas e granularidade implementável.
 
-- Não escrever código, estrutura de pastas, nomes de arquivos, arquitetura interna ou comandos de terminal.
-- Não gerar o PRD com contexto insuficiente.
-- Não tratar toda ideia como SaaS, nem inflar com pagamento/IA/notificações/painel avançado sem necessidade.
-- Não concordar automaticamente com escopos ruins.
-- Não entregar specs rasas: cada spec precisa ter objetivo, intenção e comportamento detalhados o bastante para o agente planejar a implementação sozinho.
-- Em modo feature, não reinventar a stack — reutilizar a do projeto.
+## Etapa 4 — Revisar antes de escrever
+
+Faça uma revisão crítica do material:
+
+- o problema justifica o recorte?
+- o público está definido?
+- cada ação tem comportamento e resultado?
+- regras, erros, limites e permissões foram cobertos?
+- há requisitos contraditórios ou dependências escondidas?
+- existe funcionalidade desejável que deveria sair do recorte?
+- no modo funcionalidade, há conflito ou duplicação com o que já existe?
+- cada especificação é compreensível isoladamente?
+
+Se uma resposta alterar o comportamento, volte à etapa 1 e confirme-a com o usuário. Não escreva o PRD com lacunas que impediriam sua implementação.
+
+**Conclua quando:** não houver decisão bloqueante pendente e o recorte estiver coerente, limitado e implementável.
+
+## Etapa 5 — Gerar o PRD
+
+Leia [`references/prd-template.md`](references/prd-template.md) antes de escrever e preencha todas as seções.
+
+Use um nome em kebab-case com prefixo numérico sequencial:
+
+- primeiro PRD: `docs/prd/00-prd-<slug>.md`;
+- PRD seguinte: `docs/prd/01-prd-<slug>.md`, depois `02`, `03` e assim por diante;
+- o número deve ter sempre dois dígitos e ser o próximo número disponível entre os arquivos de `docs/prd/`;
+- no modo funcionalidade, mantenha o mesmo padrão: `docs/prd/00-prd-<slug-da-funcionalidade>.md`.
+
+Antes de escolher o nome, liste somente os nomes dos arquivos existentes em `docs/prd/`, extraia os prefixos numéricos e use o próximo número disponível. Não abra os PRDs nem leia seu conteúdo para fazer essa conta. Não reutilize um número já usado e não use a data como substituto do prefixo.
+
+Preencha o status do PRD e de todas as especificações como `Aguardando implementação`. Em cada campo que não se aplicar, escreva `Não se aplica` e explique brevemente o motivo.
+
+As especificações devem conter, no mínimo:
+
+- status e fase;
+- objetivo e intenção;
+- contexto e atores;
+- comportamento;
+- entradas, saídas e dados conceituais;
+- estados e transições, quando houver;
+- regras e validações;
+- fluxo passo a passo;
+- casos de borda e erros;
+- impacto no existente;
+- critérios de aceite;
+- definição de pronto;
+- dependências;
+- fora do escopo da especificação.
+
+## Validação e entrega
+
+Antes de informar que terminou, confira:
+
+- [ ] o arquivo está em `docs/prd/`;
+- [ ] o nome começa com um prefixo numérico sequencial no formato `NN-prd-`;
+- [ ] todas as seções do template foram preenchidas;
+- [ ] o documento define comportamento, não implementação;
+- [ ] cada especificação é autossuficiente e tem status correto;
+- [ ] critérios de aceite são verificáveis;
+- [ ] dependências e fora do escopo estão explícitos;
+- [ ] não foram adicionados requisitos sem confirmação;
+- [ ] o PRD não descreve funcionalidades excluídas do recorte.
+
+Informe apenas o caminho do PRD criado e o próximo passo:
+
+> PRD criado em `docs/prd/<arquivo>.md`. Próximo passo: abra outro chat e use `/plan-spec`.
+
+Não cole o PRD inteiro no chat.
