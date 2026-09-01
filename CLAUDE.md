@@ -6,7 +6,7 @@ See @README.md
 
 ## Onde estão as coisas
 
-- Skills: `.agents/skills/<nome>/` (no destino, prefira `.claude/skills/`)
+- Skills: `.agents/skills/engineering/<nome>/` e `.agents/skills/productivity/<nome>/` (no destino, extraia para `.claude/skills/<nome>/` — buckets não vão junto)
 - Prompts: `.prompts/` — não auto-carregados
 - Rule geral: `.cursor/rules/projetos.mdc`
 - Exemplos Next.js: `docs/exemplos/rules/` — **não** aplicar neste kit
@@ -21,10 +21,10 @@ See @README.md
 
 ## Skills
 
-- **User-invoked** (`disable-model-invocation: true`): só com comando explícito — `/questiona`, `/prd-generator`, `/plan-spec`, etc.
+- **User-invoked** (`disable-model-invocation: true`): só com comando explícito — `/setup-skills`, `/questiona`, `/prd-generator`, `/plan-spec`, etc.
 - **Model-invoked**: `writing-for-agents` — alcançável ao editar docs para agentes.
 
-Não infira skills user-invoked sem o comando. Próximo passo incerto → `/ask-marzari`.
+Não infira skills user-invoked sem o comando. Próximo passo incerto → `/ask-marzari`. Repo destino sem config → `/setup-skills`.
 
 ## Hábitos
 

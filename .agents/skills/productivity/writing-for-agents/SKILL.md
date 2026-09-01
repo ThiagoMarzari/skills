@@ -9,6 +9,8 @@ Referência para qualquer documento que um agente lê: skill, `AGENTS.md` / `CLA
 
 Se o documento for uma **skill**, leia [`SKILL-MECHANICS.md`](SKILL-MECHANICS.md) antes de decidir frontmatter e modo de invocação.
 
+Termos centrais (**carga**, **hierarquia da informação**, **poda**, **palavras-âncora**) estão definidos em [`references/principios.md`](references/principios.md) — é o glossário único desta skill. Leia quando precisar da definição, não para o fluxo normal.
+
 ## Objetivo
 
 Produzir instruções que digam ao agente: o que fazer, quando fazer, quais decisões tomar e como saber que terminou.
@@ -59,8 +61,8 @@ Cada passo termina com critério verificável:
 Um apontador diz **o que** existe no arquivo, **quando** ler e **onde** está. A redação do apontador — não o alvo — decide se o agente busca o material.
 
 ```markdown
-Se a tarefa for criar uma spec funcional, leia
-[`references/prd-template.md`](../prd-generator/references/prd-template.md) antes de escrever.
+Se precisar da definição de **carga**, leia
+[`references/principios.md`](references/principios.md) antes de decidir o degrau.
 ```
 
 Não aponte arquivo obrigatório sem dizer o momento de leitura. Não crie referência só para guardar regra curta que toda execução precisa.
@@ -78,16 +80,10 @@ Teste de no-op: delete a linha e pergunte se o comportamento mudou. Se não, rem
 
 **Conclua quando:** o corpo principal couber no que toda execução precisa e o restante estiver atrás de apontadores com gatilho claro.
 
-## Etapa 4 — Validar e entregar
+## Etapa 4 — Entregar
 
-Confira:
+Confirme que o documento tem objetivo, gatilho, formato de saída e cada etapa com critério verificável; apontadores com o quê, quando e onde; uma fonte por regra; padrão do projeto (idioma, limite de linhas, frontmatter) respeitado.
 
-- [ ] Objetivo e gatilho de ativação estão claros.
-- [ ] O agente sabe qual arquivo ou formato produzir.
-- [ ] Passos numerados, na ordem, cada um com critério de conclusão.
-- [ ] Apontadores têm o quê, quando e onde.
-- [ ] Sem dependência oculta de outro arquivo, skill ou integração.
-- [ ] Sem regra duplicada ou exemplo obsoleto.
-- [ ] Arquivo respeita padrão do projeto (idioma, limite de linhas, frontmatter).
+Informe brevemente o que mudou.
 
-Informe brevemente o que mudou e quais validações passaram.
+**Conclua quando:** o documento atende a cada critério da etapa 3 e a entrega descreve o que mudou.

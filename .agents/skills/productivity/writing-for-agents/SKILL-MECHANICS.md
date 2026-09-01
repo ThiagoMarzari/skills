@@ -33,7 +33,7 @@ Serve só ao humano: resumo de uma linha. Sem lista de gatilhos — o agente nã
 
 ## Referência compartilhada entre skills user-invoked
 
-Duas skills user-invoked não podem se invocar (sem `description`, nenhuma alcança a outra). Material que ambas precisam vai para arquivo **fora** do sistema de skills — por exemplo `references/` na raiz do projeto ou doc apontado por `AGENTS.md`.
+Duas skills user-invoked não podem se invocar (sem `description`, nenhuma alcança a outra). Material que ambas precisam vai para arquivo **fora** da pasta de cada skill — neste kit, `engineering/references/` no bucket; no destino, `references/` irmã das skills copiadas, ou doc apontado por `AGENTS.md`.
 
 ## Dividir por invocação
 

@@ -44,9 +44,11 @@ Status limpo, branch segura, base correta, sem rebase em andamento, hash de recu
 
 Cada commit: uma mudança lógica, compreensível isolada, ordem de dependências respeitada.
 
+Leia `docs/agents/commit-conventions.md` se existir e aplique o formato de mensagem. Sem o arquivo, use mensagem curta e descritiva — uma mudança lógica por commit.
+
 Ordem sugerida quando couber: dados/modelos → backend/regras → frontend → testes/docs. Adapte ao projeto.
 
-**Conclua quando:** toda alteração atribuída a um commit.
+**Conclua quando:** toda alteração atribuída a um commit e cada mensagem no formato escolhido.
 
 ## Etapa 4 — Reescrever
 

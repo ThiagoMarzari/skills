@@ -6,7 +6,7 @@ Repositório genérico com skills, prompts, regras e exemplos para agentes no Cu
 
 | Caminho | Conteúdo |
 |---------|----------|
-| `.agents/skills/` | Skills com processos executáveis |
+| `.agents/skills/` | Skills com processos executáveis, em buckets `engineering/` e `productivity/` |
 | `.prompts/` | Prompts para tarefas específicas |
 | `.cursor/rules/` | Regras permanentes |
 | `docs/exemplos/rules/` | Rules de exemplo por tecnologia |
@@ -22,6 +22,10 @@ Repositório genérico com skills, prompts, regras e exemplos para agentes no Cu
 
 ## Fluxo recomendado
 
+Repo destino ainda sem `docs/agents/`:
+
+`/setup-skills`
+
 Para funcionalidade que ainda precisa de decisões:
 
 `/questiona` → `/prd-generator` → `/plan-spec` → implementação → `/code-review` → `/documentation-writer`
@@ -32,6 +36,7 @@ Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à impleme
 
 | Comando | Quando usar |
 |---------|-------------|
+| `/setup-skills` | Configurar tracker de issues e convenções de commit no repo destino |
 | `/ask-marzari` | Escolher skill ou fluxo |
 | `/questiona` | Fechar escopo e decisões |
 | `/prd-generator` | PRD e specs em `docs/prd/` |
@@ -42,6 +47,8 @@ Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à impleme
 | `/rework-commits` | Reorganizar commits da branch |
 
 `writing-for-agents` também pode ser alcançada pelo agente ao editar docs agent-facing, sem comando.
+
+Neste kit as pastas vivem em `.agents/skills/engineering/<nome>/` e `.agents/skills/productivity/<nome>/`. Os buckets são só organização da origem.
 
 ## Prompts
 
@@ -55,6 +62,8 @@ Prompts não são auto-carregados.
 
 ## Onde copiar no destino
 
+Os buckets **não** se replicam no destino. Extraia cada skill isoladamente:
+
 ```text
 destino/.agents/skills/<nome-da-skill>/
 destino/.claude/skills/<nome-da-skill>/
@@ -62,7 +71,9 @@ destino/.prompts/<nome>.md
 destino/.cursor/rules/<nome>.mdc
 ```
 
-Leve referências indicadas pelo `SKILL.md` da skill copiada.
+Leve referências indicadas pelo `SKILL.md` da skill copiada. `questiona` e `prd-generator` também precisam de `.agents/skills/engineering/references/entrevista.md` → `destino/.agents/skills/references/entrevista.md` (o apontador relativo `../references/entrevista.md` continua válido).
+
+Depois de copiar as skills de engenharia, rode `/setup-skills` uma vez no destino.
 
 ## Convenções
 

@@ -46,12 +46,8 @@ Liste só docs que serão alterados e peça confirmação. Sem divergências →
 
 Após confirmação: mudanças identificadas, estilo preservado, links relativos, limites de linhas, sem opinião nem features futuras como existentes.
 
-**Conclua quando:** divergências confirmadas corrigidas.
+**Conclua quando:** divergências confirmadas corrigidas e os três arquivos permitidos dentro dos limites de linhas.
 
-## Validação
-
-- [ ] Só arquivos permitidos alterados
-- [ ] Afirmações confirmáveis no código
-- [ ] Limites de linhas respeitados
+## Entrega
 
 Informe arquivos atualizados e resumo curto.

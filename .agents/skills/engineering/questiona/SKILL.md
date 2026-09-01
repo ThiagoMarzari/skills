@@ -28,18 +28,7 @@ Resuma em 3–5 pontos só o que muda decisões. Não pergunte o que o projeto j
 
 ## Etapa 2 — Percorrer decisões
 
-Cubra nesta ordem, priorizando bloqueantes:
-
-1. problema e valor
-2. público e permissões
-3. escopo e ações
-4. fluxos e estados
-5. regras de negócio
-6. erros, limites e bordas
-7. integrações e dados
-8. impacto no projeto
-9. critérios de aceite
-10. fora do escopo
+Antes de perguntar, leia [`../references/entrevista.md`](../references/entrevista.md) para a lista de tópicos. Cubra nessa ordem, priorizando bloqueantes. Pule o que o contexto já fechou.
 
 ### Ritmo de perguntas
 
@@ -85,11 +74,4 @@ Pergunte: **"Fechamos ou ainda existe decisão em aberto?"**
 
 Encerre só após confirmação do usuário.
 
-## Validação
-
-- [ ] Uma decisão por mensagem (bloco só se factual e do mesmo ramo)
-- [ ] Resposta vaga refinada antes de avançar
-- [ ] Decisões ≠ suposições
-- [ ] Trade-offs explícitos
-- [ ] Nenhum arquivo alterado
-- [ ] Próximo passo recomendado, não executado
+**Conclua quando:** o fechamento separar decisões de suposições, listar trade-offs e fora do escopo, recomendar o próximo passo, e nenhum arquivo tiver sido alterado.

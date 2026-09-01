@@ -31,16 +31,20 @@ git log <ponto>..HEAD --oneline
 
 Ponto inválido ou diff vazio → informe e pare.
 
+**Conclua quando:** o ponto resolve e o diff não está vazio.
+
 ## Etapa 2 — Especificação
 
 Ordem de busca:
 
 1. Caminho informado pelo usuário
-2. Referências nos commits (`#123`, `Closes #45`)
+2. Referências nos commits — se `docs/agents/issue-tracker.md` existir, use o formato de referência descrito lá; se o arquivo não existir, procure menção a tickets/issues no formato que o projeto já usa, se houver
 3. `docs/`, `specs/`, `.scratch/` relacionados à branch
 4. Pedido do usuário, se claro
 
 Sem spec e usuário confirma ausência → pule frente Especificação; informe no resultado.
+
+**Conclua quando:** a fonte da spec estiver identificada, ou a frente Especificação pulada com confirmação do usuário.
 
 ## Etapa 3 — Análises
 
@@ -69,6 +73,8 @@ nome pouco claro, duplicação, inveja de dados, grupo de dados, obsessão por p
 
 Compare diff com spec: requisitos ausentes, escopo extra, implementação incorreta, erros/limites/permissões não tratados. Cite linha da spec e trecho do código.
 
+**Conclua quando:** as duas frentes tiverem rodado isoladas, cada uma com no máximo 400 palavras e achados com arquivo e linha.
+
 ## Etapa 4 — Relatório
 
 ```markdown
@@ -85,9 +91,4 @@ Resumo: Qualidade — N achado(s), pior: …; Especificação — N achado(s), p
 
 Não combine nem reordene achados entre frentes.
 
-## Validação
-
-- [ ] Diff validado antes da análise
-- [ ] Frentes separadas
-- [ ] Achados com localização
-- [ ] Relatório ≤ 400 palavras por frente
+**Conclua quando:** o relatório tiver as duas seções, sem misturar achados.

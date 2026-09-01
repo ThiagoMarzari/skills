@@ -28,6 +28,8 @@ Material só via apontador paga a linha do apontador + busca sob demanda. Materi
 - **Clareza**: dá para distinguir concluído de incompleto? Critério vago convida a **conclusão prematura**.
 - **Exigência**: "todo item verificado" força mais trabalho que "produza uma lista".
 
+O critério mora na etapa. Recap de checkbox no fim do documento é duplicata — não adicionar.
+
 Afie o critério antes de esconder passos seguintes (só funciona com fronteira real de contexto, ex. subagente).
 
 ## Palavras-âncora

@@ -86,17 +86,12 @@ Só com `implementa` ou aprovação explícita do plano nesta conversa.
 3. Marque spec `Implementada` após validação
 4. Atualize status do PRD se todas implementadas
 
-Sem `implementa`: não altere código, testes, docs nem status no PRD.
+Sem `implementa`: código, testes, docs e status no PRD permanecem como estão.
+
+**Conclua quando:** com `implementa` ou aprovação, o recorte estiver implementado e a spec marcada; sem `implementa`, só o plano existir e o código intacto.
 
 ## Saída
 
 **Plano:** spec planejada, passos, verificações, fora do escopo → **"Aprova este plano para implementação?"**
 
 **Implementação:** o que foi feito, validações, aceite atendido, pendências, status da spec.
-
-## Validação
-
-- [ ] PRD e spec corretos por status e ordem
-- [ ] Plano cobre comportamento, erros e aceite
-- [ ] Stack existente preservada
-- [ ] Nenhuma alteração sem `implementa` ou aprovação

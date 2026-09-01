@@ -26,6 +26,7 @@ Escolha a **primeira** necessidade real:
 
 | # | Situação | Rota |
 |---|----------|------|
+| 0 | Repo destino ainda sem `docs/agents/` | `/setup-skills` |
 | 1 | Ideia vaga ou decisões em aberto | `/questiona` |
 | 2 | Escopo fechado, falta PRD/specs | `/prd-generator` |
 | 3 | PRD existe, falta plano ou implementação | `/plan-spec` |
@@ -40,6 +41,10 @@ Se não couber em uma categoria, faça **uma** pergunta objetiva.
 **Conclua quando:** houver categoria principal e próximo comando.
 
 ## Etapa 2 — Detalhar a rota
+
+### Setup do repo destino
+
+`/setup-skills` → uma vez por repo, antes de `/code-review` e `/rework-commits` lerem config. Roda só se `docs/agents/` ainda não existir ou o usuário quiser reconfigurar.
 
 ### Decisões e escopo
 
@@ -81,7 +86,9 @@ Fluxo: [nome curto].
 Agora: [comando exato].
 ```
 
-Inclua só etapas aplicáveis. Indique decisões humanas pendentes.
+Inclua só etapas aplicáveis. Indique decisões humanas pendentes. Distinga skill de prompt.
+
+**Conclua quando:** uma rota, última linha com o comando exato, skill indicada não executada.
 
 ## Troca de fase
 
@@ -90,10 +97,3 @@ Sugira novo chat quando: PRD terminou e vem planejamento; spec mudou; contexto c
 Continue no mesmo chat quando a próxima ação depende do contexto atual sem risco de confusão.
 
 Não recomende troca no meio de implementação em andamento.
-
-## Validação
-
-- [ ] Uma rota principal
-- [ ] Skills ≠ prompts
-- [ ] Nenhuma skill executada
-- [ ] Última linha com comando exato
