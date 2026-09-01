@@ -1,14 +1,14 @@
 # Rules de exemplo (stack específica)
 
-Estas `.mdc` **não** são carregadas neste kit. São modelos para copiar para um **app** com aquela stack.
+Estas `.mdc` **não** são carregadas neste kit. Copie para um **app** com a stack correspondente.
 
 | Arquivo | Quando copiar |
 |---------|----------------|
-| `page-rules.mdc` | App Next.js (App Router) — estrutura `page` / `_components` / `_actions` / `_data-access` |
-| `nextjs-app.mdc` | App Next.js — UI, formulários, colocação de componentes (arquivo largo; enxugue no destino) |
+| `page-rules.mdc` | Next.js App Router — estrutura por rota (`page`, `_components`, `_actions`, `_data-access`) |
+| `nextjs-app.mdc` | Next.js — UI, formulários, colocação de componentes (enxugue no destino) |
 
 No projeto destino:
 
-1. Copie para `.cursor/rules/` (Cursor) ou adapte para `.claude/rules/` (Claude Code).
-2. Ligue `alwaysApply: true` **ou** `globs` (ex.: `src/app/**/*.tsx`).
-3. A rule geral `projetos.mdc` (stack-agnóstica) vai à parte; não misture Next e Nest no mesmo arquivo.
+1. Copie para `.cursor/rules/` ou `.claude/rules/`.
+2. Ative com `alwaysApply: true` **ou** `globs` (ex.: `src/app/**/*.tsx`).
+3. Mantenha a rule geral stack-agnóstica separada; não misture Next e Nest no mesmo arquivo.

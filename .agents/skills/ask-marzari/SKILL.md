@@ -1,6 +1,6 @@
 ---
 name: ask-marzari
-description: "Indica a skill, o prompt ou a sequência adequada para uma tarefa neste kit. Use somente com /ask-marzari quando o próximo passo não estiver claro, quando houver duas opções parecidas ou ao trocar de fase."
+description: "Indica a skill ou o prompt adequado neste kit. Use somente com /ask-marzari quando o próximo passo não estiver claro ou houver duas opções parecidas."
 disable-model-invocation: true
 ---
 
@@ -8,147 +8,92 @@ disable-model-invocation: true
 
 ## Objetivo
 
-Analise o pedido do usuário e indique o próximo passo mais adequado dentro deste kit. O resultado deve informar:
-
-- qual fluxo resolve a situação;
-- qual skill ou prompt deve ser usado;
-- quais decisões pertencem ao usuário;
-- quando revisar ou trocar de fase.
+Indicar **uma** rota principal: qual comando usar agora e qual decisão humana falta.
 
 ## Limites
 
-Esta skill é um roteador. Depois de recomendar o caminho:
+Depois de recomendar:
 
-1. não execute a skill recomendada;
-2. não escreva código, PRD, plano ou documentação;
-3. não altere arquivos;
-4. termine com o comando ou caminho que o usuário deve usar agora.
+1. não execute a skill indicada;
+2. não escreva código, PRD, plano nem documentação;
+3. não altere arquivos.
 
-Pode ler o `SKILL.md` da opção recomendada para confirmar seu comportamento. Essa leitura serve apenas para orientar a recomendação e não inicia a skill.
+Pode ler o `SKILL.md` da opção só para confirmar comportamento — isso não inicia a skill.
 
-## Etapa 1 — Entender a situação
+## Etapa 1 — Classificar
 
-Classifique o pedido pela primeira necessidade real:
+Escolha a **primeira** necessidade real:
 
-1. **Entendimento e decisões**: a ideia está vaga ou há escolhas de escopo, fluxo ou regra em aberto?
-2. **Documentação de produto**: o escopo está definido, mas falta registrar comportamento, regras e aceite?
-3. **Planejamento técnico**: existe um PRD com especificações e falta decidir como implementar a próxima?
-4. **Implementação**: o usuário já sabe o que quer construir e quer alterar o código?
-5. **Revisão**: quer verificar uma branch, um pull request ou alterações desde um ponto?
-6. **Documentação existente**: o código mudou e os documentos precisam ser sincronizados?
-7. **Histórico da branch**: precisa organizar commits antes de entregar?
-8. **Escrita de instruções**: quer criar ou melhorar uma skill, regra ou documento consumido por agentes?
+| # | Situação | Rota |
+|---|----------|------|
+| 1 | Ideia vaga ou decisões em aberto | `/questiona` |
+| 2 | Escopo fechado, falta PRD/specs | `/prd-generator` |
+| 3 | PRD existe, falta plano ou implementação | `/plan-spec` |
+| 4 | Sabe o que construir, quer código | implementação direta |
+| 5 | Revisar branch/PR desde um ponto | `/code-review` |
+| 6 | Docs desatualizadas vs. código | `/documentation-writer` |
+| 7 | Branch com histórico confuso | `/rework-commits` |
+| 8 | Criar ou revisar instruções para agentes | `/writing-for-agents` |
 
-Se o pedido não permitir escolher uma categoria, faça **uma pergunta objetiva**. Não faça uma lista de perguntas nem recomende várias rotas sem explicar a diferença.
+Se não couber em uma categoria, faça **uma** pergunta objetiva.
 
-**Conclua quando:** houver uma categoria principal e um próximo passo claro.
+**Conclua quando:** houver categoria principal e próximo comando.
 
-## Etapa 2 — Escolher a rota
+## Etapa 2 — Detalhar a rota
 
-### Ideia ou escopo ainda aberto
+### Decisões e escopo
 
-Use `/questiona` quando o usuário ainda não sabe exatamente o que construir ou há decisões importantes pendentes.
+`/questiona` → depois: escopo grande → `/prd-generator`; tarefa pequena e clara → implementação.
 
-Depois que o escopo estiver fechado:
+### PRD e specs
 
-- produto ou funcionalidade precisa ser documentado → `/prd-generator`;
-- tarefa pequena, clara e sem necessidade de PRD → implementação direta pelo agente.
+`/prd-generator` → com PRD em `docs/prd/`:
 
-### PRD e especificações
+- próxima spec → `/plan-spec`
+- todas → `/plan-spec todas`
+- implementar → `/plan-spec implementa` ou `/plan-spec todas implementa`
 
-Use `/prd-generator` para transformar uma ideia ou funcionalidade em PRD e especificações funcionais.
+PRD revisado pelo usuário antes de planejar. Plano aprovado antes de implementar, salvo `implementa` no comando.
 
-Quando já existir um PRD em `docs/prd/`:
+### Implementação
 
-- revisar qual especificação vem depois → `/plan-spec`;
-- planejar todas as especificações → `/plan-spec todas`;
-- implementar diretamente o recorte → `/plan-spec implementa`;
-- implementar todas em uma tarefa curta → `/plan-spec todas implementa`.
+Durante implementação com regras de negócio, o usuário pode colar `.prompts/tdd-com-agentes.md` ou `.prompts/testes-automatizados.md`. São prompts, não skills.
 
-O PRD deve ser revisado pelo usuário antes do planejamento. O plano deve ser aprovado antes da implementação quando o comando não incluir `implementa`.
+### Revisão
 
-### Implementação e testes
+`/code-review` — usuário informa ponto de comparação (`main`, `HEAD~3`, tag).
 
-Durante uma implementação que envolva regras de negócio, o agente pode usar `.prompts/tdd-com-agentes.md`.
+### Documentação e commits
 
-Antes de decidir a estratégia de testes, use `.prompts/testes-automatizados.md`.
+- `/documentation-writer` — sync de README e docs de produto.
+- `/rework-commits` — reorganizar histórico antes de entregar.
 
-Esses arquivos são prompts para o usuário colar ou solicitar; não são skills e não são executados por este roteador.
-
-### Revisão de código
-
-Use `/code-review` quando o usuário quiser revisar alterações de uma branch, pull request ou período definido por commit, tag ou branch.
-
-O usuário precisa informar o ponto de comparação, como `main`, `HEAD~3` ou uma tag. A revisão separa qualidade estrutural do código e atendimento à especificação.
-
-### Documentação
-
-Use `/documentation-writer` quando a documentação do projeto estiver desatualizada em relação ao código existente.
-
-Use `/writing-for-agents` quando o usuário quiser criar ou revisar instruções para agentes, como skills, `AGENTS.md`, `CLAUDE.md` ou arquivos de referência.
-
-### Organização de commits
-
-Use `/rework-commits` quando a branch tiver um commit único, histórico confuso ou precisar ser reorganizada antes da entrega.
-
-## Etapa 3 — Informar o fluxo
-
-Responda neste formato:
+## Etapa 3 — Responder
 
 ```markdown
-Situação: [resumo em uma frase].
+Situação: [uma frase].
 
-Fluxo recomendado: [nome do fluxo].
+Fluxo: [nome curto].
 
-1. [comando ou prompt inicial]
+1. [comando ou ação]
 2. [próxima etapa, se houver]
-3. [ponto de revisão ou decisão humana]
 
-Agora: [o que o usuário deve fazer].
+Agora: [comando exato].
 ```
 
-Inclua somente as etapas aplicáveis ao pedido. Se uma etapa depender de uma decisão humana, diga qual decisão precisa ser tomada. Não apresente uma sequência genérica.
-
-## Fluxos principais
-
-### Da ideia à entrega
-
-`/questiona` → `/prd-generator` → `/plan-spec` → implementação → `/documentation-writer`
-
-Use apenas as etapas necessárias. Não force PRD para uma tarefa pequena e clara.
-
-### De um PRD à implementação
-
-`/plan-spec` → aprovação do plano → `/plan-spec implementa`
-
-Para poucas especificações, use `/plan-spec todas`; para executar todas sem uma etapa separada de plano, use `/plan-spec todas implementa`.
-
-### Da implementação à entrega
-
-Implementação → testes → `/code-review` → `/documentation-writer`
-
-Use `/code-review` quando houver um ponto de comparação e uma alteração concreta para revisar. Use `/documentation-writer` somente quando houver documentação para sincronizar.
+Inclua só etapas aplicáveis. Indique decisões humanas pendentes.
 
 ## Troca de fase
 
-Sugira um novo chat quando:
+Sugira novo chat quando: PRD terminou e vem planejamento; spec mudou; contexto cheio de tentativas descartadas; objetivo da fase mudou.
 
-- o PRD terminou e o próximo trabalho é planejar;
-- uma especificação mudou;
-- o contexto ficou cheio de tentativas descartadas;
-- uma nova fase tem objetivo diferente.
+Continue no mesmo chat quando a próxima ação depende do contexto atual sem risco de confusão.
 
-Continue no mesmo chat quando a próxima ação depende diretamente do contexto atual e não houver risco de confusão.
+Não recomende troca no meio de implementação em andamento.
 
-Não recomende uma troca de fase no meio de uma implementação que ainda está em andamento.
+## Validação
 
-## Validação da resposta
-
-Antes de terminar, confirme:
-
-- [ ] uma única rota principal foi escolhida;
-- [ ] o motivo da escolha está claro;
-- [ ] skills e prompts não foram confundidos;
-- [ ] decisões humanas estão indicadas;
-- [ ] nenhuma skill foi executada;
-- [ ] a última linha diz exatamente o próximo comando ou ação.
+- [ ] Uma rota principal
+- [ ] Skills ≠ prompts
+- [ ] Nenhuma skill executada
+- [ ] Última linha com comando exato

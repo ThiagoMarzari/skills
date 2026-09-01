@@ -1,38 +1,59 @@
 # Kit de práticas para IA
 
-Repositório genérico com skills, prompts, regras e exemplos para trabalhar com agentes de IA no Cursor, Claude Code ou ferramentas compatíveis. Este kit não é um aplicativo: os arquivos devem ser copiados seletivamente e adaptados ao projeto de destino.
+Repositório genérico com skills, prompts, regras e exemplos para agentes no Cursor, Claude Code ou ferramentas compatíveis. **Não é um aplicativo** — copie seletivamente e adapte ao destino.
 
 ## Conteúdo
 
-| Caminho | Conteúdo | Uso |
-|---|---|---|
-| `.agents/skills/` | Skills com instruções de processo | Copie a pasta para `.agents/skills/` no Cursor ou `.claude/skills/` no Claude Code |
-| `.prompts/` | Prompts para tarefas específicas | Cole o conteúdo na conversa ou solicite o prompt explicitamente |
-| `.cursor/rules/` | Regras permanentes | Copie as regras aplicáveis ao projeto de destino |
-| `docs/exemplos/rules/` | Regras de exemplo por tecnologia | Copie somente quando a tecnologia corresponder |
-| `docs/` | Exemplos de documentação e PRD | Use como modelo; substitua o conteúdo de domínio |
-| `AGENTS.md` | Orientações para agentes | Adapte ao projeto de destino |
-| `CLAUDE.md` | Orientações para Claude Code | Adapte ao projeto de destino |
+| Caminho | Conteúdo |
+|---------|----------|
+| `.agents/skills/` | Skills com processos executáveis |
+| `.prompts/` | Prompts para tarefas específicas |
+| `.cursor/rules/` | Regras permanentes |
+| `docs/exemplos/rules/` | Rules de exemplo por tecnologia |
+| `docs/exemplos/` | PRD, architecture, design — modelos apenas |
+| `AGENTS.md` / `CLAUDE.md` | Orientação carregada com o projeto |
 
 ## Como usar
 
-1. Escolha uma skill ou prompt compatível com a tarefa.
-2. Leia suas instruções antes de invocá-la.
+1. Escolha skill ou prompt compatível com a tarefa.
+2. Invoque explicitamente skills user-invoked (`/nome`).
 3. Se o próximo passo não estiver claro, use `/ask-marzari`.
-4. Invoque explicitamente a skill desejada, por exemplo `/questiona`, `/prd-generator`, `/plan-spec` ou `/code-review`.
-5. Copie prompts de `.prompts/` somente quando a tarefa precisar deles.
+4. Copie prompts de `.prompts/` só quando a tarefa precisar.
 
 ## Fluxo recomendado
 
-Para uma funcionalidade que ainda precisa de decisões:
+Para funcionalidade que ainda precisa de decisões:
 
 `/questiona` → `/prd-generator` → `/plan-spec` → implementação → `/code-review` → `/documentation-writer`
 
-Use apenas as etapas necessárias. Uma tarefa pequena e clara pode ir direto para implementação. O fluxo melhora a consistência, mas não substitui testes, verificações automáticas ou revisão humana.
+Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à implementação.
 
-## Onde copiar
+## Skills
 
-Copie somente o que o projeto destino precisa:
+| Comando | Quando usar |
+|---------|-------------|
+| `/ask-marzari` | Escolher skill ou fluxo |
+| `/questiona` | Fechar escopo e decisões |
+| `/prd-generator` | PRD e specs em `docs/prd/` |
+| `/plan-spec` | Planejar ou implementar specs pendentes (`todas` / `implementa`) |
+| `/code-review` | Revisar diff desde um ponto informado |
+| `/documentation-writer` | Sincronizar docs com o código |
+| `/writing-for-agents` | Escrever ou melhorar instruções para agentes |
+| `/rework-commits` | Reorganizar commits da branch |
+
+`writing-for-agents` também pode ser alcançada pelo agente ao editar docs agent-facing, sem comando.
+
+## Prompts
+
+| Arquivo | Uso |
+|---------|-----|
+| `.prompts/prd-generator.md` | Briefing inicial antes de `/prd-generator` |
+| `.prompts/testes-automatizados.md` | Decidir o que merece teste |
+| `.prompts/tdd-com-agentes.md` | Ciclo red-green-refactor com agente |
+
+Prompts não são auto-carregados.
+
+## Onde copiar no destino
 
 ```text
 destino/.agents/skills/<nome-da-skill>/
@@ -41,40 +62,18 @@ destino/.prompts/<nome>.md
 destino/.cursor/rules/<nome>.mdc
 ```
 
-Uma skill pode possuir arquivos de referência em seu próprio diretório. Ao copiá-la, leve também as referências indicadas pelo `SKILL.md`.
-
-## Skills
-
-| Skill | Quando usar |
-|---|---|
-| `/ask-marzari` | Escolher a skill ou o fluxo adequado |
-| `/questiona` | Fechar escopo e decisões antes de implementar |
-| `/prd-generator` | Criar um PRD e especificações funcionais |
-| `/plan-spec` | Planejar ou implementar especificações pendentes |
-| `/code-review` | Revisar qualidade estrutural e aderência à especificação |
-| `/documentation-writer` | Atualizar documentação com base no código real |
-| `/writing-for-agents` | Escrever ou melhorar documentos para agentes |
-| `/rework-commits` | Organizar commits de uma branch para revisão |
-
-## Prompts
-
-- `.prompts/prd-generator.md`: briefing para levantar informações antes de um PRD.
-- `.prompts/testes-automatizados.md`: decidir o que merece testes.
-- `.prompts/tdd-com-agentes.md`: conduzir um ciclo de desenvolvimento orientado por testes.
-
-Prompts não são carregados automaticamente. O usuário deve colá-los ou pedir seu uso.
+Leve referências indicadas pelo `SKILL.md` da skill copiada.
 
 ## Convenções
 
-- Escreva em português, salvo quando um termo técnico em outro idioma for mais preciso.
-- Mantenha skills, prompts e regras portáteis e sem dependências ocultas.
-- Trate `docs/` como material de exemplo, não como a descrição deste kit.
-- Não invente stack, banco, autenticação, rotas ou funcionalidades de produto neste repositório.
-- Skills com `disable-model-invocation: true` exigem invocação explícita.
+- Português nos artefatos; termos técnicos quando precisos.
+- Portabilidade e autossuficiência; sem dependências ocultas.
+- `docs/exemplos/` é modelo, não descrição deste kit.
+- Skills user-invoked exigem invocação explícita.
 
 ## Referências externas
 
 - [Cursor — Rules](https://cursor.com/docs/rules)
 - [Cursor — Skills](https://cursor.com/docs/skills)
-- [Claude Code — memória e CLAUDE.md](https://code.claude.com/docs/en/memory)
-- [Claude Code — boas práticas](https://code.claude.com/docs/en/best-practices)
+- [Claude Code — memória](https://code.claude.com/docs/en/memory)
+- [Matt Pocock — Skills](https://www.aihero.dev/skills)

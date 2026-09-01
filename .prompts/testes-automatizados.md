@@ -1,28 +1,23 @@
 # Prompt — o que testar
 
-Cole no chat **antes** de escrever testes. Depois de fechar o que testar, use o fluxo em [tdd-com-agentes.md](tdd-com-agentes.md).
+Cole **antes** de escrever testes. Depois, use [tdd-com-agentes.md](tdd-com-agentes.md).
 
 ```text
-Analise a funcionalidade que [ x | acabamos de implementar].
-
+Analise [a funcionalidade X | o que acabamos de implementar].
 
 Não escreva testes ainda.
 
-
-Identifique apenas comportamentos que realmente merecem testes automatizados considerando:
+Liste só comportamentos que merecem teste automatizado:
 - regras de negócio
 - dinheiro
-- autenticação/permissões
+- auth/permissões
 - perda ou corrupção de dados
 - estados e transições
 - casos limite
 - integrações externas
 - regressões prováveis
 
+Ignore UI trivial e implementação óbvia.
 
-Ignore detalhes visuais e implementações triviais.
-
-
-Classifique cada teste sugerido como:
-CRÍTICO, IMPORTANTE ou DISPENSÁVEL.
+Classifique cada sugestão: CRÍTICO, IMPORTANTE ou DISPENSÁVEL.
 ```

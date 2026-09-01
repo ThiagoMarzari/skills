@@ -1,22 +1,52 @@
-# Skill mechanics
+# Mecânica de skills
 
-The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill (frontmatter, the invocation choice, and router skills). Everything else about writing it is the universal reference in `SKILL.md`.
+Ramo específico de [`writing-for-agents`](SKILL.md): frontmatter, escolha de invocação e router skills. O restante da escrita segue o arquivo principal.
 
-## Invocation
+## Invocação
 
-Two choices, trading the two loads:
+Duas escolhas, trocando as duas cargas:
 
-- A **model-invoked** skill keeps a `description`, so the agent can fire it autonomously, and other skills can reach it. You can still type its name: model-invocation always _includes_ user reach; a description only ever adds agent discovery, never removes the human's. The description is the skill's top-level context pointer, forced to stay loaded at all times: permanent context load in exchange for discoverability. A model-invoked skill whose content is all reference is also one home for shared reference: another skill can invoke it, so reference needed by several skills lives in one place. Mechanics: omit `disable-model-invocation`, and write a model-facing description carrying the trigger branches (the pointer-writing rules in `SKILL.md` apply in full).
-- A **user-invoked** skill strips the description from the agent's reach: only the human typing its name can invoke it, and no other skill can. Zero context load, but it spends cognitive load: you are the index that must remember it exists. Mechanics: set `disable-model-invocation: true`; the `description` becomes human-facing: a one-line summary, trigger lists stripped.
+| Modo | Frontmatter | Carga de contexto | Carga cognitiva |
+|------|-------------|-------------------|-----------------|
+| **Model-invoked** | Omitir `disable-model-invocation` | `description` sempre carregada; o agente pode acionar sozinho | Baixa para o humano |
+| **User-invoked** | `disable-model-invocation: true` | Zero — `description` não entra no contexto do agente | Alta — o humano é o índice |
 
-Pick model-invocation only when the agent must reach the skill on its own, or another skill must. If it only ever fires by hand, make it user-invoked and pay no context load.
+Escolha model-invocation quando:
 
-Shared reference that two user-invoked skills both need can live in neither: with no descriptions, neither can fire the other. Push it to a plain file outside the skill system: external reference any skill can point at.
+- o agente precisa alcançar a skill sozinho; ou
+- outra skill precisa invocá-la; ou
+- a skill é referência compartilhada entre várias skills.
 
-## Splitting by invocation
+Escolha user-invocation quando a skill só dispara por comando explícito (`/nome`) e você quer preservar orçamento de contexto. Workflows com gate humano (PRD, plano, reorganização de commits) devem ser user-invoked.
 
-The invocation cut of splitting (the sequence cut lives in `SKILL.md`): split off a model-invoked skill when you have a distinct leading word that should trigger it on its own (a trigger word you actually use in your prompts), or another skill must reach it. You pay context load for the new always-loaded description, so that independent reach has to be worth it.
+### Escrever a `description` (model-invoked)
+
+A `description` é um **apontador de contexto**: diz o que a skill faz e lista os **ramos** que devem dispará-la. Cada palavra custa em todo turno — poda mais agressivamente que o corpo.
+
+- Primeira frase: capacidade.
+- Segunda frase: `Use quando…` com ramos genuinamente distintos (não sinônimos do mesmo ramo).
+- Até 64 caracteres no `name`; `description` concisa, em terceira pessoa.
+
+### `description` em skill user-invoked
+
+Serve só ao humano: resumo de uma linha. Sem lista de gatilhos — o agente não a lê.
+
+## Referência compartilhada entre skills user-invoked
+
+Duas skills user-invoked não podem se invocar (sem `description`, nenhuma alcança a outra). Material que ambas precisam vai para arquivo **fora** do sistema de skills — por exemplo `references/` na raiz do projeto ou doc apontado por `AGENTS.md`.
+
+## Dividir por invocação
+
+Separe uma skill model-invoked quando houver palavra-âncora ou ramo que deve disparar sozinho, ou quando outra skill precisa alcançá-la. Você paga carga de contexto pela nova `description` — o ganho de descoberta precisa valer a pena.
 
 ## Router skills
 
-When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each, so the human has one skill to remember instead of many. It can only hint, never fire them: user-invoked skills have no description, so nothing but the human can reach them.
+Quando skills user-invoked passam do que o humano lembra, use uma **router skill** user-invoked (ex.: `/ask-marzari`): uma skill que nomeia as outras e quando usar cada uma.
+
+Limites do router:
+
+- só **indica** o próximo comando;
+- **não** executa a skill recomendada;
+- **não** altera arquivos.
+
+O router cura carga cognitiva; não remove a necessidade de invocar cada workflow à mão.

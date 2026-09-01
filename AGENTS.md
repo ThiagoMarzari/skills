@@ -1,45 +1,36 @@
 # Instruções para agentes
 
-Este repositório é um kit reutilizável de práticas para agentes de IA. Ele reúne skills, prompts, regras e documentos de exemplo para serem copiados e adaptados a outros projetos. Não é um aplicativo e não possui uma stack de produto própria.
+Kit reutilizável de skills, prompts, regras e exemplos — **não é um aplicativo**. Copie seletivamente para o projeto destino e adapte.
 
-## Mapa do kit
+## Mapa
 
-- `README.md`: visão geral e formas de reutilização.
-- `.agents/skills/<nome>/SKILL.md`: skills do kit.
-- `.prompts/`: prompts que o usuário cola ou solicita explicitamente.
-- `.cursor/rules/projetos.mdc`: regra geral para qualquer stack.
-- `docs/exemplos/rules/`: regras de exemplo, atualmente voltadas a Next.js.
-- `docs/`: exemplos de documentação e PRD; não representam um produto real.
+| Caminho | Uso |
+|---------|-----|
+| `README.md` | Índice humano: skills, fluxos, prompts |
+| `.agents/skills/<nome>/` | Skills (Cursor lê aqui; Claude Code: `.claude/skills/`) |
+| `.prompts/` | Prompts colados ou solicitados explicitamente |
+| `.cursor/rules/projetos.mdc` | Regra geral (qualquer stack) |
+| `docs/exemplos/` | Modelos de PRD, rules e docs — não é o produto deste kit |
 
 ## Regras de trabalho
 
-- Preserve a portabilidade: uma skill, prompt ou regra deve continuar útil quando copiada para outro projeto.
-- Mantenha cada artefato autossuficiente; referências necessárias devem estar no próprio diretório ou ter um caminho claro.
-- Não invente stack, rotas, banco, autenticação ou funcionalidades de produto neste repositório.
-- Não misture o domínio dos exemplos em `docs/` com a identidade do kit.
-- Não adapte uma skill para um produto específico; extraia instruções genéricas e deixe o contexto do destino para o projeto que a receber.
-- Escreva em português, mantendo termos técnicos no idioma original quando isso evitar ambiguidade.
-- Faça somente as alterações pedidas e preserve mudanças existentes do usuário.
+- Portabilidade: cada artefato deve funcionar copiado sozinho.
+- Não invente stack, rotas, banco, auth ou features de produto neste repositório.
+- Não misture domínio de `docs/exemplos/` com a identidade do kit.
+- Escreva em português; termos técnicos no idioma original quando evitar ambiguidade.
+- Altere só o que a tarefa exige.
 
-## Skills disponíveis
+## Invocação de skills
 
-| Comando | Uso |
-|---|---|
-| `/ask-marzari` | Escolher a skill ou o fluxo adequado |
-| `/questiona` | Fechar escopo, decisões e trade-offs |
-| `/prd-generator` | Criar PRD e especificações funcionais |
-| `/plan-spec` | Planejar ou implementar specs pendentes de um PRD |
-| `/code-review` | Revisar qualidade do código e aderência à especificação |
-| `/documentation-writer` | Sincronizar documentação com o código existente |
-| `/writing-for-agents` | Criar ou melhorar instruções para agentes |
-| `/rework-commits` | Reorganizar uma branch em commits revisáveis |
+- Skills com `disable-model-invocation: true` só rodam quando o usuário digitar o comando (`/nome`).
+- `writing-for-agents` é model-invoked: o agente pode alcançá-la ao criar ou revisar documentos agent-facing.
+- Não deduza uma skill user-invoked a partir de pedido parecido — use `/ask-marzari` se o próximo passo não estiver claro.
 
-Skills com `disable-model-invocation: true` só devem ser executadas quando o usuário as invocar pelo nome. Não deduza uma skill a partir de uma solicitação parecida.
+## Alterar artefatos
 
-## Regras para alterar artefatos
+- **Skill**: `SKILL.md` com `name`, `description`, corpo com menos de 500 linhas; detalhes em referências na mesma pasta.
+- **Prompt**: um arquivo em `.prompts/`, uma tarefa, sem depender deste kit.
+- **Rule**: uma preocupação por arquivo.
+- Não crie commits nem altere Git sem pedido explícito.
 
-- Skill: mantenha `SKILL.md` com `name`, `description` e corpo com menos de 500 linhas; coloque detalhes extensos em referências diretas.
-- Prompt: mantenha um arquivo em `.prompts/`, focado em uma tarefa e sem depender deste repositório.
-- Regra: trate uma preocupação por arquivo e use exemplos concretos.
-- Documento de exemplo: mantenha-o genérico e identifique claramente que é exemplo.
-- Não crie commits ou altere configuração do Git sem pedido explícito.
+Para catálogo de skills e fluxos recomendados, veja `README.md`.

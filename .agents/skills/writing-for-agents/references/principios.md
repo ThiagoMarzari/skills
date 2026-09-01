@@ -1,107 +1,48 @@
 # Princípios de escrita para agentes
 
-Referência de apoio — consulte apenas quando tiver dúvida sobre _por que_
-uma regra do fluxo principal existe. Não é necessária para o uso normal
-da skill.
+Consulte quando tiver dúvida sobre **por que** uma regra do fluxo principal existe. Não é necessário para uso normal da skill.
 
-## Os dois custos
+## As duas cargas
 
-Todo documento e todo apontador gastam um de dois orçamentos:
+| Carga | O que é | Quando minimizar |
+|-------|---------|------------------|
+| **Contexto** | Material sempre no contexto do agente | Tudo que não aplica em quase todo turno |
+| **Cognitiva** | O humano lembra que o documento existe | Onde o julgamento humano importa (gates, escolha de workflow) |
 
-- **Custo de contexto**: o preço de algo que fica sempre carregado — uma
-  linha de `AGENTS.md`, a `description` de uma skill, qualquer coisa
-  presente no contexto em todo turno, gastando espaço mesmo quando não
-  é usada.
-- **Custo cognitivo**: o preço para o humano — saber quais documentos
-  existem e quando buscar cada um. Não é um custo a minimizar a todo
-  custo; é o preço da autonomia humana. Gaste-o onde o julgamento
-  humano importa; remova-o onde não importa.
-
-Material acessado só por um apontador paga apenas o custo cognitivo (mais
-a linha do próprio apontador). Material sem apontador nenhum vive
-inteiramente no custo cognitivo — ninguém lembra que ele existe.
-
-## Apontadores (context pointers)
-
-Um apontador é uma referência no contexto do agente que nomeia um
-material fora do contexto e diz a condição para buscá-lo. A _redação_ do
-apontador — não o conteúdo do arquivo apontado — decide se e quando o
-agente vai buscar aquele material. Um apontador fraco para um material
-essencial é um bug de variância: melhore a redação antes de considerar
-trazer o conteúdo para dentro do arquivo principal.
-
-Um bom apontador faz duas coisas: diz o que é o material, e lista as
-situações que devem levar a buscá-lo. Cada situação distinta merece um
-gatilho; sinônimos que renomeiam a mesma situação não contam como
-gatilhos novos.
+Material só via apontador paga a linha do apontador + busca sob demanda. Material sem apontador paga só carga cognitiva — e costuma ser esquecido.
 
 ## Hierarquia da informação
 
-Um documento é feito de **passos** (ações em ordem) e **referência**
-(definições e regras consultadas sob demanda). Cada trecho ocupa um
-degrau:
+1. **Passo no arquivo** — ação em ordem; o que todo fluxo precisa.
+2. **Referência no arquivo** — definição consultada sob demanda, ainda no mesmo arquivo.
+3. **Referência externa** — arquivo separado, alcançado por apontador com gatilho explícito.
 
-1. **Passo no arquivo** — o que o agente faz, em ordem.
-2. **Referência no arquivo** — consultada sob demanda, mas ainda dentro
-   do documento principal.
-3. **Referência em outro arquivo** — só acessada via apontador, carregada
-   apenas quando o apontador dispara.
+**Progressive disclosure** é descer na escada para manter o topo legível. Teste: o que todo ramo precisa fica inline; o que só alguns ramos alcançam vai para referência.
 
-Empurrar pouco demais para baixo deixa o topo inchado; empurrar demais
-esconde o que o agente realmente precisa. Essa tensão é a decisão
-inteira.
+**Co-localização**: definição, regras e ressalvas de um conceito sob o mesmo título — não espalhadas pelo documento.
 
-**Progressive disclosure** é mover conteúdo para baixo nessa escada —
-para fora do arquivo principal, atrás de um apontador — para manter o
-topo enxuto. O teste mais simples: o que _todo_ fluxo precisa fica
-dentro; o que só _algumas_ situações alcançam vai para uma referência
-separada.
-
-**Co-localização** é o complemento dentro do arquivo: mantenha definição,
-regras e ressalvas de um mesmo conceito juntas sob um único título, em
-vez de espalhadas pelo documento.
+**Sprawl**: documento longo demais mesmo sem duplicação. Cura: descer na escada ou dividir por ramo/sequência.
 
 ## Critério de conclusão
 
-Cada passo deve terminar em uma condição verificável de "pronto". Dois
-fatores importam:
+- **Clareza**: dá para distinguir concluído de incompleto? Critério vago convida a **conclusão prematura**.
+- **Exigência**: "todo item verificado" força mais trabalho que "produza uma lista".
 
-- **Clareza**: dá para distinguir concluído de incompleto? Um critério
-  vago ("compreensão alcançada") convida à **conclusão prematura** — o
-  agente encerra o passo antes da hora, atraído pelos passos seguintes
-  já visíveis. Resolva afiando o critério primeiro; só esconda os
-  próximos passos se isso não bastar.
-- **Exigência**: o quanto o critério cobra. "Todo item verificado" força
-  um trabalho mais completo do que "produza uma lista".
+Afie o critério antes de esconder passos seguintes (só funciona com fronteira real de contexto, ex. subagente).
 
-## Palavras-âncora (leading words)
+## Palavras-âncora
 
-Uma palavra-âncora é um conceito compacto que já existe no
-pré-treinamento do modelo (ex.: _tight_, _fog of war_) e que, repetido
-como token, ancora um comportamento inteiro com poucos tokens. Prefira
-uma palavra já existente a inventar uma nova — a nova exige definição
-explícita; a existente já vem com significado embutido.
+Conceito compacto do pré-treinamento (`tight`, _tracer bullet_) que ancora comportamento com poucos tokens. Prefira palavra existente a inventar termo novo.
 
-**Negação é a armadilha correspondente**: dizer "não faça X" traz X para
-o contexto e o torna mais presente, não menos. Prefira afirmar o
-comportamento desejado ("valide a entrada antes de persistir") em vez de
-proibir o indesejado. Proibições só valem a pena para limites realmente
-essenciais — e mesmo assim, sempre acompanhadas do comportamento
-positivo correspondente.
+**Negação** traz o proibido para o contexto. Prefira afirmar o alvo: "valide antes de persistir", não "não persista sem validar".
 
-## Poda (pruning)
+## Poda
 
-- **Fonte única de verdade**: cada significado deve existir em um único
-  lugar. Duplicação custa manutenção e infla a importância de algo além
-  do que ele merece.
-- **O ambiente também é fonte de verdade**: um script já descrito no
-  `package.json`, uma config, a saída de `--help` — não repita o que o
-  agente encontra sozinho, a menos que exista uma armadilha real ali.
-- **Relevância**: toda linha deve seguir influenciando o comportamento.
-  Uma linha perde relevância por nunca ter afetado o resultado ou por
-  ficar desatualizada com o tempo. Sem disciplina de poda, o documento
-  acumula sedimento — camadas obsoletas que ninguém remove.
-- **No-ops**: uma instrução que o modelo já seguiria por padrão não muda
-  nada e só custa espaço. O teste é sempre comportamental: "isso muda o
-  que o agente faz, comparado ao padrão dele?" — não uma opinião pessoal
-  sobre o que parece útil.
+- **Fonte única**: um significado, um lugar.
+- **Ambiente como fonte**: não repita o que `package.json`, config ou `--help` já respondem.
+- **Relevância**: toda linha deve ainda influenciar comportamento.
+- **No-op**: "isso muda o que o agente faz vs. o padrão?" — resolva rodando o documento, não debatendo.
+
+## Quando dividir por sequência
+
+Separe quando passos posteriores visíveis fazem o agente apressar o passo atual. Manter sequências separadas fora de vista aumenta o trabalho no passo em curso. Cuidado com o inverso: juntar sequências expõe passos futuros e convida conclusão prematura.
