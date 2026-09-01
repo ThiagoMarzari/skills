@@ -41,7 +41,21 @@ Cubra nesta ordem, priorizando bloqueantes:
 9. critérios de aceite
 10. fora do escopo
 
-**Uma pergunta por mensagem**, com:
+### Ritmo de perguntas
+
+**Padrão: uma decisão por mensagem.** Cada mensagem cobre um ramo bloqueante por vez.
+
+Use **bloco de 2–3 perguntas** só quando todas forem:
+
+- do **mesmo ramo**;
+- **independentes** entre si (uma resposta não muda as outras);
+- **factuais** (dado que o usuário já sabe), não trade-off de produto.
+
+Se o usuário já colou briefing completo, **não repita** o que está respondido — pergunte só lacunas.
+
+Resposta vaga ou que muda escopo → refine **o mesmo ramo**; não avance nem empilhe novas perguntas na mesma mensagem.
+
+Cada pergunta inclui:
 
 - por que importa neste projeto;
 - a pergunta;
@@ -73,7 +87,8 @@ Encerre só após confirmação do usuário.
 
 ## Validação
 
-- [ ] Uma pergunta por vez
+- [ ] Uma decisão por mensagem (bloco só se factual e do mesmo ramo)
+- [ ] Resposta vaga refinada antes de avançar
 - [ ] Decisões ≠ suposições
 - [ ] Trade-offs explícitos
 - [ ] Nenhum arquivo alterado

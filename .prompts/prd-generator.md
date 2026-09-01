@@ -1,6 +1,6 @@
 # Prompt — briefing para /prd-generator
 
-Cole no chat **com** `/prd-generator`. Quanto mais preencher, menos a skill pergunta. O que não souber, deixe em **Regras em aberto** — a skill pergunta em vez de inventar.
+Cole no chat **com** `/prd-generator`. Quanto mais preencher, menos a skill pergunta — o briefing é o atalho para evitar entrevista turno a turno. O que não souber, deixe em **Regras em aberto**.
 
 Troque `[colchetes]`; apague seções que não se aplicarem.
 

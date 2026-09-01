@@ -39,7 +39,19 @@ Informe modo detectado em uma frase e peça confirmação.
 
 ## Etapa 1 — Fechar recorte
 
-Uma pergunta por mensagem (ou bloco pequeno relacionado). Com alternativas:
+### Ritmo de perguntas
+
+**Padrão: uma decisão de produto por mensagem** — problema, escopo, regra, fluxo ou aceite, um de cada vez.
+
+**Bloco de 2–3 perguntas** só para fatos do mesmo tema, independentes e já conhecidos pelo usuário (ex.: nome do recorte + público principal).
+
+**Não** agrupe decisões que se influenciam (permissões + fluxo de erro + aceite na mesma mensagem).
+
+Se o usuário já descreveu o recorte no primeiro turno, leia o que está fechado e pergunte **só lacunas** — não re-pergunte campos já respondidos.
+
+Resposta vaga → refine o mesmo ponto antes de avançar.
+
+Formato com alternativas:
 
 ```markdown
 **Pergunta:** [decisão]
@@ -107,3 +119,5 @@ Não cole o PRD no chat.
 - [ ] Comportamento, não implementação
 - [ ] Specs autossuficientes com aceite verificável
 - [ ] Sem requisitos não confirmados
+- [ ] Uma decisão de produto por mensagem (bloco só se factual e independente)
+- [ ] Recorte já descrito pelo usuário respeitado — sem re-perguntar o já respondido
