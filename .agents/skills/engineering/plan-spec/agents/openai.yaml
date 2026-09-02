@@ -1,0 +1,6 @@
+name: plan-spec
+description: "Plano técnico de specs pendentes em docs/prd/. Use com /plan-spec; acrescente \"todas\" para todas as pendentes ou \"implementa\" para executar sem etapa separada de aprovação."
+disable-model-invocation: true
+interface:
+  display_name: "Plan Spec"
+  short_description: "Turn pending specs into technical plans"

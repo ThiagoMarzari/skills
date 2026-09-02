@@ -1,0 +1,5 @@
+name: writing-for-agents
+description: "Escreve e revisa documentos consumidos por agentes. Use ao criar ou editar skills, AGENTS.md, CLAUDE.md, rules, PRDs, specs, tickets, prompts ou qualquer doc apontado para um agente."
+interface:
+  display_name: "Writing for Agents"
+  short_description: "Write clear instructions for AI agents"

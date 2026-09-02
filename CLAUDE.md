@@ -2,7 +2,7 @@
 
 Kit reutilizável de práticas de IA — **não é um aplicativo**. Skills, prompts, rules e exemplos existem para serem copiados ao projeto destino.
 
-See @README.md
+O índice completo está em `README.md`; leia-o apenas quando precisar consultar o catálogo ou o fluxo de uso.
 
 ## Onde estão as coisas
 
@@ -18,6 +18,7 @@ See @README.md
 - Não invente stack, rotas, banco ou auth neste repo.
 - Português na conversa e nos artefatos, salvo termos técnicos.
 - `CLAUDE.md` é cheat sheet curto; detalhes ficam nas skills e no `README.md`.
+- `README.md` não é carregado automaticamente; consulte-o sob demanda.
 
 ## Skills
 

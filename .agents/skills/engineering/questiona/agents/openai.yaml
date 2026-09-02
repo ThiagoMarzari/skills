@@ -1,0 +1,6 @@
+name: questiona
+description: "Interroga o usuário para fechar escopo, comportamento, decisões e trade-offs antes da implementação. Use somente com /questiona."
+disable-model-invocation: true
+interface:
+  display_name: "Questiona"
+  short_description: "Clarify scope, behavior, and trade-offs"

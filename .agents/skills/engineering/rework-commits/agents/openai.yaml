@@ -1,0 +1,6 @@
+name: rework-commits
+description: "Reorganiza branch em commits pequenos e semanticamente separados, preservando o conteúdo. Use somente com /rework-commits."
+disable-model-invocation: true
+interface:
+  display_name: "Rework Commits"
+  short_description: "Organize a branch into focused commits"
