@@ -12,5 +12,6 @@ Skills de fluxo de produto e código. No destino, copie cada pasta `<nome>/` par
 | `code-review` | Revisa o diff em qualidade e atendimento à spec |
 | `documentation-writer` | Alinha README e docs de produto ao código |
 | `rework-commits` | Reorganiza a branch em commits pequenos e coerentes |
+| `fecha-a-task` | Revisa, commita, faz push e abre duas MRs no GitLab (sandbox e release) |
 
 Referência compartilhada: [`references/entrevista.md`](references/entrevista.md) — tópicos de entrevista para `questiona` e `prd-generator`.

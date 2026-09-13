@@ -22,7 +22,7 @@ O índice completo está em `README.md`; leia-o apenas quando precisar consultar
 
 ## Skills
 
-- **User-invoked** (`disable-model-invocation: true`): só com comando explícito — `/setup-skills`, `/questiona`, `/prd-generator`, `/plan-spec`, etc.
+- **User-invoked** (`disable-model-invocation: true`): só com comando explícito — `/setup-skills`, `/questiona`, `/prd-generator`, `/plan-spec`, `/fecha-a-task`, etc.
 - **Model-invoked**: `writing-for-agents` — alcançável ao editar docs para agentes.
 
 Não infira skills user-invoked sem o comando. Próximo passo incerto → `/ask-marzari`. Repo destino sem config → `/setup-skills`.

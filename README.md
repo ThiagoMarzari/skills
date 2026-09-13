@@ -28,7 +28,7 @@ Repo destino ainda sem `docs/agents/`:
 
 Para funcionalidade que ainda precisa de decisões:
 
-`/questiona` → `/prd-generator` → `/plan-spec` → implementação → `/code-review` → `/documentation-writer`
+`/questiona` → `/prd-generator` → `/plan-spec` → implementação → `/code-review` → `/documentation-writer` → `/fecha-a-task`
 
 Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à implementação.
 
@@ -45,6 +45,7 @@ Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à impleme
 | `/documentation-writer` | Sincronizar docs com o código |
 | `/writing-for-agents` | Escrever ou melhorar instruções para agentes |
 | `/rework-commits` | Reorganizar commits da branch |
+| `/fecha-a-task` | Revisar, commitar, push e duas MRs no GitLab (sandbox e release) |
 
 `writing-for-agents` também pode ser alcançada pelo agente ao editar docs agent-facing, sem comando.
 

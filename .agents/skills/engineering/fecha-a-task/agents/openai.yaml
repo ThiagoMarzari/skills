@@ -1,0 +1,6 @@
+name: fecha-a-task
+description: "Revisa o diff, commita, faz push e abre duas MRs no GitLab (sandbox e release). Use somente com /fecha-a-task."
+disable-model-invocation: true
+interface:
+  display_name: "Fecha a task"
+  short_description: "Review, commit, push, and open two GitLab MRs"

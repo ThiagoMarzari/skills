@@ -34,7 +34,8 @@ Escolha a **primeira** necessidade real:
 | 5 | Revisar branch/PR desde um ponto | `/code-review` |
 | 6 | Docs desatualizadas vs. código | `/documentation-writer` |
 | 7 | Branch com histórico confuso | `/rework-commits` |
-| 8 | Criar ou revisar instruções para agentes | `/writing-for-agents` |
+| 8 | Task pronta: revisar, commit, push e MRs sandbox/release | `/fecha-a-task` |
+| 9 | Criar ou revisar instruções para agentes | `/writing-for-agents` |
 
 Se não couber em uma categoria, faça **uma** pergunta objetiva.
 
@@ -72,6 +73,7 @@ Durante implementação com regras de negócio, o usuário pode colar `.prompts/
 
 - `/documentation-writer` — sync de README e docs de produto.
 - `/rework-commits` — reorganizar histórico antes de entregar.
+- `/fecha-a-task` — last mile no GitLab: duas MRs (sandbox e release) da mesma branch. Preencha o mapa `TODO_*` da skill no destino.
 
 ## Etapa 3 — Responder
 
