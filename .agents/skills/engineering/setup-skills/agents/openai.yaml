@@ -1,6 +1,6 @@
 name: setup-skills
-description: "Configura o repo destino para as skills de engenharia — tracker de issues e convenções de commit. Use somente com /setup-skills."
+description: "Configura o repo destino para as skills de engenharia — tracker, commits e bases sandbox/release. Use somente com /setup-skills."
 disable-model-invocation: true
 interface:
   display_name: "Setup Skills"
-  short_description: "Configure engineering workflow conventions"
+  short_description: "Configure tracker, commits, and GitLab MR bases"

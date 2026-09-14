@@ -36,7 +36,7 @@ Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à impleme
 
 | Comando | Quando usar |
 |---------|-------------|
-| `/setup-skills` | Configurar tracker de issues e convenções de commit no repo destino |
+| `/setup-skills` | Configurar tracker, commits e bases sandbox/release no repo destino |
 | `/ask-marzari` | Escolher skill ou fluxo |
 | `/questiona` | Fechar escopo e decisões |
 | `/prd-generator` | PRD e specs em `docs/prd/` |
@@ -74,7 +74,7 @@ destino/.cursor/rules/<nome>.mdc
 
 Leve referências indicadas pelo `SKILL.md` da skill copiada. `questiona` e `prd-generator` também precisam de `.agents/skills/engineering/references/entrevista.md` → `destino/.agents/skills/references/entrevista.md` (o apontador relativo `../references/entrevista.md` continua válido).
 
-Depois de copiar as skills de engenharia, rode `/setup-skills` uma vez no destino.
+Depois de copiar as skills de engenharia, rode `/setup-skills` uma vez no destino. Ele grava `docs/agents/` (tracker, commits e, se `/fecha-a-task` estiver no destino, sandbox/release). Não edite o `SKILL.md` no projeto.
 
 ## Convenções
 

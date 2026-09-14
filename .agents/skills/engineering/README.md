@@ -4,7 +4,7 @@ Skills de fluxo de produto e código. No destino, copie cada pasta `<nome>/` par
 
 | Skill | Resumo |
 |-------|--------|
-| `setup-skills` | Configura tracker de issues e convenções de commit no repo destino |
+| `setup-skills` | Configura tracker, commits e bases sandbox/release no repo destino |
 | `ask-marzari` | Indica a próxima skill ou prompt |
 | `questiona` | Fecha escopo, comportamento e trade-offs antes de avançar |
 | `prd-generator` | Gera PRD com specs funcionais em `docs/prd/` |
@@ -12,6 +12,6 @@ Skills de fluxo de produto e código. No destino, copie cada pasta `<nome>/` par
 | `code-review` | Revisa o diff em qualidade e atendimento à spec |
 | `documentation-writer` | Alinha README e docs de produto ao código |
 | `rework-commits` | Reorganiza a branch em commits pequenos e coerentes |
-| `fecha-a-task` | Revisa, commita, faz push e abre duas MRs no GitLab (sandbox e release) |
+| `fecha-a-task` | Revisa, commita, faz push e abre duas MRs GitLab nas bases de `docs/agents/delivery.md` |
 
 Referência compartilhada: [`references/entrevista.md`](references/entrevista.md) — tópicos de entrevista para `questiona` e `prd-generator`.

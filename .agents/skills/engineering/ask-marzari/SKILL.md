@@ -45,7 +45,7 @@ Se não couber em uma categoria, faça **uma** pergunta objetiva.
 
 ### Setup do repo destino
 
-`/setup-skills` → uma vez por repo, antes de `/code-review` e `/rework-commits` lerem config. Roda só se `docs/agents/` ainda não existir ou o usuário quiser reconfigurar.
+`/setup-skills` → uma vez por repo, antes de `/code-review`, `/rework-commits` e `/fecha-a-task` lerem config. Roda só se `docs/agents/` ainda não existir ou o usuário quiser reconfigurar.
 
 ### Decisões e escopo
 
@@ -73,7 +73,7 @@ Durante implementação com regras de negócio, o usuário pode colar `.prompts/
 
 - `/documentation-writer` — sync de README e docs de produto.
 - `/rework-commits` — reorganizar histórico antes de entregar.
-- `/fecha-a-task` — last mile no GitLab: duas MRs (sandbox e release) da mesma branch. Preencha o mapa `TODO_*` da skill no destino.
+- `/fecha-a-task` — last mile no GitLab: duas MRs (sandbox e release) da mesma branch. Lê `docs/agents/delivery.md`; sem o arquivo, `/setup-skills` primeiro.
 
 ## Etapa 3 — Responder
 

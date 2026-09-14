@@ -14,18 +14,7 @@ Pedido explícito de commit + **duas** MRs no **GitLab** (`glab`). Não usar `gh
 
 ## Objetivo
 
-Branch de feature publicada, com duas MRs da mesma source: uma para a base sandbox e outra para a base release do repo atual (front e back têm nomes diferentes).
-
-## Mapa de repos e branches
-
-Preencha os `TODO_*` neste arquivo antes de usar em um destino. Não invente nomes.
-
-- Front — reconhecer por: `TODO_FRONT_REMOTE` (trecho da URL GitLab ou nome da pasta)
-- Front — sandbox: `TODO_FRONT_SANDBOX`
-- Front — release: `TODO_FRONT_RELEASE`
-- Back — reconhecer por: `TODO_BACK_REMOTE`
-- Back — sandbox: `TODO_BACK_SANDBOX`
-- Back — release: `TODO_BACK_RELEASE`
+Branch de feature publicada, com duas MRs da mesma source: uma para a base sandbox e outra para a base release **deste** repo. Os nomes das bases vêm de `docs/agents/delivery.md`, gravado por `/setup-skills`. Não edite esta skill no destino.
 
 ## Sem marca d'água
 
@@ -33,11 +22,13 @@ Commit e corpo das MRs só com conteúdo humano. Sem `Co-authored-by`, `Made-wit
 
 ## Etapa 1 — Resolver bases
 
-1. Leia `git remote get-url origin` e o basename do cwd.
-2. Case com `TODO_FRONT_REMOTE` ou `TODO_BACK_REMOTE`.
-3. Sem match, ou qualquer valor ainda `TODO_*` → **pare** e peça os quatro nomes de branch e como reconhecer cada repo. Não abra MR contra `main`/`master`.
+1. Se `docs/agents/delivery.md` não existir → **pare** e peça `/setup-skills`. Não invente nomes de branch.
+2. Leia o arquivo. Extraia **Base sandbox**, **Base release** e **Não abrir MR contra**.
+3. Campo vazio, placeholder (`[…]`) ou `TODO` → **pare** e peça para editar `docs/agents/delivery.md` ou reexecutar `/setup-skills`.
+4. Se **Reconhecer por** estiver preenchido, confira `git remote get-url origin` e o basename do cwd. Sem match → **pare** (o arquivo provavelmente é de outro repo). Não chute.
+5. Não abra MR contra as branches de **Não abrir MR contra**. Sem essa lista, trate sandbox, release, `main` e `master` como proibidas.
 
-**Conclua quando:** repo identificado como front ou back e as duas bases reais estiverem definidas.
+**Conclua quando:** sandbox e release deste repo estiverem lidas do arquivo, sem placeholder.
 
 ## Etapa 2 — Revisar
 
@@ -55,7 +46,7 @@ Bloqueio → pare e pergunte. Não commite no escuro.
 
 ## Etapa 4 — Branch
 
-Nunca commite/pushe nas bases sandbox/release do mapa, nem em `main`/`master`. Se estiver numa dessas, crie `feat|fix|chore/...` a partir da base sandbox daquele repo.
+Nunca commite/pushe nas bases sandbox/release lidas na etapa 1, nem nas branches de **Não abrir MR contra**. Se HEAD for uma delas, crie `feat|fix|chore/...` a partir da base sandbox.
 
 **Conclua quando:** HEAD for uma branch de feature.
 
@@ -77,7 +68,7 @@ Se existir `docs/agents/commit-conventions.md`, aplique o formato de lá.
 
 ## Etapa 7 — Duas MRs
 
-Mesma source, targets do mapa:
+Mesma source, targets de `docs/agents/delivery.md`:
 
 ```bash
 glab mr create --yes --target-branch <base-sandbox> --source-branch <branch> --title "<titulo>" --description "<corpo sandbox>"

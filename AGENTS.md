@@ -27,7 +27,7 @@ No destino, copie cada skill para `.agents/skills/<nome>/` (Claude Code: `.claud
 
 - Skills com `disable-model-invocation: true` só rodam quando o usuário digitar o comando (`/nome`).
 - `writing-for-agents` é model-invoked: o agente pode alcançá-la ao criar ou revisar documentos agent-facing.
-- Repo destino sem `docs/agents/` → `/setup-skills` antes de `/code-review` e `/rework-commits`.
+- Repo destino sem `docs/agents/` → `/setup-skills` antes de `/code-review`, `/rework-commits` e `/fecha-a-task`.
 - Não deduza uma skill user-invoked a partir de pedido parecido — use `/ask-marzari` se o próximo passo não estiver claro.
 
 ## Alterar artefatos
