@@ -23,10 +23,10 @@ Commit e corpo das MRs só com conteúdo humano. Sem `Co-authored-by`, `Made-wit
 ## Etapa 1 — Resolver bases
 
 1. Se `docs/agents/delivery.md` não existir → **pare** e peça `/setup-skills`. Não invente nomes de branch.
-2. Leia o arquivo. Extraia **Base sandbox**, **Base release** e **Não abrir MR contra**.
+2. Leia o arquivo. Extraia **Base sandbox**, **Base release** e **Branches protegidas contra commit/push direto**. Se ainda houver o campo legado **Não abrir MR contra**, peça a atualização da configuração para distinguir proteção contra escrita direta de targets de MR antes de continuar.
 3. Campo vazio, placeholder (`[…]`) ou `TODO` → **pare** e peça para editar `docs/agents/delivery.md` ou reexecutar `/setup-skills`.
 4. Se **Reconhecer por** estiver preenchido, confira `git remote get-url origin` e o basename do cwd. Sem match → **pare** (o arquivo provavelmente é de outro repo). Não chute.
-5. Não abra MR contra as branches de **Não abrir MR contra**. Sem essa lista, trate sandbox, release, `main` e `master` como proibidas.
+5. Permita MRs apenas contra **Base sandbox** e **Base release**. Proteja ambas contra commit/push direto, junto com `main`, `master` e as demais branches da lista; essa proteção não impede usá-las como targets de MR quando forem uma das bases configuradas.
 
 **Conclua quando:** sandbox e release deste repo estiverem lidas do arquivo, sem placeholder.
 
@@ -46,7 +46,7 @@ Bloqueio → pare e pergunte. Não commite no escuro.
 
 ## Etapa 4 — Branch
 
-Nunca commite/pushe nas bases sandbox/release lidas na etapa 1, nem nas branches de **Não abrir MR contra**. Se HEAD for uma delas, crie `feat|fix|chore/...` a partir da base sandbox.
+Nunca commite/pushe diretamente nas branches protegidas na etapa 1. Se HEAD for uma delas, crie `feat|fix|chore/...` a partir da base sandbox.
 
 **Conclua quando:** HEAD for uma branch de feature.
 

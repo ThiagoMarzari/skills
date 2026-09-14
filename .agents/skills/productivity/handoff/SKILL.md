@@ -13,7 +13,7 @@ Inclua uma seção **Skills sugeridas**, nomeando quais skills o próximo agente
 
 Não duplique conteúdo já capturado em outros artefatos (specs, planos, ADRs, issues, commits, diffs). Referencie por path ou URL.
 
-Redija informações sensíveis (API keys, senhas, PII).
+Antes de gravar, remova ou mascare informações sensíveis (API keys, senhas, PII), substituindo os valores por `[REDACTED]`. Confira que nenhum desses valores permaneceu no documento.
 
 Se o usuário passou argumentos, trate-os como descrição do foco da próxima sessão e ajuste o documento a isso.
 

@@ -73,7 +73,7 @@ Pergunte, nesta ordem, com recomendação a partir das branches vistas:
 1. **Papel** deste checkout: `front`, `back` ou `único`.
 2. **Reconhecer por** — trecho estável da URL do remote ou nome da pasta (sanity check se o arquivo for copiado para o repo errado).
 3. **Base sandbox** e **base release** — nomes literais das branches. Não invente; se não aparecerem em `git branch -a`, confirme com o usuário.
-4. **Não abrir MR contra** — no mínimo as duas bases, `main` e `master`.
+4. **Branches protegidas contra commit/push direto** — no mínimo as duas bases, `main` e `master`. Essa proteção não proíbe MRs: os targets permitidos são **Base sandbox** e **Base release**.
 
 Front e back são dois repositórios: cada um tem o próprio `docs/agents/delivery.md`. Não grave o mapa do par no mesmo arquivo.
 
