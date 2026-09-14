@@ -44,6 +44,7 @@ Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à impleme
 | `/code-review` | Revisar diff desde um ponto informado |
 | `/documentation-writer` | Sincronizar docs com o código |
 | `/writing-for-agents` | Escrever ou melhorar instruções para agentes |
+| `/handoff` | Compactar a conversa num arquivo no temp para outro agente continuar |
 | `/rework-commits` | Reorganizar commits da branch |
 | `/fecha-a-task` | Revisar, commitar, push e duas MRs no GitLab (sandbox e release) |
 

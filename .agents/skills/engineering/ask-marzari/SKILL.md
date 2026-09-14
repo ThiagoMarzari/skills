@@ -36,6 +36,7 @@ Escolha a **primeira** necessidade real:
 | 7 | Branch com histórico confuso | `/rework-commits` |
 | 8 | Task pronta: revisar, commit, push e MRs sandbox/release | `/fecha-a-task` |
 | 9 | Criar ou revisar instruções para agentes | `/writing-for-agents` |
+| 10 | Trabalho precisa viajar (outro harness, pasta, colega ou fork) | `/handoff` |
 
 Se não couber em uma categoria, faça **uma** pergunta objetiva.
 
@@ -74,6 +75,10 @@ Durante implementação com regras de negócio, o usuário pode colar `.prompts/
 - `/documentation-writer` — sync de README e docs de produto.
 - `/rework-commits` — reorganizar histórico antes de entregar.
 - `/fecha-a-task` — last mile no GitLab: duas MRs (sandbox e release) da mesma branch. Lê `docs/agents/delivery.md`; sem o arquivo, `/setup-skills` primeiro.
+
+### Handoff (portabilidade)
+
+`/handoff` — grava documento no **temp do OS** para outro agente/sessão/harness/pasta. Não é `/summarize`: use só se o trabalho precisa **viajar**. Mesma task na mesma sessão → summarize ou chat novo com `@` no artefato no disco.
 
 ## Etapa 3 — Responder
 

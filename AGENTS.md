@@ -8,7 +8,7 @@ Kit reutilizável de skills, prompts, regras e exemplos — **não é um aplicat
 |---------|-----|
 | `README.md` | Índice humano: skills, fluxos, prompts |
 | `.agents/skills/engineering/<nome>/` | Skills de fluxo de produto e código |
-| `.agents/skills/productivity/<nome>/` | Skills de escrita para agentes |
+| `.agents/skills/productivity/<nome>/` | Skills de escrita para agentes e handoff entre sessões |
 | `.prompts/` | Prompts colados ou solicitados explicitamente |
 | `.cursor/rules/projetos.mdc` | Regra geral (qualquer stack) |
 | `docs/exemplos/` | Modelos de PRD, rules e docs — não é o produto deste kit |
