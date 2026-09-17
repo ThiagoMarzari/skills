@@ -32,6 +32,8 @@ Para funcionalidade que ainda precisa de decisões:
 
 Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à implementação.
 
+Walkthrough completo (arquivos, posse, exemplo do início ao fim): **[Guia de workflow](docs/workflow-guide.md)**.
+
 ## Skills
 
 | Comando | Quando usar |

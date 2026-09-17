@@ -2,7 +2,7 @@
 
 Kit reutilizável de práticas de IA — **não é um aplicativo**. Skills, prompts, rules e exemplos existem para serem copiados ao projeto destino.
 
-O índice completo está em `README.md`; leia-o apenas quando precisar consultar o catálogo ou o fluxo de uso.
+O índice completo está em `README.md`; o walkthrough do fluxo está em `docs/workflow-guide.md`. Leia-os só quando precisar do catálogo ou do quadro completo.
 
 ## Onde estão as coisas
 

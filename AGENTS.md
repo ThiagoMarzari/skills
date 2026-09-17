@@ -7,6 +7,7 @@ Kit reutilizável de skills, prompts, regras e exemplos — **não é um aplicat
 | Caminho | Uso |
 |---------|-----|
 | `README.md` | Índice humano: skills, fluxos, prompts |
+| `docs/workflow-guide.md` | Walkthrough do fluxo: arquivos, posse, exemplo do início ao fim |
 | `.agents/skills/engineering/<nome>/` | Skills de fluxo de produto e código |
 | `.agents/skills/productivity/<nome>/` | Skills de escrita para agentes e handoff entre sessões |
 | `.prompts/` | Prompts colados ou solicitados explicitamente |
@@ -37,4 +38,4 @@ No destino, copie cada skill para `.agents/skills/<nome>/` (Claude Code: `.claud
 - **Rule**: uma preocupação por arquivo.
 - Não crie commits nem altere Git sem pedido explícito.
 
-Para catálogo de skills e fluxos recomendados, veja `README.md`.
+Para catálogo de skills, veja `README.md`. Para o walkthrough do fluxo, veja `docs/workflow-guide.md`.
