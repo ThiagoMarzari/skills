@@ -3,7 +3,7 @@ name: writing-for-agents
 description: Escreve e revisa documentos consumidos por agentes. Use ao criar ou editar skills, AGENTS.md, CLAUDE.md, rules, PRDs, specs, tickets, prompts ou qualquer doc apontado para um agente.
 ---
 
-# Escrita para agentes
+# Writing for Agents
 
 Referência para qualquer documento que um agente lê: skill, `AGENTS.md` / `CLAUDE.md`, rule, spec, ticket, prompt ou README. O empacotamento muda; a escrita não — o objetivo é o mesmo **processo** a cada execução, não o mesmo texto de saída.
 

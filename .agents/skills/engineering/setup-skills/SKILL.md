@@ -1,10 +1,10 @@
 ---
 name: setup-skills
-description: Configura o repo destino para as skills de engenharia — tracker, commits e bases sandbox/release. Use somente com /setup-skills.
+description: Configura tracker, commits e entrega por provedor no repo destino. Use somente com /setup-skills.
 disable-model-invocation: true
 ---
 
-# Setup das skills de engenharia
+# Setup Skills
 
 Configura **este** repositório para que as skills de engenharia leiam decisões em runtime, em vez de assumir ferramenta.
 
@@ -12,7 +12,7 @@ Grava:
 
 - `docs/agents/issue-tracker.md` — onde issues vivem e como aparecem em commits (`code-review` lê)
 - `docs/agents/commit-conventions.md` — formato de mensagem (`rework-commits` lê)
-- `docs/agents/delivery.md` — bases sandbox/release deste repo (`fecha-a-task` lê), só se a skill `fecha-a-task` estiver instalada
+- `docs/agents/delivery.md` — provedor, destinos e branches protegidas deste repo (`delivery` lê), só se a skill estiver instalada
 - bloco `## Agent skills` em `CLAUDE.md` ou `AGENTS.md`
 
 Skill prompt-driven: explore, proponha, confirme, só então escreva. Roda uma vez por repo; reexecute só para trocar tracker, delivery ou recomeçar.
@@ -31,10 +31,10 @@ Leia o que existir; não assuma:
 2. `AGENTS.md` e `CLAUDE.md` na raiz — qual existe; se já há `## Agent skills`.
 3. `docs/agents/` — output anterior desta skill.
 4. Convenção de commit visível: `git log -10 --oneline`, `CONTRIBUTING.md`, section de commits em README.
-5. Branches locais e remotas (`git branch -a`) — candidatos a sandbox/release.
-6. Se a pasta `fecha-a-task` existe ao lado das skills deste repo (no destino: `.agents/skills/fecha-a-task` ou `.claude/skills/fecha-a-task`). Sem ela, pule a seção Delivery.
+5. Branches locais e remotas (`git branch -a`) — candidatos a destinos de entrega.
+6. Se a pasta `delivery` existe ao lado das skills deste repo (no destino: `.agents/skills/delivery` ou `.claude/skills/delivery`). Sem ela, pule a seção Delivery.
 
-**Conclua quando:** remote, arquivos de instrução, configs existentes e presença de `fecha-a-task` estiverem registrados.
+**Conclua quando:** remote, arquivos de instrução, configs existentes e presença de `delivery` estiverem registrados.
 
 ## Etapa 2 — Propor e perguntar
 
@@ -64,18 +64,19 @@ Como `rework-commits` redige mensagens. Se o log recente já for consistente, pr
 
 Inclua idioma das mensagens se o log já o revelar.
 
-### Seção C — Delivery (só se `fecha-a-task` estiver instalada)
+### Seção C — Delivery (só se `delivery` estiver instalada)
 
-Bases **deste** repo para duas MRs GitLab. `fecha-a-task` lê só este arquivo; não preenche a skill.
+Provedor e destinos **deste** repo. `delivery` lê só este arquivo; não preenche a skill.
 
-Pergunte, nesta ordem, com recomendação a partir das branches vistas:
+Pergunte, nesta ordem, recomendando a partir do remote e das branches vistas:
 
-1. **Papel** deste checkout: `front`, `back` ou `único`.
-2. **Reconhecer por** — trecho estável da URL do remote ou nome da pasta (sanity check se o arquivo for copiado para o repo errado).
-3. **Base sandbox** e **base release** — nomes literais das branches. Não invente; se não aparecerem em `git branch -a`, confirme com o usuário.
-4. **Branches protegidas contra commit/push direto** — no mínimo as duas bases, `main` e `master`. Essa proteção não proíbe MRs: os targets permitidos são **Base sandbox** e **Base release**.
+1. **Provider:** `github`, `gitlab` ou `manual`. Detecte pelo remote, mas confirme com o usuário.
+2. **CLI:** `gh` para GitHub, `glab` para GitLab, `nenhuma` para manual.
+3. **Reconhecer por:** trecho estável da URL do remote ou nome da pasta, para evitar usar config copiada do repo errado.
+4. **Destinos:** um branch para GitHub; um ou mais branches para GitLab; nenhum para manual. Não invente branches: confirme os destinos que não apareçam em `git branch -a`.
+5. **Branches protegidas contra commit/push direto:** inclua todos os destinos e `main`/`master`, salvo escolha explícita diferente do usuário. Proteção contra push direto não impede PR/MR para destino configurado.
 
-Front e back são dois repositórios: cada um tem o próprio `docs/agents/delivery.md`. Não grave o mapa do par no mesmo arquivo.
+Front e back são dois repositórios: cada um tem o próprio `docs/agents/delivery.md`.
 
 **Conclua quando:** as seções aplicáveis estiverem confirmadas pelo usuário.
 
@@ -119,7 +120,7 @@ Se a seção C rodou, acrescente:
 ```markdown
 ### Delivery
 
-[uma linha: duas MRs GitLab, bases sandbox e release]. Ver `docs/agents/delivery.md`.
+[uma linha: provedor e destino(s) configurados]. Ver `docs/agents/delivery.md`.
 ```
 
 Escreva os arquivos a partir dos seeds:
@@ -133,10 +134,10 @@ Escreva os arquivos a partir dos seeds:
 
 Para **Outro** no tracker, escreva `docs/agents/issue-tracker.md` a partir da descrição do usuário, no mesmo formato dos seeds (tipo, onde, referência em commits, consumidores).
 
-Preencha os campos do seed de delivery com os nomes confirmados. Não deixe placeholder.
+Preencha o seed de delivery com a configuração confirmada. GitHub usa exatamente um destino e `gh`; GitLab usa um ou mais destinos e `glab`; `manual` usa `nenhuma` e nenhum destino. Não deixe placeholder.
 
 **Conclua quando:** os arquivos aplicáveis em `docs/agents/` existirem e o bloco `## Agent skills` estiver no arquivo escolhido, sem duplicata.
 
 ## Entrega
 
-Informe os caminhos gravados. `code-review`, `rework-commits` e `fecha-a-task` passam a ler esses arquivos. O usuário pode editar `docs/agents/*.md` direto; reexecute esta skill só para trocar tracker, delivery ou recomeçar.
+Informe os caminhos gravados. `code-review`, `rework-commits` e `delivery` passam a ler esses arquivos. O usuário pode editar `docs/agents/*.md` direto; reexecute esta skill só para trocar tracker, delivery ou recomeçar.

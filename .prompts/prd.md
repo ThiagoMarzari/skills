@@ -1,6 +1,6 @@
-# Prompt — briefing para /prd-generator
+# Prompt — briefing para /prd
 
-Cole no chat **com** `/prd-generator`. Quanto mais preencher, menos a skill pergunta — o briefing fecha ramos da árvore de antemão. O que não souber, deixe em **Regras em aberto**.
+Cole no chat **com** `/prd`. Quanto mais preencher, menos a skill pergunta — o briefing fecha ramos da árvore de antemão. O que não souber, deixe em **Regras em aberto**.
 
 Troque `[colchetes]`; apague seções que não se aplicarem.
 
@@ -9,7 +9,7 @@ Troque `[colchetes]`; apague seções que não se aplicarem.
 ## Produto novo
 
 ```text
-/prd-generator
+/prd
 
 Modo: INICIAL.
 
@@ -50,7 +50,7 @@ Modo: INICIAL.
 ## Funcionalidade em projeto existente
 
 ```text
-/prd-generator
+/prd
 
 Modo: FEATURE.
 

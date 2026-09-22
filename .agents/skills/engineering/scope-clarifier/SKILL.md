@@ -1,14 +1,14 @@
 ---
-name: questiona
-description: Interroga o usuário para fechar escopo, comportamento, decisões e trade-offs antes da implementação. Use somente com /questiona.
+name: scope-clarifier
+description: Interroga o usuário para fechar escopo, comportamento, decisões e trade-offs antes da implementação. Use somente com /scope-clarifier.
 disable-model-invocation: true
 ---
 
-# Questiona
+# Scope Clarifier
 
 ## Ativação e limites
 
-Use somente com `/questiona`.
+Use somente com `/scope-clarifier`.
 
 Durante a skill: não escreva código; não crie nem altere arquivos; não invoque outra skill. Use código e docs só para evitar perguntas já respondidas no projeto.
 
@@ -68,7 +68,7 @@ A cada 3–5 decisões, resuma o fechado e confronte o trade-off principal.
 
 ## Etapa 3 — Fechar
 
-Apresente: **Decisões confirmadas**, **Suposições**, **Trade-offs**, **Fora do escopo**, **Próximo passo** (`/prd-generator` se grande; implementação se pequeno e fechado).
+Apresente: **Decisões confirmadas**, **Suposições**, **Trade-offs**, **Fora do escopo**, **Próximo passo** (`/prd` se grande; implementação se pequeno e fechado).
 
 Pergunte: **"Fechamos ou ainda existe decisão em aberto?"**
 

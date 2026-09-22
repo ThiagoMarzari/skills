@@ -17,7 +17,7 @@ Repositório genérico com skills, prompts, regras e exemplos para agentes no Cu
 
 1. Escolha skill ou prompt compatível com a tarefa.
 2. Invoque explicitamente skills user-invoked (`/nome`).
-3. Se o próximo passo não estiver claro, use `/ask-marzari`.
+3. Se o próximo passo não estiver claro, use `/workflow-router`.
 4. Copie prompts de `.prompts/` só quando a tarefa precisar.
 
 ## Fluxo recomendado
@@ -26,11 +26,11 @@ Repo destino ainda sem `docs/agents/`:
 
 `/setup-skills`
 
-Para funcionalidade que ainda precisa de decisões:
+Para uma mudança de produto com decisões em aberto:
 
-`/questiona` → `/prd-generator` → `/plan-spec` → implementação → `/code-review` → `/documentation-writer` → `/fecha-a-task`
+`/scope-clarifier` → `/prd` → `/plan-spec` → implementação → `/preflight` (se aplicável) → `/code-review` → `/documentation-writer` (se necessário) → `/delivery` (se solicitado)
 
-Use só as etapas necessárias. Tarefa pequena e clara pode ir direto à implementação.
+Mudança pequena e clara pode ir direto à implementação, verificações aplicáveis e `/code-review`. Use `/preflight` para mudanças com risco de comportamento, API, negócio, segurança, dados ou produção. Registre decisões arquiteturais duradouras com `/adr`.
 
 Walkthrough completo (arquivos, posse, exemplo do início ao fim): **[Guia de workflow](docs/workflow-guide.md)**.
 
@@ -38,17 +38,28 @@ Walkthrough completo (arquivos, posse, exemplo do início ao fim): **[Guia de wo
 
 | Comando | Quando usar |
 |---------|-------------|
-| `/setup-skills` | Configurar tracker, commits e bases sandbox/release no repo destino |
-| `/ask-marzari` | Escolher skill ou fluxo |
-| `/questiona` | Fechar escopo e decisões |
-| `/prd-generator` | PRD e specs em `docs/prd/` |
+| `/setup-skills` | Configurar tracker, commits, provedor e destinos no repo destino |
+| `/workflow-router` | Escolher skill ou fluxo |
+| `/scope-clarifier` | Fechar escopo e decisões de produto |
+| `/prd` | PRD e specs em `docs/prd/` |
 | `/plan-spec` | Planejar ou implementar specs pendentes (`todas` / `implementa`) |
+| `/preflight` | Verificar prontidão por risco e gerar checklist para PR/MR |
+| `/adr` | Registrar decisão arquitetural confirmada em `docs/adr/` |
 | `/code-review` | Revisar diff desde um ponto informado |
 | `/documentation-writer` | Sincronizar docs com o código |
 | `/writing-for-agents` | Escrever ou melhorar instruções para agentes |
 | `/handoff` | Compactar a conversa num arquivo no temp para outro agente continuar |
 | `/rework-commits` | Reorganizar commits da branch |
-| `/fecha-a-task` | Revisar, commitar, push e duas MRs no GitLab (sandbox e release) |
+| `/delivery` | Entregar pela configuração do repo: GitHub, GitLab ou manual |
+
+### Migração de nomes
+
+| Nome antigo | Nome atual |
+|------------|------------|
+| `/questiona` | `/scope-clarifier` |
+| `/fecha-a-task` | `/delivery` |
+
+Atualize as skills copiadas para os novos diretórios; não instale as versões antigas em paralelo.
 
 `writing-for-agents` também pode ser alcançada pelo agente ao editar docs agent-facing, sem comando.
 
@@ -58,7 +69,7 @@ Neste kit as pastas vivem em `.agents/skills/engineering/<nome>/` e `.agents/ski
 
 | Arquivo | Uso |
 |---------|-----|
-| `.prompts/prd-generator.md` | Briefing inicial antes de `/prd-generator` |
+| `.prompts/prd.md` | Briefing inicial antes de `/prd` |
 | `.prompts/testes-automatizados.md` | Decidir o que merece teste |
 | `.prompts/tdd-com-agentes.md` | Ciclo red-green-refactor com agente |
 
@@ -75,9 +86,9 @@ destino/.prompts/<nome>.md
 destino/.cursor/rules/<nome>.mdc
 ```
 
-Leve referências indicadas pelo `SKILL.md` da skill copiada. `questiona` e `prd-generator` também precisam de `.agents/skills/engineering/references/entrevista.md` → `destino/.agents/skills/references/entrevista.md` (o apontador relativo `../references/entrevista.md` continua válido).
+Leve referências indicadas pelo `SKILL.md` da skill copiada. `scope-clarifier` e `prd` também precisam de `.agents/skills/engineering/references/entrevista.md` → `destino/.agents/skills/references/entrevista.md` (o apontador relativo `../references/entrevista.md` continua válido).
 
-Depois de copiar as skills de engenharia, rode `/setup-skills` uma vez no destino. Ele grava `docs/agents/` (tracker, commits e, se `/fecha-a-task` estiver no destino, sandbox/release). Não edite o `SKILL.md` no projeto.
+Depois de copiar as skills de engenharia, rode `/setup-skills` uma vez no destino. Ele grava `docs/agents/` (tracker, commits e, se `/delivery` estiver no destino, provedor e destinos). Não edite o `SKILL.md` no projeto.
 
 ## Convenções
 

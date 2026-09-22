@@ -1,6 +1,6 @@
 # Tópicos de entrevista
 
-Fonte única para `/questiona` e `/prd-generator`. Cada skill define a **cadência** das perguntas; esta referência define só **o que** cobrir.
+Fonte única para `/scope-clarifier` e `/prd`. Cada skill define a **cadência** das perguntas; esta referência define só **o que** cobrir.
 
 Percorra na ordem, pulando o que o contexto já fechou:
 

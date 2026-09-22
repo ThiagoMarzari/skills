@@ -4,7 +4,7 @@ description: Revisa alterações desde um ponto informado em duas frentes indepe
 disable-model-invocation: true
 ---
 
-# Revisão de código
+# Code Review
 
 ## Ativação
 

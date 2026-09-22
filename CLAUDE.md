@@ -8,7 +8,6 @@ O índice completo está em `README.md`; o walkthrough do fluxo está em `docs/w
 
 - Skills: `.agents/skills/engineering/<nome>/` e `.agents/skills/productivity/<nome>/` (no destino, extraia para `.claude/skills/<nome>/` — buckets não vão junto)
 - Prompts: `.prompts/` — não auto-carregados
-- Rule geral: `.cursor/rules/projetos.mdc`
 - Exemplos Next.js: `docs/exemplos/rules/` — **não** aplicar neste kit
 - Exemplos de produto: `docs/exemplos/` — amostra, não identidade do kit
 
@@ -22,10 +21,10 @@ O índice completo está em `README.md`; o walkthrough do fluxo está em `docs/w
 
 ## Skills
 
-- **User-invoked** (`disable-model-invocation: true`): só com comando explícito — `/setup-skills`, `/questiona`, `/prd-generator`, `/plan-spec`, `/fecha-a-task`, etc.
+- **User-invoked** (`disable-model-invocation: true`): só com comando explícito — `/setup-skills`, `/scope-clarifier`, `/prd`, `/plan-spec`, `/preflight`, `/adr`, `/delivery`, etc.
 - **Model-invoked**: `writing-for-agents` — alcançável ao editar docs para agentes.
 
-Não infira skills user-invoked sem o comando. Próximo passo incerto → `/ask-marzari`. Repo destino sem config → `/setup-skills`.
+Não infira skills user-invoked sem o comando. Próximo passo incerto → `/workflow-router`. Repo destino sem config → `/setup-skills`.
 
 ## Hábitos
 

@@ -1,14 +1,14 @@
 ---
-name: prd-generator
-description: Gera PRD com especificações funcionais em docs/prd/. Use somente com /prd-generator.
+name: prd
+description: Gera PRD com especificações funcionais em docs/prd/. Use somente com /prd.
 disable-model-invocation: true
 ---
 
-# Gerador de PRD
+# PRD
 
 ## Ativação e limites
 
-Use somente com `/prd-generator`.
+Use somente com `/prd`.
 
 **Único arquivo alterável:** `docs/prd/NN-prd-<slug>.md`.
 

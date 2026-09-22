@@ -1,14 +1,10 @@
 # Delivery
 
-- **Host:** GitLab
-- **CLI:** `glab`
-- **Papel:** [front | back | único]
+- **Provider:** [github | gitlab | manual]
+- **CLI:** [`gh` para GitHub | `glab` para GitLab | `nenhuma` para manual]
 - **Reconhecer por:** [trecho da URL do remote ou nome da pasta deste repo]
-- **Base sandbox:** [nome da branch]
-- **Base release:** [nome da branch]
-- **Branches protegidas contra commit/push direto:** [sandbox], [release], `main`, `master`
-- **Consumidores:** `fecha-a-task` (Etapa 1 — resolver bases)
+- **Destinos:** [um branch para GitHub; um ou mais para GitLab; `nenhum` para manual]
+- **Branches protegidas contra commit/push direto:** [destinos], `main`, `master`
+- **Consumidores:** `delivery` (provedor, destinos e proteções)
 
-Os targets permitidos para MR são **Base sandbox** e **Base release**; a proteção acima impede apenas commit/push direto nessas branches.
-
-Preencha com os nomes **deste** repositório. Front e back têm cada um o próprio `docs/agents/delivery.md`. Sem este arquivo, `fecha-a-task` para e pede `/setup-skills`.
+Use a configuração **deste** repositório. GitHub exige exatamente um destino; GitLab aceita um ou mais destinos. Front e back têm cada um o próprio `docs/agents/delivery.md`. `manual` não tem destinos, gera apenas checklist e não executa Git/CLI. Sem este arquivo ou com placeholders, `delivery` para e pede `/setup-skills`.

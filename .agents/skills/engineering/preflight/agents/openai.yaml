@@ -1,0 +1,6 @@
+name: preflight
+description: "Avalia a prontidão de uma mudança conforme seu risco e gera um checklist para PR/MR. Use com /preflight."
+disable-model-invocation: true
+interface:
+  display_name: "Preflight"
+  short_description: "Check change readiness by risk"

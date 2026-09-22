@@ -41,7 +41,7 @@ Separe uma skill model-invoked quando houver palavra-âncora ou ramo que deve di
 
 ## Router skills
 
-Quando skills user-invoked passam do que o humano lembra, use uma **router skill** user-invoked (ex.: `/ask-marzari`): uma skill que nomeia as outras e quando usar cada uma.
+Quando skills user-invoked passam do que o humano lembra, use uma **router skill** user-invoked (ex.: `/workflow-router`): uma skill que nomeia as outras e quando usar cada uma.
 
 Limites do router:
 

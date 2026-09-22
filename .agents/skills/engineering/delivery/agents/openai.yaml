@@ -1,0 +1,6 @@
+name: delivery
+description: "Revisa e entrega uma mudança pelo provedor configurado no repositório. Use somente com /delivery."
+disable-model-invocation: true
+interface:
+  display_name: "Delivery"
+  short_description: "Review and deliver through the configured provider"

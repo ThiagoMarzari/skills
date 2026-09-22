@@ -4,7 +4,7 @@ description: Reorganiza branch em commits pequenos e semanticamente separados, p
 disable-model-invocation: true
 ---
 
-# Reorganização de commits
+# Rework Commits
 
 ## Ativação
 

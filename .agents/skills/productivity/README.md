@@ -5,3 +5,4 @@ Skills de escrita e manutenção de documentos para agentes. No destino, copie c
 | Skill | Resumo |
 |-------|--------|
 | `writing-for-agents` | Escreve e revisa documentos consumidos por agentes |
+| `handoff` | Leva contexto para outro agente ou sessão |

@@ -4,7 +4,7 @@ description: Plano técnico de specs pendentes em docs/prd/. Use com /plan-spec;
 disable-model-invocation: true
 ---
 
-# Planejamento de especificação
+# Plan Spec
 
 ## Ativação e objetivo
 
@@ -31,7 +31,7 @@ Se faltar `todas` e `implementa`, pergunte: **"Uma spec ou todas as pendentes?"*
 2. Escolha o PRD do pedido; se ambíguo, pergunte.
 3. Leia PRD e spec-alvo.
 
-Sem PRD → informe que `/prd-generator` vem antes. Não crie PRD aqui.
+Sem PRD → informe que `/prd` vem antes. Não crie PRD aqui.
 
 **Conclua quando:** um PRD escolhido e lido.
 
@@ -74,6 +74,7 @@ Por spec planejada:
 6. Testes e verificação por critério de aceite
 7. Fora do escopo
 8. Dependências
+9. Decisão arquitetural duradoura que possa exigir `/adr`, se houver; não crie ADR automaticamente
 
 **Conclua quando:** cada requisito tiver ação, validação ou justificativa de N/A.
 

@@ -11,7 +11,6 @@ Kit reutilizável de skills, prompts, regras e exemplos — **não é um aplicat
 | `.agents/skills/engineering/<nome>/` | Skills de fluxo de produto e código |
 | `.agents/skills/productivity/<nome>/` | Skills de escrita para agentes e handoff entre sessões |
 | `.prompts/` | Prompts colados ou solicitados explicitamente |
-| `.cursor/rules/projetos.mdc` | Regra geral (qualquer stack) |
 | `docs/exemplos/` | Modelos de PRD, rules e docs — não é o produto deste kit |
 
 No destino, copie cada skill para `.agents/skills/<nome>/` (Claude Code: `.claude/skills/<nome>/`). Os buckets ficam só nesta origem.
@@ -28,8 +27,8 @@ No destino, copie cada skill para `.agents/skills/<nome>/` (Claude Code: `.claud
 
 - Skills com `disable-model-invocation: true` só rodam quando o usuário digitar o comando (`/nome`).
 - `writing-for-agents` é model-invoked: o agente pode alcançá-la ao criar ou revisar documentos agent-facing.
-- Repo destino sem `docs/agents/` → `/setup-skills` antes de `/code-review`, `/rework-commits` e `/fecha-a-task`.
-- Não deduza uma skill user-invoked a partir de pedido parecido — use `/ask-marzari` se o próximo passo não estiver claro.
+- Repo destino sem `docs/agents/` → `/setup-skills` antes de `/code-review`, `/rework-commits` e `/delivery`.
+- Não deduza uma skill user-invoked a partir de pedido parecido — use `/workflow-router` se o próximo passo não estiver claro.
 
 ## Alterar artefatos
 

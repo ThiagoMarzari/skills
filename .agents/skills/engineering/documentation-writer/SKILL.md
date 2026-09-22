@@ -4,7 +4,7 @@ description: Compara documentação do projeto com o código e atualiza só o de
 disable-model-invocation: true
 ---
 
-# Atualizador de documentação
+# Documentation Writer
 
 ## Ativação e limites
 

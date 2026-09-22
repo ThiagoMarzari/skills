@@ -1,6 +1,0 @@
-name: prd-generator
-description: "Gera PRD com especificações funcionais em docs/prd/. Use somente com /prd-generator."
-disable-model-invocation: true
-interface:
-  display_name: "PRD Generator"
-  short_description: "Create functional product specifications"

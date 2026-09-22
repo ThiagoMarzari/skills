@@ -1,6 +1,0 @@
-name: ask-marzari
-description: "Indica a skill ou o prompt adequado neste kit. Use somente com /ask-marzari quando o próximo passo não estiver claro ou houver duas opções parecidas."
-disable-model-invocation: true
-interface:
-  display_name: "Ask Marzari"
-  short_description: "Choose the right skill or workflow"
