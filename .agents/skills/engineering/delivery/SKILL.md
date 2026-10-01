@@ -33,8 +33,9 @@ Commit e corpo de PR/MR só com conteúdo humano. Sem `Co-authored-by`, `Made-wi
 ## Etapa 1 — Resolver configuração
 
 1. Sem `docs/agents/delivery.md` ou com campos obrigatórios vazios/placeholder → pare e peça `/setup-skills`.
-2. Confira `Provider`, `Reconhecer por`, `Destinos`, `Branches protegidas` e CLI configurada. Confirme que remote e pasta correspondem ao repo configurado.
-3. `github` → exatamente um destino e CLI `gh`; `gitlab` → um ou mais destinos e CLI `glab`. Configuração incompatível, inclusive `manual` → pare e peça `/setup-skills`.
+2. Sem `docs/agents/commit-conventions.md`, ou se não definir um formato de mensagem aplicável → pare e peça `/setup-skills` antes de commitar.
+3. Confira `Provider`, `Reconhecer por`, `Destinos`, `Branches protegidas` e CLI configurada. Confirme que remote e pasta correspondem ao repo configurado.
+4. `github` → exatamente um destino e CLI `gh`; `gitlab` → um ou mais destinos e CLI `glab`. Configuração incompatível, inclusive `manual` → pare e peça `/setup-skills`.
 
 **Conclua quando:** provedor, destinos e proteções deste repo estiverem verificados.
 
@@ -64,7 +65,7 @@ Se a working tree estiver limpa, pule para a etapa 6.
 
 Caso contrário: status + diff + log; stage só arquivos nomeados (sem `git add .` / `git add -A`); mensagem via HEREDOC; sem `--no-verify`; sem marca d'água.
 
-Se existir `docs/agents/commit-conventions.md`, aplique o formato de lá.
+Aplique o formato de mensagem definido em `docs/agents/commit-conventions.md`.
 
 **Conclua quando:** mudanças relevantes estiverem commitadas ou não houver nada a commitar.
 
