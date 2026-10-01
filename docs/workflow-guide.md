@@ -46,9 +46,9 @@ Rode `/setup-skills` uma vez para configurar `docs/agents/`:
 
 - `issue-tracker.md`: onde issues vivem e como são referenciadas nos commits;
 - `commit-conventions.md`: formato de mensagens;
-- `delivery.md`: provider (`github`, `gitlab` ou `manual`), CLI, identidade do repo, destinos e branches protegidas — somente se `delivery` estiver instalada.
+- `delivery.md`: provider (`github` ou `gitlab`), CLI, identidade do repo, destinos e branches protegidas — somente se `delivery` estiver instalada.
 
-GitHub usa um destino; GitLab usa um ou mais destinos, inclusive o fluxo atual com sandbox e release; manual não executa Git/CLI e retorna checklist. A configuração pertence a cada repo (front e back têm arquivos próprios). Sem setup válido, `delivery` para em vez de inventar configuração ou fazer fallback.
+GitHub usa um destino; GitLab usa um ou mais destinos, inclusive o fluxo atual com sandbox e release. A configuração pertence a cada repo (front e back têm arquivos próprios). Sem setup válido, `delivery` para em vez de inventar configuração ou fazer fallback.
 
 ## Artefatos e posse
 
@@ -70,7 +70,7 @@ O critério de aceite liga PRD, plano, implementação e review. Cada requisito 
 3. **Planejar e implementar:** `/plan-spec` transforma a próxima spec pendente em plano técnico. Sem `implementa`, não altera código; com `/plan-spec implementa` ou aprovação explícita, implementa e só marca a spec concluída após validação.
 4. **Registrar decisão quando necessário:** use `/adr` para trade-off técnico duradouro já decidido; mantenha requisitos e aceite no PRD.
 5. **Verificar:** rode verificações do projeto e `/preflight` quando o risco justificar. Depois, `/code-review` compara o diff com a spec ou pedido. Use `/documentation-writer` se docs humanas divergirem do código.
-6. **Entregar:** `/delivery` revisa o diff, confere configuração e autenticação, e então faz commit/push e abre PR/MR(s) configurados. O modo manual retorna checklist. Nunca faz merge ou deploy.
+6. **Entregar:** `/delivery` revisa o diff, confere configuração e autenticação, e então faz commit/push e abre PR/MR(s) configurados. Nunca faz merge ou deploy.
 
 `/rework-commits` é opcional e só reescreve histórico após apresentar o plano e receber confirmação; para se a working tree estiver suja ou a branch principal/publicada tornar a operação insegura. `/handoff` é só quando o trabalho precisa viajar para outro agente, pasta ou harness.
 

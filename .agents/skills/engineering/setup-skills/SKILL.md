@@ -70,10 +70,10 @@ Provedor e destinos **deste** repo. `delivery` lê só este arquivo; não preenc
 
 Pergunte, nesta ordem, recomendando a partir do remote e das branches vistas:
 
-1. **Provider:** `github`, `gitlab` ou `manual`. Detecte pelo remote, mas confirme com o usuário.
-2. **CLI:** `gh` para GitHub, `glab` para GitLab, `nenhuma` para manual.
+1. **Provider:** `github` ou `gitlab`. Detecte pelo remote, mas confirme com o usuário.
+2. **CLI:** `gh` para GitHub, `glab` para GitLab.
 3. **Reconhecer por:** trecho estável da URL do remote ou nome da pasta, para evitar usar config copiada do repo errado.
-4. **Destinos:** um branch para GitHub; um ou mais branches para GitLab; nenhum para manual. Não invente branches: confirme os destinos que não apareçam em `git branch -a`.
+4. **Destinos:** um branch para GitHub; um ou mais branches para GitLab. Não invente branches: confirme os destinos que não apareçam em `git branch -a`.
 5. **Branches protegidas contra commit/push direto:** inclua todos os destinos e `main`/`master`, salvo escolha explícita diferente do usuário. Proteção contra push direto não impede PR/MR para destino configurado.
 
 Front e back são dois repositórios: cada um tem o próprio `docs/agents/delivery.md`.
@@ -134,7 +134,7 @@ Escreva os arquivos a partir dos seeds:
 
 Para **Outro** no tracker, escreva `docs/agents/issue-tracker.md` a partir da descrição do usuário, no mesmo formato dos seeds (tipo, onde, referência em commits, consumidores).
 
-Preencha o seed de delivery com a configuração confirmada. GitHub usa exatamente um destino e `gh`; GitLab usa um ou mais destinos e `glab`; `manual` usa `nenhuma` e nenhum destino. Não deixe placeholder.
+Preencha o seed de delivery com a configuração confirmada. GitHub usa exatamente um destino e `gh`; GitLab usa um ou mais destinos e `glab`. Não deixe placeholder.
 
 **Conclua quando:** os arquivos aplicáveis em `docs/agents/` existirem e o bloco `## Agent skills` estiver no arquivo escolhido, sem duplicata.
 

@@ -14,7 +14,17 @@ O comando explícito autoriza o last mile configurado: revisar, criar branch se 
 
 ## Objetivo
 
-Conclua o last mile pelo provedor e destinos definidos em `docs/agents/delivery.md`, gravado por `/setup-skills`; no modo manual, entregue somente um checklist. Não edite esta skill no destino.
+Conclua o last mile pelo provedor e destinos definidos em `docs/agents/delivery.md`, gravado por `/setup-skills`. Não edite esta skill no destino.
+
+## Ambiente e ferramentas do provedor
+
+Considere que `gh`, `glab` ou a CLI de outro provedor pode estar instalada e autenticada no computador do usuário, mas ausente ou inacessível no sandbox/ambiente do agente. A configuração do repositório informa qual ferramenta usar; ela não garante que essa ferramenta esteja disponível neste ambiente.
+
+Antes de concluir que a CLI está ausente, verifique-a no ambiente de execução atual com `command -v <cli>` e consulte a ajuda/status somente se o comando existir. Não tente instalar a CLI, acessar o computador do usuário por outro meio, nem repita comandos que já falharam por ausência da ferramenta ou falta de acesso ao host.
+
+Se a CLI estiver no computador do usuário, mas indisponível no ambiente do agente, não trate isso como erro de configuração do provedor nem fique alternando entre CLIs. Continue as etapas locais que forem seguras e possíveis. Pare antes da primeira ação que dependa dessa CLI (autenticação, consulta/criação de PR/MR etc.) e informe claramente: a CLI configurada, que ela não está acessível neste ambiente e o ponto exato em que a entrega parou. Forneça ao usuário os comandos restantes para executar no próprio computador. Se as etapas locais já tiverem sido concluídas, preserve o resultado e entregue instruções claras para finalizar a publicação; não desfaça commits ou branches.
+
+Não peça ao usuário para instalar uma ferramenta que ele já tem no computador. Só recomende instalação se ele disser que ela também não está instalada no host.
 
 ## Sem marca d'água
 
@@ -24,11 +34,9 @@ Commit e corpo de PR/MR só com conteúdo humano. Sem `Co-authored-by`, `Made-wi
 
 1. Sem `docs/agents/delivery.md` ou com campos obrigatórios vazios/placeholder → pare e peça `/setup-skills`.
 2. Confira `Provider`, `Reconhecer por`, `Destinos`, `Branches protegidas` e CLI configurada. Confirme que remote e pasta correspondem ao repo configurado.
-3. `github` → exatamente um destino e CLI `gh`; `gitlab` → um ou mais destinos e CLI `glab`; `manual` → nenhum destino e nenhuma CLI. Configuração incompatível → pare.
+3. `github` → exatamente um destino e CLI `gh`; `gitlab` → um ou mais destinos e CLI `glab`. Configuração incompatível, inclusive `manual` → pare e peça `/setup-skills`.
 
 **Conclua quando:** provedor, destinos e proteções deste repo estiverem verificados.
-
-No modo manual, continue até a revisão do diff (etapa 2), pule as etapas 3–7 e entregue checklist; não faça mutações locais ou remotas.
 
 ## Etapa 2 — Revisar
 
@@ -40,19 +48,19 @@ Bloqueio → pare e pergunte. Não commite no escuro.
 
 ## Etapa 3 — Verificar CLI e autenticação
 
-No modo manual, pule esta etapa. Nos outros modos, use somente a CLI configurada e confira sua autenticação (`gh auth status` ou `glab auth status`). Faltando ou auth falha → pare com instrução curta.
+Verifique se a CLI configurada está disponível neste ambiente (`command -v gh`, `command -v glab` ou equivalente) e use somente essa CLI. Se estiver disponível, confira sua autenticação (`gh auth status`, `glab auth status` ou equivalente). Se estiver ausente/inacessível no sandbox, siga “Ambiente e ferramentas do provedor”: continue o trabalho local possível e pare antes da primeira operação que dependa dela. Se existir, mas não estiver autenticada, pare com instrução curta para autenticar no computador/ambiente que fará a entrega. Não troque de provedor ou CLI para contornar a configuração.
 
-**Conclua quando:** CLI correspondente ao provedor está instalada e autenticada, salvo no modo manual.
+**Conclua quando:** CLI correspondente ao provedor está acessível e autenticada neste ambiente. Se não estiver, registre o bloqueio de ambiente e siga as instruções de parada acima.
 
 ## Etapa 4 — Branch
 
-No modo manual, pule esta etapa. Caso contrário, nunca commite/pushe diretamente nas branches protegidas na etapa 1. Se HEAD for uma delas, crie uma branch `feat|fix|chore/...` a partir do primeiro destino configurado. Se o destino local não estiver disponível, pare e peça orientação; não escolha outra base.
+Nunca commite/pushe diretamente nas branches protegidas na etapa 1. Se HEAD for uma delas, crie uma branch `feat|fix|chore/...` a partir do primeiro destino configurado. Se o destino local não estiver disponível, pare e peça orientação; não escolha outra base.
 
 **Conclua quando:** HEAD for uma branch de feature.
 
 ## Etapa 5 — Commit
 
-No modo manual, pule esta etapa. Se a working tree estiver limpa, pule para a etapa 6.
+Se a working tree estiver limpa, pule para a etapa 6.
 
 Caso contrário: status + diff + log; stage só arquivos nomeados (sem `git add .` / `git add -A`); mensagem via HEREDOC; sem `--no-verify`; sem marca d'água.
 
@@ -62,15 +70,11 @@ Se existir `docs/agents/commit-conventions.md`, aplique o formato de lá.
 
 ## Etapa 6 — Push
 
-No modo manual, pule esta etapa.
-
 `git push -u origin HEAD`. Sem force push.
 
 **Conclua quando:** a branch estiver no remoto.
 
 ## Etapa 7 — Abrir PR/MR(s)
-
-No modo manual, pule esta etapa.
 
 Abra um PR no GitHub ou uma MR por destino GitLab, sempre com a mesma source e os destinos de `docs/agents/delivery.md`. Antes de criar, procure par source/target já existente e não duplique.
 
@@ -87,4 +91,4 @@ Par source/destino já existente → não duplique; devolva URL existente (`gh p
 
 ## Entrega
 
-Informe o provedor, as URLs ou o checklist manual, validações e bloqueios. Sem merge ou deploy.
+Informe o provedor, as URLs, validações e bloqueios. Sem merge ou deploy.

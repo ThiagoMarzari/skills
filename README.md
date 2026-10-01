@@ -50,7 +50,7 @@ Walkthrough completo (arquivos, posse, exemplo do início ao fim): **[Guia de wo
 | `/writing-for-agents` | Escrever ou melhorar instruções para agentes |
 | `/handoff` | Compactar a conversa num arquivo no temp para outro agente continuar |
 | `/rework-commits` | Reorganizar commits da branch |
-| `/delivery` | Entregar pela configuração do repo: GitHub, GitLab ou manual |
+| `/delivery` | Entregar pela configuração do repo: GitHub ou GitLab |
 
 ### Migração de nomes
 
