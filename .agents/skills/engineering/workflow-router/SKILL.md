@@ -67,7 +67,7 @@ PRD revisado pelo usuário antes de planejar. Plano aprovado antes de implementa
 
 ### Implementação
 
-Durante implementação com regras de negócio, o usuário pode colar `.prompts/tdd-com-agentes.md` ou `.prompts/testes-automatizados.md`. São prompts, não skills.
+Antes de escrever testes, o usuário pode colar `.prompts/testes-automatizados.md`; é um prompt, não uma skill.
 
 ### Prontidão e decisões
 

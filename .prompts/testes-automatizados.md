@@ -1,6 +1,6 @@
 # Prompt — o que testar
 
-Cole **antes** de escrever testes. Depois, use [tdd-com-agentes.md](tdd-com-agentes.md).
+Cole antes de escrever testes.
 
 ```text
 Analise [a funcionalidade X | o que acabamos de implementar].

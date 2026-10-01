@@ -71,7 +71,6 @@ Neste kit as pastas vivem em `.agents/skills/engineering/<nome>/` e `.agents/ski
 |---------|-----|
 | `.prompts/prd.md` | Briefing inicial antes de `/prd` |
 | `.prompts/testes-automatizados.md` | Decidir o que merece teste |
-| `.prompts/tdd-com-agentes.md` | Ciclo red-green-refactor com agente |
 
 Prompts não são auto-carregados.
 
