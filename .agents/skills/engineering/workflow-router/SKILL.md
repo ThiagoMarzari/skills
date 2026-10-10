@@ -19,7 +19,7 @@ Escolha a **primeira** necessidade real:
 | 2 | PRD existe, falta plano ou implementação | `/plan-spec` (`todas`, `implementa`) |
 | 3 | Mudança pequena e clara (bug, ajuste isolado, docs) | implementação direta → verificações aplicáveis → `/code-review` |
 | 4 | Mudança com risco implementada, pronta para review | `/preflight` → `/code-review` |
-| 5 | Revisar branch/PR desde um ponto | `/code-review` |
+| 5 | Revisar branch ou PR/MR | `/code-review` |
 | 6 | Entrega explicitamente solicitada | `/delivery` |
 | 7 | Trabalho precisa viajar (outro harness, pasta, colega) | `/handoff` |
 

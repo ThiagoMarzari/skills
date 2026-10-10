@@ -1,94 +1,41 @@
 ---
 name: code-review
-description: Revisa alterações desde um ponto informado em duas frentes independentes — qualidade estrutural e atendimento à especificação. Use com /code-review.
+description: "Revisa as mudanças da branch atual em busca de bugs, desvios da spec e problemas de qualidade, com achados verificados e citando arquivo e linha. Use somente com /code-review."
 disable-model-invocation: true
 ---
 
 # Code Review
 
-## Ativação
+Use somente com `/code-review`.
 
-Use somente com `/code-review`. Outro caminho → recuse e instrua o comando.
+Revise o que esta branch muda e aponte o que deve ser corrigido antes do merge. O valor do review está em achados reais e acionáveis: um bug confirmado vale mais que dez sugestões de estilo. Nesta skill, não altere código; se o usuário pedir correções depois, isso é outra etapa.
 
-Sem ponto de comparação → pergunte (`main`, `develop`, `HEAD~3`, tag, commit).
+## Condução
 
-## Objetivo
+1. **Defina o que revisar.** Sem argumento, revise tudo o que a branch atual mudou em relação à branch principal, incluindo alterações ainda não commitadas: descubra a principal com `git symbolic-ref refs/remotes/origin/HEAD` (ou `main`/`master`) e use `git diff $(git merge-base <principal> HEAD)`. Se o usuário passar uma branch, commit ou número de PR/MR, revise isso. Sem nada para revisar, informe e pare. Diga em uma frase o que está revisando.
+2. **Encontre a intenção.** Procure o que a mudança deveria fazer: caminho indicado pelo usuário, spec relacionada em `docs/prd/` (incluindo **Fora do escopo**), issues citadas nos commits ou o pedido na conversa. Se não houver nenhuma fonte, revise só correção e qualidade e diga isso no relatório.
+3. **Procure bugs.** Leia o diff e o código ao redor que ele afeta, não só as linhas alteradas. Priorize o que quebra em uso real: lógica errada, casos limite, nulos e listas vazias, tratamento de erro, concorrência, permissões, dados sensíveis expostos, migrações que perdem dados, chamadas que mudaram de contrato sem atualizar quem as usa.
+4. **Compare com a intenção.** Aponte requisitos ausentes, comportamento diferente do pedido e escopo extra. Cite o trecho da spec e o trecho do código.
+5. **Avalie a qualidade.** Só o que tem custo concreto: duplicação de algo que já existe no projeto, complexidade desnecessária, nomes que enganam, desvio das convenções do repositório. Não aponte preferências de estilo que o linter ou o projeto não exigem.
+6. **Verifique antes de reportar.** Para cada achado, confirme no código que o problema acontece: descreva a entrada ou o estado que leva ao erro. O que não conseguir confirmar, reporte como "possível" ou descarte. Se houver subagentes, você pode dividir os passos 3–5 entre eles, mas verifique os achados você mesmo.
 
-Compare `<ponto>...HEAD` em duas frentes **independentes**:
+## Relatório
 
-1. **Qualidade**: problemas estruturais observáveis no diff (heurísticas, não falhas automáticas).
-2. **Especificação**: implementação vs. pedido original — faltas, escopo extra, comportamento incorreto.
-
-Mantenha as frentes separadas no relatório final.
-
-## Etapa 1 — Diff
-
-```bash
-git rev-parse <ponto>
-git diff <ponto>...HEAD
-git log <ponto>..HEAD --oneline
-```
-
-Ponto inválido ou diff vazio → informe e pare.
-
-**Conclua quando:** o ponto resolve e o diff não está vazio.
-
-## Etapa 2 — Especificação
-
-Ordem de busca:
-
-1. Caminho informado pelo usuário
-2. Referências a issues/tickets nos commits, no formato que o projeto já usa
-3. `docs/`, `specs/`, `.scratch/` relacionados à branch
-4. Pedido do usuário, se claro
-
-Sem spec e usuário confirma ausência → pule frente Especificação; informe no resultado.
-
-**Conclua quando:** a fonte da spec estiver identificada, ou a frente Especificação pulada com confirmação do usuário.
-
-## Etapa 3 — Análises
-
-Limite: **400 palavras** por frente. Cite arquivo e linha/trecho.
-
-### Paralelo (preferido)
-
-Dois subagentes com: comando do diff, commits, diff ou arquivos, instruções de citação. Qualidade não deve ver spec; Especificação não deve ver achados de qualidade.
-
-### Fallback (sem subagentes)
-
-Execute as duas frentes **em sequência** na mesma sessão:
-
-1. Complete Qualidade sem ler a spec.
-2. Depois Especificação sem reordenar nem combinar achados de Qualidade.
-
-Não misture as frentes no fallback.
-
-#### Qualidade — heurísticas
-
-Reporte só com evidência no diff. Marque como "possível":
-
-nome pouco claro, duplicação, inveja de dados, grupo de dados, obsessão por primitivos, condicionais repetidas, mudança espalhada, mudanças divergentes, generalização prematura, cadeia de mensagens, intermediário desnecessário, herança não utilizada.
-
-#### Especificação
-
-Compare diff com spec: requisitos ausentes, escopo extra, implementação incorreta, erros/limites/permissões não tratados. Cite linha da spec e trecho do código.
-
-**Conclua quando:** as duas frentes tiverem rodado isoladas, cada uma com no máximo 400 palavras e achados com arquivo e linha.
-
-## Etapa 4 — Relatório
+Ordene por severidade e não repita o mesmo problema em seções diferentes.
 
 ```markdown
-## Qualidade do código
+Revisado: [o que foi comparado] · Intenção: [fonte ou "nenhuma encontrada"]
 
-[achados ou "Nenhum problema encontrado nesta frente."]
+## Bugs
+- **[arquivo:linha]** [problema] — [cenário que dispara] — [correção sugerida]
 
-## Especificação
+## Aderência à spec
+- **[arquivo:linha ou spec]** [falta, desvio ou escopo extra]
 
-[achados ou "Nenhum problema..." / "Não há especificação disponível para esta frente."]
+## Qualidade
+- **[arquivo:linha]** [problema e custo concreto]
 
-Resumo: Qualidade — N achado(s), pior: …; Especificação — N achado(s), pior: …
+Resumo: [N bugs, N desvios, N de qualidade] — [o que bloqueia o merge, se algo]
 ```
 
-Não combine nem reordene achados entre frentes.
-
-**Conclua quando:** o relatório tiver as duas seções, sem misturar achados.
+Omita seções sem achados, mas deixe claro quando nada foi encontrado. Seja direto: um achado por linha, sem elogios nem resumo do diff.

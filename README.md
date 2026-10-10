@@ -21,7 +21,7 @@ Todas são user-invoked: só rodam com o comando explícito.
 | `/prd` | Entrevistar e gravar PRD com specs em `docs/prd/` |
 | `/plan-spec` | Planejar ou implementar specs pendentes (`todas` / `implementa`) |
 | `/preflight` | Rodar as verificações que cobrem o diff e gerar checklist para PR/MR |
-| `/code-review` | Revisar diff desde um ponto informado |
+| `/code-review` | Revisar as mudanças da branch: bugs, aderência à spec e qualidade |
 | `/delivery` | Commit, push e PR/MR pelo provedor configurado (GitHub ou GitLab); nunca merge nem deploy |
 | `/handoff` | Compactar a conversa num arquivo no temp para outro agente continuar |
 
