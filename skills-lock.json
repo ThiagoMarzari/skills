@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "skills": {
+    "ai-memory-obsidian": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "ai-memory-obsidian/SKILL.md",
+      "computedHash": "8d2b087cc4304a9a8a0368b24efc3893d2fe44880983909a644bfc29b653c2ca"
+    },
+    "aprender": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "aprender/SKILL.md",
+      "computedHash": "f6eb22d1f430b157da939ed74834c8922365296ad33f11bbb066442091726611"
+    },
+    "concept-to-excalidraw": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "concept-to-excalidraw/SKILL.md",
+      "computedHash": "f3766006e9e0f836999b9b390c254f35d510008179bdd95dadf682e75c4f489b"
+    },
+    "construir": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "construir/SKILL.md",
+      "computedHash": "926cec00b454df1a919b841480af4d03bb12c5ca815da8ad8fb35ecf6bcde267"
+    },
+    "design-craft": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "design-craft/SKILL.md",
+      "computedHash": "f637755df92bd058f64bf12f5e287c0f8e5364fd1f93819c4405ee01d638d515"
+    },
+    "good-design": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "good-design/SKILL.md",
+      "computedHash": "02530c1fe0d78c5fe91821b408f1aa49d2e4dc964fd0d8306639bf4c234e6bd7"
+    },
+    "grill-me": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "grill-me/SKILL.md",
+      "computedHash": "f8c312dd8fd7710ef2c9f709ca3f0c6f946f3310bd9e195951d32571c4291269"
+    },
+    "prepare-technical-slides": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "prepare-technical-slides/SKILL.md",
+      "computedHash": "53bedf466a6495e23e483a98729a2c444911fa70f982c494d35aa4c2caddad2c"
+    },
+    "skillpper-saver": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "skillpper-saver/SKILL.md",
+      "computedHash": "5504e5b55d0bbfe3d9a1222da2a4152da66255904e50aa017e6ec17c65dc0979"
+    },
+    "study-quiz": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "skillPath": "study-quiz/SKILL.md",
+      "computedHash": "8fbc9c93a8e650b546f7f5fb6f1a6b5b62256d20b4e0cb4c11873572ca98f237"
+    }
+  }
+}

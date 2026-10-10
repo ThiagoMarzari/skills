@@ -7,6 +7,7 @@ Skills e prompts para agentes no Claude Code, Cursor ou ferramentas compatíveis
 | Caminho | Conteúdo |
 |---------|----------|
 | `.agents/skills/` | Skills, em buckets `engineering/` e `productivity/` (só organização da origem) |
+| `.agents/skills/third-party/` | Skills de terceiros (`kipperdev/skillpper`), registradas em `skills-lock.json`; não fazem parte do kit |
 | `.prompts/` | Prompts colados quando a tarefa precisar; não são auto-carregados |
 | `AGENTS.md` / `CLAUDE.md` | Orientação carregada com o projeto |
 
