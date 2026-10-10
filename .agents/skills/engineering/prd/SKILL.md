@@ -43,7 +43,7 @@ Registre o que o ambiente já responde — stack, telas, entidades, permissões,
 
 ## Etapa 1 — Percorrer a árvore de design
 
-Antes da primeira rodada, leia [`../references/entrevista.md`](../references/entrevista.md) para a lista de tópicos.
+Antes da primeira rodada, leia [`references/entrevista.md`](references/entrevista.md) para a lista de tópicos.
 
 Entreviste até alcançar um entendimento compartilhado. Mapeie o recorte como **árvore de design**: cada decisão ramifica nas que dependem dela.
 

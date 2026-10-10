@@ -1,6 +1,0 @@
-name: scope-clarifier
-description: "Interroga o usuário para fechar escopo, comportamento, decisões e trade-offs antes da implementação. Use somente com /scope-clarifier."
-disable-model-invocation: true
-interface:
-  display_name: "Scope Clarifier"
-  short_description: "Clarify scope, behavior, and trade-offs"

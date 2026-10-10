@@ -74,7 +74,7 @@ Por spec planejada:
 6. Testes e verificação por critério de aceite
 7. Fora do escopo
 8. Dependências
-9. Decisão arquitetural duradoura que possa exigir `/adr`, se houver; não crie ADR automaticamente
+9. Decisão arquitetural duradoura em aberto, se houver
 
 **Conclua quando:** cada requisito tiver ação, validação ou justificativa de N/A.
 

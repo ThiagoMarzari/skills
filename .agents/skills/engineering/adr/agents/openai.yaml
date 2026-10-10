@@ -1,6 +1,0 @@
-name: adr
-description: "Registra uma decisão arquitetural duradoura confirmada pelo usuário em docs/adr/. Use com /adr."
-disable-model-invocation: true
-interface:
-  display_name: "Architecture Decision Record"
-  short_description: "Record a confirmed architecture decision"

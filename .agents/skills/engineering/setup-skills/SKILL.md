@@ -1,6 +1,6 @@
 ---
 name: setup-skills
-description: Configura tracker, commits e entrega por provedor no repo destino. Use somente com /setup-skills.
+description: Configura convenções de commit e entrega por provedor no repo destino. Use somente com /setup-skills.
 disable-model-invocation: true
 ---
 
@@ -10,12 +10,11 @@ Configura **este** repositório para que as skills de engenharia leiam decisões
 
 Grava:
 
-- `docs/agents/issue-tracker.md` — onde issues vivem e como aparecem em commits (`code-review` lê)
-- `docs/agents/commit-conventions.md` — formato de mensagem (`rework-commits` lê)
+- `docs/agents/commit-conventions.md` — formato de mensagem (`delivery` lê)
 - `docs/agents/delivery.md` — provedor, destinos e branches protegidas deste repo (`delivery` lê), só se a skill estiver instalada
 - bloco `## Agent skills` em `CLAUDE.md` ou `AGENTS.md`
 
-Skill prompt-driven: explore, proponha, confirme, só então escreva. Roda uma vez por repo; reexecute só para trocar tracker, delivery ou recomeçar.
+Skill prompt-driven: explore, proponha, confirme, só então escreva. Roda uma vez por repo; reexecute só para trocar commits, delivery ou recomeçar.
 
 ## Ativação e limites
 
@@ -40,23 +39,9 @@ Leia o que existir; não assuma:
 
 Resuma o que encontrou. Uma seção, uma pergunta, depois a próxima. Lidere com a recomendação para o usuário aceitar em uma palavra.
 
-### Seção A — Tracker de issues
+### Seção A — Convenções de commit
 
-Onde o trabalho deste repo é rastreado. `code-review` usa isso para achar spec a partir de commits.
-
-Se o remote aponta para GitHub, proponha GitHub. Se GitLab (`gitlab.com` ou self-hosted), proponha GitLab. Ofereça:
-
-- **GitHub** — issues no GitHub Issues do repo
-- **GitLab** — issues no GitLab Issues do repo
-- **Local** — arquivos markdown no próprio repo (indique a pasta)
-- **Nenhum** — sem tracker; `code-review` segue docs e o pedido do usuário
-- **Outro** — o usuário descreve o fluxo em um parágrafo; grave como prosa
-
-Grave a escolha em `docs/agents/issue-tracker.md`. Inclua o **formato de referência em commits** (ex.: `#123`, `Closes #45`, `ABC-123`) — é o que `code-review` consome.
-
-### Seção B — Convenções de commit
-
-Como `rework-commits` redige mensagens. Se o log recente já for consistente, proponha esse padrão. Ofereça:
+Como `delivery` redige mensagens. Se o log recente já for consistente, proponha esse padrão. Ofereça:
 
 - **Curta e descritiva** — uma linha, mudança lógica, sem prefixo obrigatório (padrão se nada estiver definido)
 - **Conventional Commits** — `tipo(escopo): descrição`
@@ -64,7 +49,7 @@ Como `rework-commits` redige mensagens. Se o log recente já for consistente, pr
 
 Inclua idioma das mensagens se o log já o revelar.
 
-### Seção C — Delivery (só se `delivery` estiver instalada)
+### Seção B — Delivery (só se `delivery` estiver instalada)
 
 Provedor e destinos **deste** repo. `delivery` lê só este arquivo; não preenche a skill.
 
@@ -85,9 +70,8 @@ Front e back são dois repositórios: cada um tem o próprio `docs/agents/delive
 Mostre, antes de gravar:
 
 - o bloco `## Agent skills` (arquivo-alvo segundo a etapa 4)
-- o conteúdo de `docs/agents/issue-tracker.md`
 - o conteúdo de `docs/agents/commit-conventions.md`
-- o conteúdo de `docs/agents/delivery.md`, se a seção C rodou
+- o conteúdo de `docs/agents/delivery.md`, se a seção B rodou
 
 Aguarde edição ou confirmação.
 
@@ -106,16 +90,12 @@ Se `## Agent skills` já existir, atualize no lugar; preserve o restante do arqu
 ```markdown
 ## Agent skills
 
-### Issue tracker
-
-[uma linha: onde as issues vivem]. Ver `docs/agents/issue-tracker.md`.
-
 ### Convenções de commit
 
 [uma linha: formato das mensagens]. Ver `docs/agents/commit-conventions.md`.
 ```
 
-Se a seção C rodou, acrescente:
+Se a seção B rodou, acrescente:
 
 ```markdown
 ### Delivery
@@ -125,14 +105,8 @@ Se a seção C rodou, acrescente:
 
 Escreva os arquivos a partir dos seeds:
 
-- Tracker GitHub → [`references/issue-tracker-github.md`](references/issue-tracker-github.md)
-- Tracker GitLab → [`references/issue-tracker-gitlab.md`](references/issue-tracker-gitlab.md)
-- Tracker local → [`references/issue-tracker-local.md`](references/issue-tracker-local.md)
-- Tracker nenhum → [`references/issue-tracker-none.md`](references/issue-tracker-none.md)
 - Convenções → [`references/commit-conventions.md`](references/commit-conventions.md)
 - Delivery → [`references/delivery.md`](references/delivery.md)
-
-Para **Outro** no tracker, escreva `docs/agents/issue-tracker.md` a partir da descrição do usuário, no mesmo formato dos seeds (tipo, onde, referência em commits, consumidores).
 
 Preencha o seed de delivery com a configuração confirmada. GitHub usa exatamente um destino e `gh`; GitLab usa um ou mais destinos e `glab`. Não deixe placeholder.
 
@@ -140,4 +114,4 @@ Preencha o seed de delivery com a configuração confirmada. GitHub usa exatamen
 
 ## Entrega
 
-Informe os caminhos gravados. `code-review`, `rework-commits` e `delivery` passam a ler esses arquivos. O usuário pode editar `docs/agents/*.md` direto; reexecute esta skill só para trocar tracker, delivery ou recomeçar.
+Informe os caminhos gravados. `delivery` passa a ler esses arquivos. O usuário pode editar `docs/agents/*.md` direto; reexecute esta skill só para trocar commits, delivery ou recomeçar.

@@ -1,40 +1,26 @@
 # Instruções para agentes
 
-Kit reutilizável de skills, prompts, regras e exemplos — **não é um aplicativo**. Copie seletivamente para o projeto destino e adapte.
+Kit reutilizável de skills e prompts — **não é um aplicativo**. Copie seletivamente para o projeto destino e adapte. Catálogo, fluxo e onde copiar: `README.md` (consulte sob demanda).
 
 ## Mapa
 
-| Caminho | Uso |
-|---------|-----|
-| `README.md` | Índice humano: skills, fluxos, prompts |
-| `docs/workflow-guide.md` | Walkthrough do fluxo: arquivos, posse, exemplo do início ao fim |
-| `.agents/skills/engineering/<nome>/` | Skills de fluxo de produto e código |
-| `.agents/skills/productivity/<nome>/` | Skills de escrita para agentes e handoff entre sessões |
-| `.prompts/` | Prompts colados ou solicitados explicitamente |
-| `docs/exemplos/` | Modelos de PRD, rules e docs — não é o produto deste kit |
-
-No destino, copie cada skill para `.agents/skills/<nome>/` (Claude Code: `.claude/skills/<nome>/`). Os buckets ficam só nesta origem.
+- Skills: `.agents/skills/engineering/<nome>/` e `.agents/skills/productivity/<nome>/`. No destino, cada skill vai para `.claude/skills/<nome>/` ou `.agents/skills/<nome>/`; os buckets não vão junto.
+- Prompts: `.prompts/` — colados ou pedidos explicitamente.
 
 ## Regras de trabalho
 
-- Portabilidade: cada artefato deve funcionar copiado sozinho.
+- Portabilidade: cada artefato funciona copiado sozinho.
 - Não invente stack, rotas, banco, auth ou features de produto neste repositório.
-- Não misture domínio de `docs/exemplos/` com a identidade do kit.
-- Escreva em português; termos técnicos no idioma original quando evitar ambiguidade.
-- Altere só o que a tarefa exige.
+- Português na conversa e nos artefatos; termos técnicos no idioma original quando evitar ambiguidade.
+- Altere só o que a tarefa exige. Plan mode para mudanças que tocam vários arquivos.
+- Não crie commits nem altere Git sem pedido explícito.
 
-## Invocação de skills
+## Skills
 
-- Skills com `disable-model-invocation: true` só rodam quando o usuário digitar o comando (`/nome`).
-- `writing-for-agents` é model-invoked: o agente pode alcançá-la ao criar ou revisar documentos agent-facing.
-- Repo destino sem `docs/agents/` → `/setup-skills` antes de `/code-review`, `/rework-commits` e `/delivery`.
-- Não deduza uma skill user-invoked a partir de pedido parecido — use `/workflow-router` se o próximo passo não estiver claro.
+Todas são user-invoked (`disable-model-invocation: true`): `/setup-skills`, `/workflow-router`, `/prd`, `/plan-spec`, `/preflight`, `/code-review`, `/delivery`, `/handoff`. Não deduza uma skill a partir de pedido parecido. Próximo passo incerto → `/workflow-router`. Repo destino sem `docs/agents/` → `/setup-skills`.
 
 ## Alterar artefatos
 
-- **Skill**: `SKILL.md` com `name`, `description`, corpo com menos de 500 linhas; detalhes em referências na mesma pasta.
+- **Skill**: `SKILL.md` com `name`, `description` e `disable-model-invocation: true`; corpo curto; detalhes em `references/` na mesma pasta.
 - **Prompt**: um arquivo em `.prompts/`, uma tarefa, sem depender deste kit.
-- **Rule**: uma preocupação por arquivo.
-- Não crie commits nem altere Git sem pedido explícito.
-
-Para catálogo de skills, veja `README.md`. Para o walkthrough do fluxo, veja `docs/workflow-guide.md`.
+- Ao adicionar, remover ou renomear skill, atualize `README.md`, este arquivo e `workflow-router`.

@@ -1,6 +1,0 @@
-name: documentation-writer
-description: "Compara documentação do projeto com o código e atualiza só o desatualizado. Use somente com /documentation-writer."
-disable-model-invocation: true
-interface:
-  display_name: "Documentation Writer"
-  short_description: "Sync project documentation with the code"

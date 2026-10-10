@@ -38,7 +38,7 @@ Ponto inválido ou diff vazio → informe e pare.
 Ordem de busca:
 
 1. Caminho informado pelo usuário
-2. Referências nos commits — se `docs/agents/issue-tracker.md` existir, use o formato de referência descrito lá; se o arquivo não existir, procure menção a tickets/issues no formato que o projeto já usa, se houver
+2. Referências a issues/tickets nos commits, no formato que o projeto já usa
 3. `docs/`, `specs/`, `.scratch/` relacionados à branch
 4. Pedido do usuário, se claro
 
