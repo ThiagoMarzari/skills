@@ -4,4 +4,4 @@ Skills de apoio entre sessões. No destino, copie cada pasta `<nome>/` para `.ag
 
 | Skill | Resumo |
 |-------|--------|
-| `handoff` | Leva contexto para outro agente ou sessão |
+| `tm-handoff` | Leva contexto para outro agente ou sessão |

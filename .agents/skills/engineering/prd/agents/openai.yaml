@@ -1,6 +1,0 @@
-name: prd
-description: "Gera PRD com especificações funcionais em docs/prd/. Use somente com /prd."
-disable-model-invocation: true
-interface:
-  display_name: "PRD"
-  short_description: "Create functional product specifications"

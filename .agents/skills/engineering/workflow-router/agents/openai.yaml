@@ -1,6 +1,0 @@
-name: workflow-router
-description: "Indica a skill ou o prompt adequado neste kit. Use somente com /workflow-router quando o próximo passo não estiver claro ou houver duas opções parecidas."
-disable-model-invocation: true
-interface:
-  display_name: "Workflow Router"
-  short_description: "Choose the right skill or workflow"

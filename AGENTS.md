@@ -18,10 +18,11 @@ Kit reutilizável de skills e prompts — **não é um aplicativo**. Copie selet
 
 ## Skills
 
-Todas são user-invoked (`disable-model-invocation: true`): `/setup-skills`, `/workflow-router`, `/prd`, `/plan-spec`, `/preflight`, `/code-review`, `/delivery`, `/handoff`. Não deduza uma skill a partir de pedido parecido. Próximo passo incerto → `/workflow-router`. Repo destino sem `docs/agents/` → `/setup-skills`.
+Todas são user-invoked (`disable-model-invocation: true`): `/tm-setup-skills`, `/tm-workflow-router`, `/tm-prd`, `/tm-plan-spec`, `/tm-preflight`, `/tm-code-review`, `/tm-delivery`, `/tm-handoff`. Não deduza uma skill a partir de pedido parecido. Próximo passo incerto → `/tm-workflow-router`. Repo destino sem `docs/agents/` → `/tm-setup-skills`.
 
 ## Alterar artefatos
 
 - **Skill**: `SKILL.md` com `name`, `description` e `disable-model-invocation: true`; corpo curto; detalhes em `references/` na mesma pasta.
+- **Nome**: prefixo `tm-` em toda skill do kit; pasta com o mesmo nome do campo `name`.
 - **Prompt**: um arquivo em `.prompts/`, uma tarefa, sem depender deste kit.
-- Ao adicionar, remover ou renomear skill, atualize `README.md`, este arquivo e `workflow-router`.
+- Ao adicionar, remover ou renomear skill, atualize `README.md`, este arquivo e `tm-workflow-router`.

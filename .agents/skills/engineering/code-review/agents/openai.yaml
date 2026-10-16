@@ -1,6 +1,0 @@
-name: code-review
-description: "Revisa alterações desde um ponto informado em duas frentes independentes — qualidade estrutural e atendimento à especificação. Use com /code-review."
-disable-model-invocation: true
-interface:
-  display_name: "Code Review"
-  short_description: "Review a diff against standards and spec"
