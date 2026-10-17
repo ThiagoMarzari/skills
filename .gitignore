@@ -1,2 +1,8 @@
 .DS_Store
 .env*
+
+# Skills instaladas pela CLI (terceiros): só skills-lock.json vai para o Git
+.agents/skills/*
+!.agents/skills/engineering/
+!.agents/skills/productivity/
+.claude/skills/

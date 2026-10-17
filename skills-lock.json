@@ -1,12 +1,6 @@
 {
   "version": 1,
   "skills": {
-    "ai-memory-obsidian": {
-      "source": "kipperdev/skillpper",
-      "sourceType": "github",
-      "skillPath": "ai-memory-obsidian/SKILL.md",
-      "computedHash": "8d2b087cc4304a9a8a0368b24efc3893d2fe44880983909a644bfc29b653c2ca"
-    },
     "aprender": {
       "source": "kipperdev/skillpper",
       "sourceType": "github",
@@ -48,12 +42,6 @@
       "sourceType": "github",
       "skillPath": "prepare-technical-slides/SKILL.md",
       "computedHash": "53bedf466a6495e23e483a98729a2c444911fa70f982c494d35aa4c2caddad2c"
-    },
-    "skillpper-saver": {
-      "source": "kipperdev/skillpper",
-      "sourceType": "github",
-      "skillPath": "skillpper-saver/SKILL.md",
-      "computedHash": "5504e5b55d0bbfe3d9a1222da2a4152da66255904e50aa017e6ec17c65dc0979"
     },
     "study-quiz": {
       "source": "kipperdev/skillpper",

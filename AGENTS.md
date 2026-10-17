@@ -6,7 +6,8 @@ Kit reutilizável de skills e prompts — **não é um aplicativo**. Copie selet
 
 - Skills: `.agents/skills/engineering/<nome>/` e `.agents/skills/productivity/<nome>/`. No destino, cada skill vai para `.claude/skills/<nome>/` ou `.agents/skills/<nome>/`; os buckets não vão junto.
 - Prompts: `.prompts/` — colados ou pedidos explicitamente.
-- Terceiros: `.agents/skills/third-party/<nome>/` — skills de outros autores, instaladas com `npx skills add` (ver `skills-lock.json`) e ligadas em `.claude/skills/`. Não são do kit: não edite nem aplique as regras abaixo a elas.
+- Terceiros: listados em `skills-lock.json` e instalados com `npx skills add`; os arquivos ficam só na máquina (`.agents/skills/` fora dos buckets está no `.gitignore`). Não são do kit: não edite nem aplique as regras abaixo a elas.
+- `install.sh`: instala as skills do kit e as do lock num projeto destino.
 
 ## Regras de trabalho
 

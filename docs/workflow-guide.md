@@ -35,7 +35,7 @@ Skills com `disable-model-invocation: true` exigem o comando explícito. Prompts
 
 ## Configuração no repo destino
 
-Copie as pastas das skills para `.agents/skills/<nome>/` (ou `.claude/skills/<nome>/`) e leve as referências indicadas por cada `SKILL.md`.
+Instale com `npx skills add ThiagoMarzari/skills` (ou o `install.sh`, que inclui as skills de terceiros; ver README). Sem a CLI, copie as pastas das skills para `.agents/skills/<nome>/` (ou `.claude/skills/<nome>/`) com as referências indicadas por cada `SKILL.md`.
 
 Rode `/tm-setup-skills` uma vez para configurar `docs/agents/`:
 

@@ -7,9 +7,11 @@ Skills e prompts para agentes no Claude Code, Cursor ou ferramentas compatíveis
 | Caminho | Conteúdo |
 |---------|----------|
 | `.agents/skills/` | Skills, em buckets `engineering/` e `productivity/` (só organização da origem) |
-| `.agents/skills/third-party/` | Skills de terceiros (`kipperdev/skillpper`), registradas em `skills-lock.json`; não fazem parte do kit |
+| `skills-lock.json` | Lista das skills de terceiros que uso (origem e versão). Os arquivos delas ficam só na máquina, fora do Git |
+| `install.sh` | Instala as skills do kit e as do lock em qualquer projeto |
 | `.prompts/` | Prompts colados quando a tarefa precisar; não são auto-carregados |
 | `AGENTS.md` / `CLAUDE.md` | Orientação carregada com o projeto |
+| `LICENSE` | MIT — vale para o conteúdo do kit, não para as skills de terceiros |
 
 ## Skills
 
@@ -58,15 +60,22 @@ PRD revisado pelo usuário antes de planejar; plano aprovado antes de implementa
 | Código e testes | Implementação / `tm-plan-spec implementa` |
 | Histórico Git | Humanos; `tm-delivery` commita/pusha só sob comando explícito |
 
-## Onde copiar no destino
+## Instalar
 
-Os buckets **não** vão junto. Extraia cada skill com as referências da própria pasta:
+Rode dentro do projeto destino. A CLI [`skills`](https://github.com/vercel-labs/skills) detecta os agentes instalados e copia cada skill sem o bucket (`engineering/`, `productivity/`).
 
-```text
-destino/.claude/skills/<nome>/     (Claude Code)
-destino/.agents/skills/<nome>/     (outras ferramentas)
-destino/.prompts/<nome>.md
-```
+| Para | Comando |
+|---|---|
+| Só as skills do kit | `npx skills add ThiagoMarzari/skills` |
+| Kit + terceiros do lock | `curl -fsSL https://raw.githubusercontent.com/ThiagoMarzari/skills/main/install.sh \| sh` |
+| O mesmo, para todos os projetos | `curl -fsSL https://raw.githubusercontent.com/ThiagoMarzari/skills/main/install.sh \| sh -s -- -g` |
+| Atualizar o que foi instalado | `npx skills update` |
+
+Para manter a coleção:
+
+- **Adicionar uma skill de terceiro:** neste repo, `npx skills add dono/repo --skill <nome>` e commite o `skills-lock.json`. O `install.sh` passa a instalá-la.
+- **Clonou este repo numa máquina nova:** `npx skills experimental_install` restaura os terceiros a partir do lock.
+- **Sem a CLI:** copie a pasta da skill para `destino/.claude/skills/<nome>/` (Claude Code) ou `destino/.agents/skills/<nome>/`, com as referências da própria pasta. Prompts vão para `destino/.prompts/`.
 
 Depois rode `/tm-setup-skills` uma vez no destino. A configuração é por repo (front e back têm arquivos próprios); sem ela, `tm-delivery` para em vez de inventar. Não edite o `SKILL.md` no projeto.
 
