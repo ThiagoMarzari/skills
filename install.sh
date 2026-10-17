@@ -10,19 +10,22 @@ set -eu
 
 REPO="ThiagoMarzari/skills"
 
-if [ -n "${SKILLS_LOCK:-}" ]; then
-  lock="$SKILLS_LOCK"
-else
-  lock=$(mktemp)
-  trap 'rm -f "$lock"' EXIT
-  curl -fsSL "https://raw.githubusercontent.com/$REPO/main/skills-lock.json" -o "$lock"
-fi
+# Tudo dentro de uma função chamada no fim: com `curl | sh`, o sh só executa depois de ler
+# o script inteiro, e nenhum comando consome o resto do script pela entrada padrão.
+main() {
+  if [ -n "${SKILLS_LOCK:-}" ]; then
+    lock="$SKILLS_LOCK"
+  else
+    lock=$(mktemp)
+    trap 'rm -f "$lock"' EXIT
+    curl -fsSL "https://raw.githubusercontent.com/$REPO/main/skills-lock.json" -o "$lock"
+  fi
 
-echo "==> $REPO (skills do kit)"
-npx -y skills add "$REPO" --skill '*' -y "$@"
+  echo "==> $REPO (skills do kit)"
+  npx -y skills add "$REPO" --skill '*' -y "$@" </dev/null
 
-# Uma linha por origem: "<origem> --skill <a> --skill <b> ..."
-node -e '
+  # Uma linha por origem: "<origem> --skill <a> --skill <b> ..."
+  node -e '
 const lock = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
 const bySource = {};
 for (const [name, skill] of Object.entries(lock.skills || {})) {
@@ -32,7 +35,10 @@ for (const [source, names] of Object.entries(bySource)) {
   console.log([source, ...names.flatMap((n) => ["--skill", n])].join(" "));
 }
 ' "$lock" | while read -r line; do
-  echo "==> ${line%% *} (terceiros)"
-  # shellcheck disable=SC2086 # $line precisa ser dividido em argumentos
-  npx -y skills add $line -y "$@" </dev/null
-done
+    echo "==> ${line%% *} (terceiros)"
+    # shellcheck disable=SC2086 # $line precisa ser dividido em argumentos
+    npx -y skills add $line -y "$@" </dev/null
+  done
+}
+
+main "$@"
