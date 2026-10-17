@@ -10,8 +10,8 @@ Configura **este** repositório para que as skills de engenharia leiam decisões
 
 Grava:
 
-- `docs/agents/commit-conventions.md` — formato de mensagem (`tm-delivery` lê)
-- `docs/agents/delivery.md` — provedor, destinos e branches protegidas deste repo (`tm-delivery` lê), só se a skill estiver instalada
+- `docs/agents/commit-conventions.md` — formato de mensagem (vale para todo commit pelo bloco abaixo; `tm-delivery` lê)
+- `docs/agents/delivery.md` — provedor, destinos, branches protegidas e padrão de branch nova deste repo (`tm-delivery` lê), só se a skill estiver instalada
 - bloco `## Agent skills` em `CLAUDE.md` ou `AGENTS.md`
 
 Skill prompt-driven: explore, proponha, confirme, só então escreva. Roda uma vez por repo; reexecute só para trocar commits, delivery ou recomeçar.
@@ -41,13 +41,13 @@ Resuma o que encontrou. Uma seção, uma pergunta, depois a próxima. Lidere com
 
 ### Seção A — Convenções de commit
 
-Como `tm-delivery` redige mensagens. Se o log recente já for consistente, proponha esse padrão. Ofereça:
+Como todo commit deste repo é redigido, pedido direto ou via `tm-delivery`. Se o log recente já for consistente, proponha esse padrão. Ofereça:
 
 - **Curta e descritiva** — uma linha, mudança lógica, sem prefixo obrigatório (padrão se nada estiver definido)
 - **Conventional Commits** — `tipo(escopo): descrição`
 - **Outro** — o usuário descreve o formato
 
-Inclua idioma das mensagens se o log já o revelar.
+Inclua idioma das mensagens se o log já o revelar. Confirme também uma mensagem de exemplo: uma real do `git log` que siga o padrão ou, sem nenhuma, uma montada no formato escolhido. Trailer de IA não é pergunta: é sempre proibido.
 
 ### Seção B — Delivery (só se `tm-delivery` estiver instalada)
 
@@ -60,6 +60,7 @@ Pergunte, nesta ordem, recomendando a partir do remote e das branches vistas:
 3. **Reconhecer por:** trecho estável da URL do remote ou nome da pasta, para evitar usar config copiada do repo errado.
 4. **Destinos:** um branch para GitHub; um ou mais branches para GitLab. Não invente branches: confirme os destinos que não apareçam em `git branch -a`.
 5. **Branches protegidas contra commit/push direto:** inclua todos os destinos e `main`/`master`, salvo escolha explícita diferente do usuário. Proteção contra push direto não impede PR/MR para destino configurado.
+6. **Branch nova:** padrão do nome das branches que `tm-delivery` cria. Recomende o padrão que aparece em `git branch -a` (ex.: `<ticket>/<slug>`); sem padrão visível, `feat|fix|chore/<slug>`.
 
 Front e back são dois repositórios: cada um tem o próprio `docs/agents/delivery.md`.
 
@@ -90,10 +91,20 @@ Se `## Agent skills` já existir, atualize no lugar; preserve o restante do arqu
 ```markdown
 ## Agent skills
 
-### Convenções de commit
+### Commits
 
-[uma linha: formato das mensagens]. Ver `docs/agents/commit-conventions.md`.
+Todo commit neste repo, pedido direto ou via `/tm-delivery`, segue:
+
+- **Formato:** [formato confirmado]
+- **Idioma:** [idioma]
+- **Corpo:** [quando usar]
+- **Exemplo:** `[mensagem de exemplo]`
+- **Sem trailer de IA:** nada de `Co-Authored-By`, `Generated with`, 🤖 ou link de sessão. Não altere `user.name`/`user.email`.
+
+Detalhes em `docs/agents/commit-conventions.md`.
 ```
+
+As regras ficam escritas no bloco, não só no arquivo: `CLAUDE.md`/`AGENTS.md` é carregado em toda sessão, e `docs/agents/` só é lido por quem decide abri-lo. Um bloco antigo no formato "Convenções de commit … Ver `docs/agents/commit-conventions.md`" é substituído por este.
 
 Se a seção B rodou, acrescente:
 

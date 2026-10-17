@@ -71,7 +71,7 @@ Por spec planejada:
 3. Sequência de implementação
 4. Dados, regras, permissões
 5. Integrações
-6. Testes e verificação por critério de aceite
+6. Testes: liste os comportamentos que merecem teste automatizado — regras de negócio, dinheiro, auth/permissões, perda ou corrupção de dados, estados e transições, casos limite, integrações externas, regressões prováveis — e classifique cada um como CRÍTICO, IMPORTANTE ou DISPENSÁVEL. Planeje só os dois primeiros, mais a verificação de cada critério de aceite. Ignore UI trivial e implementação óbvia.
 7. Fora do escopo
 8. Dependências
 9. Decisão arquitetural duradoura em aberto, se houver

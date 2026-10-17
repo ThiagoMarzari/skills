@@ -16,6 +16,12 @@ Kit reutilizável de skills e prompts — **não é um aplicativo**. Copie selet
 - Altere só o que a tarefa exige. Plan mode para mudanças que tocam vários arquivos.
 - Não crie commits nem altere Git sem pedido explícito.
 
+## Commits
+
+- Português, assunto curto no presente, 3ª pessoa, sem prefixo de tipo: `Adiciona …`, `Reescreve …`, `Remove …`.
+- Corpo explicando o que mudou e por quê, quando o assunto não basta.
+- Sem trailer de IA: nada de `Co-Authored-By`, `Generated with`, 🤖 ou link de sessão.
+
 ## Skills
 
 Todas são user-invoked (`disable-model-invocation: true`): `/tm-setup-skills`, `/tm-workflow-router`, `/tm-prd`, `/tm-plan-spec`, `/tm-preflight`, `/tm-code-review`, `/tm-delivery`, `/tm-handoff`. Não deduza uma skill a partir de pedido parecido. Próximo passo incerto → `/tm-workflow-router`. Repo destino sem `docs/agents/` → `/tm-setup-skills`.

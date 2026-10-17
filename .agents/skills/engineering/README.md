@@ -4,7 +4,7 @@ Skills de fluxo de produto e código. No destino, copie cada pasta `<nome>/` par
 
 | Skill | Resumo |
 |-------|--------|
-| `tm-setup-skills` | Configura tracker, commits, provedor e destinos no repo destino |
+| `tm-setup-skills` | Configura commits, provedor e destinos no repo destino |
 | `tm-workflow-router` | Indica a próxima skill ou fluxo |
 | `tm-prd` | Gera PRD com specs funcionais em `docs/prd/` |
 | `tm-plan-spec` | Converte spec pendente em plano técnico (e implementa se pedido) |

@@ -31,7 +31,7 @@ Todas são user-invoked: só rodam com o comando explícito. O prefixo `tm-` mar
 | Arquivo | Uso |
 |---------|-----|
 | `.prompts/prd.md` | Briefing inicial antes de `/tm-prd` |
-| `.prompts/testes-automatizados.md` | Decidir o que merece teste |
+| `.prompts/testes-automatizados.md` | Decidir o que merece teste fora do `/tm-plan-spec`, que já faz essa triagem |
 
 ## Fluxo
 

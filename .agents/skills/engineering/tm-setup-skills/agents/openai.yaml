@@ -1,6 +1,6 @@
 name: tm-setup-skills
-description: "Configura tracker, commits e entrega por provedor no repo destino. Use somente com /tm-setup-skills."
+description: "Configura convenções de commit e entrega por provedor no repo destino. Use somente com /tm-setup-skills."
 disable-model-invocation: true
 interface:
   display_name: "Setup Skills"
-  short_description: "Configure tracker, commits, and delivery provider"
+  short_description: "Configure commits and delivery provider"

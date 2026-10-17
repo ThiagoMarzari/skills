@@ -1,6 +1,6 @@
 # Guia de workflow
 
-Este kit leva mudanças de uma ideia à revisão e entrega sem exigir o SDLC completo em toda task. O risco define quais gates entram; o repo destino define tracker e provedor de entrega. Estado duradouro fica em arquivos do repo, não apenas no chat.
+Este kit leva mudanças de uma ideia à revisão e entrega sem exigir o SDLC completo em toda task. O risco define quais gates entram; o repo destino define commits e provedor de entrega. Estado duradouro fica em arquivos do repo, não apenas no chat.
 
 ## Rotas
 
@@ -22,7 +22,7 @@ Próximo passo incerto: `/tm-workflow-router`.
 
 | Skill | Responsabilidade |
 |---|---|
-| `tm-setup-skills` | Configura tracker, commits e entrega por repo destino |
+| `tm-setup-skills` | Configura commits e entrega por repo destino |
 | `tm-workflow-router` | Recomenda uma rota, sem executá-la |
 | `tm-prd` | Grava PRD e specs em `docs/prd/` |
 | `tm-plan-spec` | Planeja specs pendentes; implementa somente quando pedido |
@@ -39,9 +39,8 @@ Copie as pastas das skills para `.agents/skills/<nome>/` (ou `.claude/skills/<no
 
 Rode `/tm-setup-skills` uma vez para configurar `docs/agents/`:
 
-- `issue-tracker.md`: onde issues vivem e como são referenciadas nos commits;
 - `commit-conventions.md`: formato de mensagens;
-- `delivery.md`: provider (`github` ou `gitlab`), CLI, identidade do repo, destinos e branches protegidas — somente se `tm-delivery` estiver instalada.
+- `delivery.md`: provider (`github` ou `gitlab`), CLI, identidade do repo, destinos, branches protegidas e padrão de branch nova — somente se `tm-delivery` estiver instalada.
 
 GitHub usa um destino; GitLab usa um ou mais destinos, inclusive o fluxo atual com sandbox e release. A configuração pertence a cada repo (front e back têm arquivos próprios). Sem setup válido, `tm-delivery` para em vez de inventar configuração ou fazer fallback.
 

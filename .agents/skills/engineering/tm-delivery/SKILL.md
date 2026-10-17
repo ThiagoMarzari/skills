@@ -48,7 +48,7 @@ Use só a CLI configurada; não troque de provedor nem instale ferramentas. Conf
 
 ## Etapa 4 — Branch
 
-Nunca commite/pushe diretamente nas branches protegidas na etapa 1. Se HEAD for uma delas, crie uma branch `feat|fix|chore/...` a partir do primeiro destino configurado. Se o destino local não estiver disponível, pare e peça orientação; não escolha outra base.
+Nunca commite/pushe diretamente nas branches protegidas na etapa 1. Se HEAD for uma delas, crie uma branch a partir do primeiro destino configurado, com o padrão de **Branch nova** em `docs/agents/delivery.md`. Sem esse campo (config anterior a ele), use `feat|fix|chore/<slug>`; não é motivo para parar. Se o destino local não estiver disponível, pare e peça orientação; não escolha outra base.
 
 **Conclua quando:** HEAD for uma branch de feature.
 

@@ -47,7 +47,7 @@ Escolha a **primeira** linha que se aplica:
 
 **Modo do `/tm-plan-spec`:** acrescente `todas` se o usuário quer cobrir todas as pendentes, e `implementa` só se ele dispensou a aprovação do plano. Sem esses sinais, use `/tm-plan-spec` puro. Se não houver sinal de que o usuário revisou o PRD, coloque essa revisão como decisão pendente.
 
-**Testes:** se a rota inclui escrever testes e `.prompts/testes-automatizados.md` existe, coloque antes uma etapa para colar esse prompt (é prompt, não skill).
+**Testes:** se a rota inclui escrever testes fora do `/tm-plan-spec` (que já faz essa triagem) e `.prompts/testes-automatizados.md` existe, coloque antes uma etapa para colar esse prompt (é prompt, não skill).
 
 **Skill ausente:** se a rota usa uma skill que não está instalada, diga isso e troque pela etapa manual equivalente. Por exemplo, sem `/tm-preflight`: rodar os testes, lint e typecheck que cobrem o diff. Sem `tm-setup-skills`, pule a linha 0 e avise que `/tm-delivery` não vai funcionar.
 
